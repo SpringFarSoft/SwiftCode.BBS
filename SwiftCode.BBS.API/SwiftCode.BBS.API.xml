@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwiftCode.BBS.API</name>
+    </assembly>
+    <members>
+        <member name="T:SwiftCode.BBS.API.Controllers.WeatherForecastController">
+            <summary>
+            天气预报
+            </summary>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.WeatherForecastController.Get">
+            <summary>
+            获取天气
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SwiftCode.BBS.API.WeatherForecast">
+            <summary>
+            天气预报
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.API.WeatherForecast.Date">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.API.WeatherForecast.TemperatureC">
+            <summary>
+            摄氏温度
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.API.WeatherForecast.TemperatureF">
+            <summary>
+            华氏温度
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.API.WeatherForecast.Summary">
+            <summary>
+            摘要
+            </summary>
+        </member>
+    </members>
+</doc>

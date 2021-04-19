@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace SwiftCode.BBS.API.Controllers
 {
+    /// <summary>
+    /// 天气预报
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -22,7 +26,10 @@ namespace SwiftCode.BBS.API.Controllers
         {
             _logger = logger;
         }
-
+        /// <summary>
+        /// 获取天气
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {

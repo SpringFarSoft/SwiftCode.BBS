@@ -1,6 +1,6 @@
 using System;
 
-namespace SwiftCode.BBS.API
+namespace SwiftCode.BBS.Model
 {
     /// <summary>
     /// ÌìÆøÔ¤±¨

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwiftCode.BBS.Model</name>
+    </assembly>
+    <members>
+        <member name="T:SwiftCode.BBS.Model.WeatherForecast">
+            <summary>
+            天气预报
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.WeatherForecast.Date">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.WeatherForecast.TemperatureC">
+            <summary>
+            摄氏温度
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.WeatherForecast.TemperatureF">
+            <summary>
+            华氏温度
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.WeatherForecast.Summary">
+            <summary>
+            摘要
+            </summary>
+        </member>
+    </members>
+</doc>

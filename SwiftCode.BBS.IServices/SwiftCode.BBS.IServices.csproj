@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SwiftCode.BBS.Model\SwiftCode.BBS.Model.csproj" />
+  </ItemGroup>
+
 </Project>
