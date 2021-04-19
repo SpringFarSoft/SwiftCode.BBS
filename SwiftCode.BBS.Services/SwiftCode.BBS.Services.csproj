@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SwiftCode.BBS.IServices\SwiftCode.BBS.IServices.csproj" />
+    <ProjectReference Include="..\SwiftCode.BBS.Repositories\SwiftCode.BBS.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>
