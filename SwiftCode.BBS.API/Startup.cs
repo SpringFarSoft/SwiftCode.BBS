@@ -9,8 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SwiftCode.BBS.Common.Helper;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace SwiftCode.BBS.API
 {
@@ -28,7 +33,7 @@ namespace SwiftCode.BBS.API
         {
 
             services.AddControllers();
-
+            services.AddSingleton(new Appsettings(Configuration));
             #region Swagger
             services.AddSwaggerGen(c =>
             {
@@ -52,9 +57,69 @@ namespace SwiftCode.BBS.API
                 var xmlModelPath = Path.Combine(basePath, "SwiftCode.BBS.Model.xml");//这个就是Model层的xml文件名
                 c.IncludeXmlComments(xmlModelPath);
 
+                // 开启小锁
+                c.OperationFilter<AddResponseHeadersFilter>();
+                c.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+
+                // 在header中添加token，传递到后台
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
+
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+
+                    Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）\"",
+                    Name = "Authorization",//jwt默认的参数名称
+                    In = ParameterLocation.Header,//jwt默认存放Authorization信息的位置(请求头中)
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+
             });
-           
+
             #endregion
+
+
+           
+
+            // 认证
+            services.AddAuthentication(x =>
+            {
+                // 仔细看这个单词 上图中错误的提示里的那个
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(o => {
+
+                //读取配置文件
+                var audienceConfig = Configuration.GetSection("Audience");
+                var symmetricKeyAsBase64 = audienceConfig["Secret"];
+                var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
+                var signingKey = new SymmetricSecurityKey(keyByteArray);
+
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = signingKey,
+                    ValidateIssuer = true,
+                    ValidIssuer = audienceConfig["Issuer"],//发行人
+                    ValidateAudience = true,
+                    ValidAudience = audienceConfig["Audience"],//订阅人
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,//这个是缓冲过期时间，也就是说，即使我们配置了过期时间，这里也要考虑进去，过期时间+缓冲，默认好像是7分钟，你可以直接设置为0
+                    RequireExpirationTime = true,
+                };
+            });
+
+
+            // 1【授权】、这个和上边的异曲同工，好处就是不用在controller中，写多个 roles 。
+            // 然后这么写 [Authorize(Policy = "Admin")]
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Client", policy => policy.RequireRole("Client").Build());//单独角色
+                options.AddPolicy("Admin", policy => policy.RequireRole("Admin").Build());
+                options.AddPolicy("SystemOrAdmin", policy => policy.RequireRole("Admin", "System"));//或的关系
+                options.AddPolicy("SystemAndAdmin", policy => policy.RequireRole("Admin").RequireRole("System"));//且的关系
+            });
 
         }
 
@@ -77,6 +142,9 @@ namespace SwiftCode.BBS.API
 
             app.UseRouting();
 
+            // 先开启认证
+            app.UseAuthentication();
+            // 然后是授权中间件
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

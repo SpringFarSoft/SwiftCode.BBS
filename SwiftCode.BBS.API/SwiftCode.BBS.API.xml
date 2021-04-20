@@ -4,6 +4,14 @@
         <name>SwiftCode.BBS.API</name>
     </assembly>
     <members>
+        <member name="M:SwiftCode.BBS.API.Controllers.LoginController.GetJwtStr(System.String,System.String)">
+            <summary>
+            获取Jwt令牌
+            </summary>
+            <param name="name"></param>
+            <param name="pass"></param>
+            <returns></returns>
+        </member>
         <member name="T:SwiftCode.BBS.API.Controllers.WeatherForecastController">
             <summary>
             天气预报
