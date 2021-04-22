@@ -4,6 +4,21 @@
         <name>SwiftCode.BBS.API</name>
     </assembly>
     <members>
+        <member name="M:SwiftCode.BBS.API.Controllers.ArticleController.Get(System.Int32)">
+            <summary>
+            根据Id查询文章
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.CalculatController.Get(System.Int32,System.Int32)">
+            <summary>
+            Sum接口
+            </summary>
+            <param name="i">参数i</param>
+            <param name="j">参数j</param>
+            <returns></returns>
+        </member>
         <member name="M:SwiftCode.BBS.API.Controllers.LoginController.GetJwtStr(System.String,System.String)">
             <summary>
             获取Jwt令牌

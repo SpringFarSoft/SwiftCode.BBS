@@ -4,6 +4,91 @@
         <name>SwiftCode.BBS.Model</name>
     </assembly>
     <members>
+        <member name="T:SwiftCode.BBS.Model.MessageModel`1">
+            <summary>
+            通用返回信息类
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.MessageModel`1.status">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.MessageModel`1.success">
+            <summary>
+            操作是否成功
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.MessageModel`1.msg">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.MessageModel`1.response">
+            <summary>
+            返回数据集合
+            </summary>
+        </member>
+        <member name="T:SwiftCode.BBS.Model.Models.Article">
+            <summary>
+            文章
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.Submitter">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.Title">
+            <summary>
+            标题blog
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.Category">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.Traffic">
+            <summary>
+            访问量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.CommentNum">
+            <summary>
+            评论数量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.UpdateTime">
+            <summary> 
+            修改时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.IsDeleted">
+            <summary>
+            逻辑删除
+            </summary>
+        </member>
         <member name="T:SwiftCode.BBS.Model.WeatherForecast">
             <summary>
             天气预报
@@ -27,6 +112,31 @@
         <member name="P:SwiftCode.BBS.Model.WeatherForecast.Summary">
             <summary>
             摘要
+            </summary>
+        </member>
+        <member name="T:SwiftCode.BBS.Model.TableModel`1">
+            <summary>
+            表格数据，支持分页
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.TableModel`1.Code">
+            <summary>
+            返回编码
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.TableModel`1.Msg">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.TableModel`1.Count">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.TableModel`1.Data">
+            <summary>
+            返回数据集
             </summary>
         </member>
     </members>
