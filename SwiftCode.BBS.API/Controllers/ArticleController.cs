@@ -21,11 +21,11 @@ namespace SwiftCode.BBS.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "Get")]
-        public List<Article> Get(int id)
+        public async Task<List<Article>> Get(int id)
         {
             IArticleService advertisementServices = new ArticleService();
 
-            return advertisementServices.Query(d => d.Id == id);
+            return await advertisementServices.Query(d => d.Id == id);
         }
     }
 }
