@@ -4,13 +4,14 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\SwiftCode.BBS.API\bin\Debug\</OutputPath>
-  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+  </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SwiftCode.BBS.EntityFramework\SwiftCode.BBS.EntityFramework.csproj" />
     <ProjectReference Include="..\SwiftCode.BBS.IRepositories\SwiftCode.BBS.IRepositories.csproj" />
     <ProjectReference Include="..\SwiftCode.BBS.IServices\SwiftCode.BBS.IServices.csproj" />
   </ItemGroup>
-
 </Project>

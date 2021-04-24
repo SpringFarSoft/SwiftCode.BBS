@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using SwiftCode.BBS.Model.Models;
 using SwiftCode.BBS.IServices;
-using SwiftCode.BBS.Services;
 
 namespace SwiftCode.BBS.API.Controllers
 {
@@ -14,6 +13,12 @@ namespace SwiftCode.BBS.API.Controllers
     [ApiController]
     public class ArticleController : ControllerBase
     {
+        private readonly IArticleService _articleServices;
+
+        public ArticleController(IArticleService articleServices)
+        {
+            _articleServices = articleServices;
+        }
   
         /// <summary>
         /// 根据Id查询文章
@@ -23,9 +28,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<List<Article>> Get(int id)
         {
-            IArticleService ArticleServices = new ArticleService();
-
-            return await ArticleServices.Query(d => d.Id == id);
+            return await _articleServices.Query(d => d.Id == id);
         }
     }
 }

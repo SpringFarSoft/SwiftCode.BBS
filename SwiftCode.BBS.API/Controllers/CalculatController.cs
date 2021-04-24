@@ -5,14 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SwiftCode.BBS.IServices;
-using SwiftCode.BBS.Services;
-
 namespace SwiftCode.BBS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class CalculatController : ControllerBase
     {
+        private readonly ICalculateService _advertisementServices;
+
+        public CalculatController(ICalculateService advertisementServices)
+        {
+            _advertisementServices = advertisementServices;
+        }
         /// <summary>
         /// Sum接口
         /// </summary>
@@ -22,8 +26,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public int Get(int i, int j)
         {
-            ICalculateService advertisementServices = new CalculateService();
-            return advertisementServices.Sum(i, j);
+            return _advertisementServices.Sum(i, j);
         }
     }
 }

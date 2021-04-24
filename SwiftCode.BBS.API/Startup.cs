@@ -16,6 +16,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SwiftCode.BBS.Common.Helper;
 using Swashbuckle.AspNetCore.Filters;
+using Autofac;
+using SwiftCode.BBS.Extensions.ServiceExtensions;
+using SwiftCode.BBS.IServices;
 
 namespace SwiftCode.BBS.API
 {
@@ -34,6 +37,8 @@ namespace SwiftCode.BBS.API
 
             services.AddControllers();
             services.AddSingleton(new Appsettings(Configuration));
+         
+
             #region Swagger
             services.AddSwaggerGen(c =>
             {
@@ -121,6 +126,14 @@ namespace SwiftCode.BBS.API
                 options.AddPolicy("SystemAndAdmin", policy => policy.RequireRole("Admin").RequireRole("System"));//且的关系
             });
 
+            // services.AddEfCoreSetup();
+
+        }
+
+        // 注意在Program.CreateHostBuilder，添加Autofac服务工厂
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule<AutofacModuleRegister>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

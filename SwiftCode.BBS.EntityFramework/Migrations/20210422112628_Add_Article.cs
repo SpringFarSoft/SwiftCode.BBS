@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SwiftCode.BBS.Repositories.Migrations
+namespace SwiftCode.BBS.EntityFramework.Migrations
 {
     public partial class Add_Article : Migration
     {

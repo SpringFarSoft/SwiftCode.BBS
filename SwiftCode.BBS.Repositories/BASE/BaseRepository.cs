@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SwiftCode.BBS.EntityFramework;
 using SwiftCode.BBS.IRepositories.BASE;
-using SwiftCode.BBS.Repositories.EfContext;
 
 namespace SwiftCode.BBS.Repositories.BASE
 {

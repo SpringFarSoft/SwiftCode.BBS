@@ -5,13 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using SwiftCode.BBS.IRepositories.BASE;
 using SwiftCode.BBS.IServices.BASE;
-using SwiftCode.BBS.Repositories.BASE;
 
 namespace SwiftCode.BBS.Services.BASE
 {
     public class BaseServices<TEntity> : IBaseServices<TEntity> where TEntity : class, new()
     {
-        public IBaseRepository<TEntity> baseDal = new BaseRepository<TEntity>();
+        public IBaseRepository<TEntity> baseDal;
+
+        public BaseServices(IBaseRepository<TEntity> baseDal)
+        {
+            this.baseDal = baseDal;
+        }
 
         /// <summary>
         /// 写入实体数据

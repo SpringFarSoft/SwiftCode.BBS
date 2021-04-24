@@ -6,7 +6,6 @@ using System.Text;
 using SwiftCode.BBS.IRepositories;
 using SwiftCode.BBS.Model.Models;
 using SwiftCode.BBS.Repositories.BASE;
-using SwiftCode.BBS.Repositories.EfContext;
 
 namespace SwiftCode.BBS.Repositories
 {

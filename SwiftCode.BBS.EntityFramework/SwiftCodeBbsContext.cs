@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SwiftCode.BBS.Model.Models;
 
-namespace SwiftCode.BBS.Repositories.EfContext
+namespace SwiftCode.BBS.EntityFramework
 {
     public class SwiftCodeBbsContext : DbContext
     {

@@ -6,13 +6,17 @@ using SwiftCode.BBS.IRepositories;
 using SwiftCode.BBS.IServices;
 using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model.Models;
-using SwiftCode.BBS.Repositories;
 using SwiftCode.BBS.Services.BASE;
 
 namespace SwiftCode.BBS.Services
 {
     public class ArticleService: BaseServices<Article>,IArticleService
     {
+        IArticleRepository dal;
+        public ArticleService(IArticleRepository dal):base(dal)
+        {
+            this.dal = dal;
+        }
         //public IArticleRepository dal = new ArticleRepository();
         //public void Add(Article model)
         //{

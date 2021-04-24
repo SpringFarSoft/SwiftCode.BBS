@@ -1,13 +1,17 @@
 ﻿using SwiftCode.BBS.IRepositories;
 using SwiftCode.BBS.IServices;
-using SwiftCode.BBS.Repositories;
 using System;
 
 namespace SwiftCode.BBS.Services
 {
     public class CalculateService : ICalculateService
     {
-        ICalculateRepository _calculateRepository = new CalculateRepository();
+        ICalculateRepository _calculateRepository;
+
+        public CalculateService(ICalculateRepository calculateRepository)
+        {
+            _calculateRepository = calculateRepository;
+        }
 
         public int Sum(int i, int j)
         {
