@@ -34,7 +34,7 @@ namespace SwiftCode.BBS.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             services.AddControllers();
             services.AddSingleton(new Appsettings(Configuration));
          
@@ -125,8 +125,6 @@ namespace SwiftCode.BBS.API
                 options.AddPolicy("SystemOrAdmin", policy => policy.RequireRole("Admin", "System"));//或的关系
                 options.AddPolicy("SystemAndAdmin", policy => policy.RequireRole("Admin").RequireRole("System"));//且的关系
             });
-
-            // services.AddEfCoreSetup();
 
         }
 

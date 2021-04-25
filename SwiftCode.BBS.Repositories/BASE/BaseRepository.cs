@@ -13,9 +13,9 @@ namespace SwiftCode.BBS.Repositories.BASE
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
         private SwiftCodeBbsContext context;
-        public BaseRepository()
+        public BaseRepository(SwiftCodeBbsContext context)
         {
-            context = new SwiftCodeBbsContext();
+            this.context = context;
         }
         /// <summary>
         /// 写入实体数据

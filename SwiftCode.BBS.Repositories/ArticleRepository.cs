@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using SwiftCode.BBS.EntityFramework;
 using SwiftCode.BBS.IRepositories;
 using SwiftCode.BBS.Model.Models;
 using SwiftCode.BBS.Repositories.BASE;
@@ -11,6 +12,10 @@ namespace SwiftCode.BBS.Repositories
 {
     public class ArticleRepository: BaseRepository<Article>, IArticleRepository
     {
+        public ArticleRepository(SwiftCodeBbsContext context) : base(context)
+        {
+
+        }
         //private SwiftCodeBbsContext context;
         //public ArticleRepository()
         //{
@@ -39,5 +44,6 @@ namespace SwiftCode.BBS.Repositories
 
         //   return  context.Articles.Where(whereExpression).ToList();
         //}
+
     }
 }
