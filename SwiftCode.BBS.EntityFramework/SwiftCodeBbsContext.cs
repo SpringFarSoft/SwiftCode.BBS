@@ -7,10 +7,7 @@ namespace SwiftCode.BBS.EntityFramework
 {
     public class SwiftCodeBbsContext : DbContext
     {
-        public SwiftCodeBbsContext()
-        {
-
-        }
+   
         public SwiftCodeBbsContext(DbContextOptions<SwiftCodeBbsContext> options)
             : base(options)
         {
@@ -25,11 +22,11 @@ namespace SwiftCode.BBS.EntityFramework
             // modelBuilder.Entity<Article>().Property(p => p.Content).HasMaxLength(128);
             modelBuilder.Entity<Article>().Property(p => p.Remark).HasMaxLength(1024);
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseSqlServer(@"Server=.; Database=SwiftCodeBbs; Trusted_Connection=True; Connection Timeout=600;MultipleActiveResultSets=true;")
-                .LogTo(Console.WriteLine, LogLevel.Information);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder
+        //        .UseSqlServer(@"Server=.; Database=SwiftCodeBbs; Trusted_Connection=True; Connection Timeout=600;MultipleActiveResultSets=true;")
+        //        .LogTo(Console.WriteLine, LogLevel.Information);
+        //}
     }
 }

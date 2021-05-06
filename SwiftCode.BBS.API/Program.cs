@@ -19,10 +19,11 @@ namespace SwiftCode.BBS.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory()) // Autofac服务工厂
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory()) // Autofac服务工厂;
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }

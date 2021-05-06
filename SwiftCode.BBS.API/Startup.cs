@@ -17,6 +17,8 @@ using Microsoft.OpenApi.Models;
 using SwiftCode.BBS.Common.Helper;
 using Swashbuckle.AspNetCore.Filters;
 using Autofac;
+using Microsoft.EntityFrameworkCore;
+using SwiftCode.BBS.EntityFramework;
 using SwiftCode.BBS.Extensions.ServiceExtensions;
 using SwiftCode.BBS.IServices;
 
@@ -36,6 +38,13 @@ namespace SwiftCode.BBS.API
         {
             
             services.AddControllers();
+
+
+            services.AddDbContext<SwiftCodeBbsContext>(o =>
+                o.UseSqlServer(
+                    @"Server=.; Database=SwiftCodeBbs; Trusted_Connection=True; Connection Timeout=600;MultipleActiveResultSets=true;", oo => oo.MigrationsAssembly("SwiftCode.BBS.EntityFramework")));
+
+
             services.AddSingleton(new Appsettings(Configuration));
          
 
@@ -131,6 +140,7 @@ namespace SwiftCode.BBS.API
         // 注意在Program.CreateHostBuilder，添加Autofac服务工厂
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            
             builder.RegisterModule<AutofacModuleRegister>();
         }
 

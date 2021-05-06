@@ -4,6 +4,8 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using Autofac;
+using Microsoft.EntityFrameworkCore;
+using SwiftCode.BBS.EntityFramework;
 
 namespace SwiftCode.BBS.Extensions.ServiceExtensions
 {
@@ -11,6 +13,22 @@ namespace SwiftCode.BBS.Extensions.ServiceExtensions
     {
         protected override void Load(ContainerBuilder builder)
         {
+
+            //builder.Register(c =>
+            //{
+            //    var optionsBuilder = new DbContextOptionsBuilder<SwiftCodeBbsContext>();
+            //    optionsBuilder.UseSqlServer(@"Server=.; Database=SwiftCodeBbs; Trusted_Connection=True; Connection Timeout=600;MultipleActiveResultSets=true;", b => b
+            //        .MigrationsAssembly("SwiftCode.BBS.EntityFramework"));
+            //    return optionsBuilder.Options;
+            //}).InstancePerLifetimeScope();
+            //// 注册 DbContext
+            //builder.RegisterType<SwiftCodeBbsContext>()
+            //    .AsSelf()
+            //    .InstancePerLifetimeScope();
+            // scan all assemblies in current application domain and resolve them on convention
+            //builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+            //    .AsImplementedInterfaces();
+
             var basePath = AppContext.BaseDirectory;
 
             // builder.RegisterType<ArticleService>().As<IArticleService>();
