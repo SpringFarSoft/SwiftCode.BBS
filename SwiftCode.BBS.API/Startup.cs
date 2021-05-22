@@ -46,7 +46,7 @@ namespace SwiftCode.BBS.API
 
 
             services.AddSingleton(new Appsettings(Configuration));
-         
+            services.AddAutoMapperSetup();
 
             #region Swagger
             services.AddSwaggerGen(c =>
@@ -92,8 +92,8 @@ namespace SwiftCode.BBS.API
 
             #endregion
 
-
            
+
 
             // хож╓
             services.AddAuthentication(x =>

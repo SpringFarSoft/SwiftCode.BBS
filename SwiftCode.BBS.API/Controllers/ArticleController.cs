@@ -30,5 +30,11 @@ namespace SwiftCode.BBS.API.Controllers
         {
             return await _articleServices.Query(d => d.Id == id);
         }
+
+
+
+
+
+
     }
 }

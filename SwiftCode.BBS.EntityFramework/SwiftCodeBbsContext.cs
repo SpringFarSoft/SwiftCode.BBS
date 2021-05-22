@@ -16,11 +16,45 @@ namespace SwiftCode.BBS.EntityFramework
         public DbSet<Article> Articles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Article>().Property(p => p.Title).HasMaxLength(128);
-            modelBuilder.Entity<Article>().Property(p => p.Submitter).HasMaxLength(64);
-            modelBuilder.Entity<Article>().Property(p => p.Category).HasMaxLength(256);
-            // modelBuilder.Entity<Article>().Property(p => p.Content).HasMaxLength(128);
-            modelBuilder.Entity<Article>().Property(p => p.Remark).HasMaxLength(1024);
+
+            var userInfoCfg = modelBuilder.Entity<UserInfo>();
+            userInfoCfg.Property(p => p.UserName).HasMaxLength(64);
+            userInfoCfg.Property(p => p.LoginName).HasMaxLength(64);
+            userInfoCfg.Property(p => p.LoginPassWord).HasMaxLength(128); 
+            userInfoCfg.Property(p => p.Phone).HasMaxLength(16);
+            userInfoCfg.Property(p => p.Introduction).HasMaxLength(512);
+            userInfoCfg.Property(p => p.Email).HasMaxLength(64);
+            // userInfoCfg.Property(p => p.HeadPortrait).HasMaxLength(1024);
+            userInfoCfg.Property(p => p.CreateTime).HasColumnType("datetime2");
+
+
+            var articleCfg = modelBuilder.Entity<Article>();
+            articleCfg.Property(p => p.Title).HasMaxLength(128);
+            articleCfg.Property(p => p.Content).HasMaxLength(2048);
+            articleCfg.Property(p => p.Tag).HasMaxLength(128);
+            articleCfg.Property(p => p.CreateTime).HasColumnType("datetime2");
+
+
+            var articleCommentCfg = modelBuilder.Entity<ArticleComment>();
+            articleCommentCfg.Property(p => p.Content).HasMaxLength(512);
+            articleCommentCfg.Property(p => p.CreateTime).HasColumnType("datetime2");
+
+
+            var questionCfg = modelBuilder.Entity<Question>();
+            questionCfg.Property(p => p.Title).HasMaxLength(128);
+            questionCfg.Property(p => p.Content).HasMaxLength(2048);
+            questionCfg.Property(p => p.Tag).HasMaxLength(128);
+            questionCfg.Property(p => p.CreateTime).HasColumnType("datetime2");
+
+
+            var questionCommentCfg = modelBuilder.Entity<QuestionComment>();
+            questionCommentCfg.Property(p => p.Content).HasMaxLength(512);
+            questionCommentCfg.Property(p => p.CreateTime).HasColumnType("datetime2");
+
+            var advertisementCfg = modelBuilder.Entity<Advertisement>();
+            advertisementCfg.Property(p => p.ImgUrl).HasMaxLength(1024);
+            advertisementCfg.Property(p => p.Url).HasMaxLength(128);
+
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

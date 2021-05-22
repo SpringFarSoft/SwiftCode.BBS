@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 
 namespace SwiftCode.BBS.Common.Helper
@@ -87,6 +88,21 @@ namespace SwiftCode.BBS.Common.Helper
             }
             return tokenModelJwt;
         }
+
+        /// <summary>
+        /// 授权解析jwt
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
+        public static TokenModelJwt ParsingJwtToken(HttpContext httpContext)
+        {
+            if (!httpContext.Request.Headers.ContainsKey("Authorization"))
+                return null;
+            var tokenHeader = httpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            TokenModelJwt tm = SerializeJwt(tokenHeader);
+            return tm;
+        }
+
     }
 
     /// <summary>

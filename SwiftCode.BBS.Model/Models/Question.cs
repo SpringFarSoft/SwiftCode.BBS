@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SwiftCode.BBS.Model.Models
 {
     /// <summary>
-    /// 文章
+    /// 问答
     /// </summary>
-    public class Article: RootEntityTkey<int>
+    public class Question : RootEntityTkey<int>
     {
         /// <summary>
         /// 标题
@@ -30,17 +32,13 @@ namespace SwiftCode.BBS.Model.Models
         /// </summary>
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// 创建用户信息
+        /// 关联用户
         /// </summary>
-        public virtual UserInfo CreateUserInfo { get; set; }
+        public virtual UserInfo UserInfo { get; set; }
         /// <summary>
-        /// 收藏文章的用户
+        /// 问答评论
         /// </summary>
-        public virtual List<UserCollectionArticle> CollectionArticles { get; set; }
-        /// <summary>
-        /// 文章评论
-        /// </summary>
-        public virtual List<ArticleComment> ArticleComments { get; set; }
+        public virtual List<QuestionComment> QuestionComments { get; set; }
 
     }
 }

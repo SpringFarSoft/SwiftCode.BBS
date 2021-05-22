@@ -29,29 +29,34 @@
             返回数据集合
             </summary>
         </member>
+        <member name="T:SwiftCode.BBS.Model.Models.Advertisement">
+            <summary>
+            广告
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Advertisement.ImgUrl">
+            <summary>
+            广告图片
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Advertisement.Url">
+            <summary>
+            广告链接
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Advertisement.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
         <member name="T:SwiftCode.BBS.Model.Models.Article">
             <summary>
             文章
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Article.Id">
-            <summary>
-            主键
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Article.Submitter">
-            <summary>
-            创建人
-            </summary>
-        </member>
         <member name="P:SwiftCode.BBS.Model.Models.Article.Title">
             <summary>
-            标题blog
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Article.Category">
-            <summary>
-            类别
+            标题
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.Models.Article.Content">
@@ -59,19 +64,14 @@
             内容
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
         <member name="P:SwiftCode.BBS.Model.Models.Article.Traffic">
             <summary>
             访问量
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Article.CommentNum">
-            <summary>
-            评论数量
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Article.UpdateTime">
-            <summary> 
-            修改时间
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.Models.Article.CreateTime">
@@ -79,14 +79,200 @@
             创建时间
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Article.Remark">
+        <member name="P:SwiftCode.BBS.Model.Models.Article.CreateUserInfo">
             <summary>
-            备注
+            创建用户信息
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Article.IsDeleted">
+        <member name="P:SwiftCode.BBS.Model.Models.Article.CollectionArticles">
             <summary>
-            逻辑删除
+            收藏文章的用户
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.ArticleComments">
+            <summary>
+            文章评论
+            </summary>
+        </member>
+        <member name="T:SwiftCode.BBS.Model.Models.ArticleComment">
+            <summary>
+            文章评论
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.ArticleComment.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.ArticleComment.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.ArticleComment.UserInfo">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.ArticleComment.Article">
+            <summary>
+            文章信息
+            </summary>
+        </member>
+        <member name="T:SwiftCode.BBS.Model.Models.Question">
+            <summary>
+            问答
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Question.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Question.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Question.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Question.Traffic">
+            <summary>
+            访问量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Question.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Question.UserInfo">
+            <summary>
+            关联用户
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Question.QuestionComments">
+            <summary>
+            问答评论
+            </summary>
+        </member>
+        <member name="T:SwiftCode.BBS.Model.Models.QuestionComment">
+            <summary>
+            问答评论
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.IsAdoption">
+            <summary>
+            是否采纳
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.UserInfo">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.Question">
+            <summary>
+            文章信息
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.RootEntityTkey`1.Id">
+            <summary>
+            ID
+            泛型主键Tkey
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.SystemAdmin.SysUserInfo.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.SystemAdmin.SysUserInfo.LoginName">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.SystemAdmin.SysUserInfo.LoginPassWord">
+            <summary>
+            登录密码
+            </summary>
+        </member>
+        <member name="T:SwiftCode.BBS.Model.Models.UserCollectionArticle">
+            <summary>
+            用户文章收藏表
+            </summary>
+        </member>
+        <member name="T:SwiftCode.BBS.Model.Models.UserInfo">
+            <summary>
+            用户表
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.LoginName">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.LoginPassWord">
+            <summary>
+            登录密码
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.Phone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.Introduction">
+            <summary>
+            个人介绍
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.CollectionArticles">
+            <summary>
+            用户收藏的文章
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.Articles">
+            <summary>
+            发表的文章
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.Questions">
+            <summary>
+            发表的问答
             </summary>
         </member>
         <member name="T:SwiftCode.BBS.Model.WeatherForecast">
@@ -137,6 +323,41 @@
         <member name="P:SwiftCode.BBS.Model.TableModel`1.Data">
             <summary>
             返回数据集
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.LoginName">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.LoginPassWord">
+            <summary>
+            登录密码
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.Phone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.Introduction">
+            <summary>
+            个人介绍
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.HeadPortrait">
+            <summary>
+            头像
             </summary>
         </member>
     </members>

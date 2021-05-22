@@ -49,6 +49,12 @@ namespace SwiftCode.BBS.Services.BASE
         {
            return baseDal.Query();
         }
+
+        public Task<TEntity> Get(Expression<Func<TEntity, bool>> whereExpression)
+        {
+            return baseDal.Get(whereExpression);
+        }
+
         /// <summary>
         /// 功能描述:查询数据列表
         /// </summary>

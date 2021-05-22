@@ -52,6 +52,12 @@ namespace SwiftCode.BBS.Repositories.BASE
         {
             return context.Set<TEntity>().ToListAsync();
         }
+
+        public  Task<TEntity> Get(Expression<Func<TEntity, bool>> whereExpression)
+        {
+            return context.Set<TEntity>().Where(whereExpression).FirstOrDefaultAsync();
+        }
+
         /// <summary>
         /// 功能描述:查询数据列表
         /// </summary>
