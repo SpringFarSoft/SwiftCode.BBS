@@ -9,7 +9,7 @@ using SwiftCode.BBS.IServices;
 
 namespace SwiftCode.BBS.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ArticleController : ControllerBase
     {

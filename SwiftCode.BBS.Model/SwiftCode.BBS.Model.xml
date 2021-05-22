@@ -360,5 +360,30 @@
             头像
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDetailsDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDetailsDto.Phone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDetailsDto.Introduction">
+            <summary>
+            个人介绍
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDetailsDto.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDetailsDto.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
     </members>
 </doc>

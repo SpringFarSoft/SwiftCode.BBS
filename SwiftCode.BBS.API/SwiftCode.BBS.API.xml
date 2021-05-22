@@ -19,6 +19,18 @@
             <param name="j">参数j</param>
             <returns></returns>
         </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.HomeController.Index">
+            <summary>
+            首页精选
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.HomeController.GetAdvertisement">
+            <summary>
+            获取广告列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:SwiftCode.BBS.API.Controllers.LoginController.GetJwtStr(System.String,System.String)">
             <summary>
             获取Jwt令牌

@@ -12,7 +12,7 @@ using SwiftCode.BBS.Model.ViewModels.UserInfo;
 
 namespace SwiftCode.BBS.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

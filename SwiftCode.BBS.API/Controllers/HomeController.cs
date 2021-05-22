@@ -11,7 +11,7 @@ using SwiftCode.BBS.Model;
 
 namespace SwiftCode.BBS.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class HomeController : ControllerBase
     {
@@ -37,6 +37,7 @@ namespace SwiftCode.BBS.API.Controllers
         /// 首页精选
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public async Task<MessageModel<string>> Index()
         {
            var articleList = await  _articleService.QueryPage(x => x.Content.Length > 50, x => x.CollectionArticles, 0, 10);
@@ -50,6 +51,7 @@ namespace SwiftCode.BBS.API.Controllers
         /// 获取广告列表
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public async Task<MessageModel<string>> GetAdvertisement()
         {
             var advertisementList = await _advertisementService.QueryPage(x => true, x=> x.CreateTime,0,5);
