@@ -12,6 +12,9 @@ using SwiftCode.BBS.Model.ViewModels.UserInfo;
 
 namespace SwiftCode.BBS.API.Controllers
 {
+    /// <summary>
+    /// 授权
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -25,6 +28,12 @@ namespace SwiftCode.BBS.API.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="loginName"></param>
+        /// <param name="loginPassWord"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<MessageModel<string>> Login(string loginName, string loginPassWord)
         {
@@ -61,6 +70,11 @@ namespace SwiftCode.BBS.API.Controllers
 
         }
 
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<MessageModel<string>> Register(RegisterInputDto input)
         {

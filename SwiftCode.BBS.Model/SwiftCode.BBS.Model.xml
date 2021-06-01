@@ -59,6 +59,11 @@
             标题
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.Cover">
+            <summary>
+            封面
+            </summary>
+        </member>
         <member name="P:SwiftCode.BBS.Model.Models.Article.Content">
             <summary>
             内容
@@ -187,6 +192,12 @@
         <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.Question">
             <summary>
             文章信息
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.RootTkey.EntityTKeyDto`1.Id">
+            <summary>
+            ID
+            泛型主键Tkey
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.Models.RootEntityTkey`1.Id">
@@ -325,6 +336,161 @@
             返回数据集
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleCommentDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleCommentDto.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleCommentDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleCommentDto.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.Cover">
+            <summary>
+            封面
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.Traffic">
+            <summary>
+            访问量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.ArticleList">
+            <summary>
+            文章推荐
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.Author">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.ArticleComments">
+            <summary>
+            文章评论
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.Cover">
+            <summary>
+            封面
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.CreateArticleInputDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.CreateArticleInputDto.Cover">
+            <summary>
+            封面
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.CreateArticleInputDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.CreateArticleInputDto.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.UpdateArticleInputDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.UpdateArticleInputDto.Cover">
+            <summary>
+            封面
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.UpdateArticleInputDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.UpdateArticleInputDto.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDto.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDto.QuestionCommentCount">
+            <summary>
+            问答数量
+            </summary>
+        </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.UserName">
             <summary>
             用户名
@@ -381,6 +547,41 @@
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDetailsDto.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDto.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDto.ArticlesCount">
+            <summary>
+            文章数量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDto.QuestionsCount">
+            <summary>
+            问答数量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoInputDto.Introduction">
+            <summary>
+            个人介绍
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoInputDto.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoInputDto.HeadPortrait">
             <summary>
             头像
             </summary>

@@ -18,7 +18,7 @@ namespace SwiftCode.BBS.Extensions.ServiceExtensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddAutoMapper(typeof(AutoMapperConfig));
-            AutoMapperConfig.RegisterMappings();
+            // AutoMapperConfig.RegisterMappings();
         }
     }
 }

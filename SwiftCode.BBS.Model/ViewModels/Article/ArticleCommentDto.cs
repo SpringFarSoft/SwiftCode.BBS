@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SwiftCode.BBS.Model.Models.RootTkey;
 
-namespace SwiftCode.BBS.Model.Models
+namespace SwiftCode.BBS.Model.ViewModels.Article
 {
-    /// <summary>
-    /// 文章评论
-    /// </summary>
-    public class ArticleComment : RootEntityTkey<int>
+    public class ArticleCommentDto : EntityTKeyDto<int>
     {
         /// <summary>
         /// 内容
@@ -19,16 +17,15 @@ namespace SwiftCode.BBS.Model.Models
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
-        /// <summary>
-        /// 用户信息
-        /// </summary>
-        public virtual UserInfo UserInfo { get; set; }
 
 
         /// <summary>
-        /// 文章信息
+        /// 用户名
         /// </summary>
-        public virtual Article Article { get; set; }
-
+        public string UserName { get; set; }
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string HeadPortrait { get; set; }
     }
 }

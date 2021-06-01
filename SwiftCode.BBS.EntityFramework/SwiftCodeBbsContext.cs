@@ -34,6 +34,8 @@ namespace SwiftCode.BBS.EntityFramework
             articleCfg.Property(p => p.Tag).HasMaxLength(128);
             articleCfg.Property(p => p.CreateTime).HasColumnType("datetime2");
 
+   
+
 
             var articleCommentCfg = modelBuilder.Entity<ArticleComment>();
             articleCommentCfg.Property(p => p.Content).HasMaxLength(512);

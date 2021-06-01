@@ -20,6 +20,7 @@ namespace SwiftCode.BBS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserInfoController : ControllerBase
     {
 
@@ -31,9 +32,12 @@ namespace SwiftCode.BBS.API.Controllers
             _userInfoService = userInfoService;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// 用户个人信息
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<MessageModel<UserInfoDetailsDto>> GetCurrentUserInfo()
+        public async Task<MessageModel<UserInfoDetailsDto>> GetAsync()
         {
             var token = JwtHelper.ParsingJwtToken(HttpContext);
             var userInfo = await _userInfoService.Get(x => x.Id == token.Uid);
@@ -43,6 +47,27 @@ namespace SwiftCode.BBS.API.Controllers
                 success = true,
                 msg = "获取成功",
                 response = _mapper.Map<UserInfoDetailsDto>(userInfo)
+            };
+        }
+
+        /// <summary>
+        /// 修改个人信息
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<MessageModel<string>> UpdateAsync(UserInfoInputDto input)
+        {
+            var token = JwtHelper.ParsingJwtToken(HttpContext);
+            var userInfo = await _userInfoService.Get(x => x.Id == token.Uid);
+
+            userInfo = _mapper.Map<UserInfo>(input);
+            _userInfoService.Update(userInfo);
+
+            return new MessageModel<string>()
+            {
+                success = true,
+                msg = "修改成功",
             };
         }
 

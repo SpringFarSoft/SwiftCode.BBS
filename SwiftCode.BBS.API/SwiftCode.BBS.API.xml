@@ -4,11 +4,82 @@
         <name>SwiftCode.BBS.API</name>
     </assembly>
     <members>
+        <member name="T:SwiftCode.BBS.API.Controllers.ArticleController">
+            <summary>
+            文章
+            </summary>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.ArticleController.GetList(System.Int32,System.Int32)">
+            <summary>
+            分页获取文章列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:SwiftCode.BBS.API.Controllers.ArticleController.Get(System.Int32)">
             <summary>
             根据Id查询文章
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.ArticleController.CreateAsync(SwiftCode.BBS.Model.ViewModels.Article.CreateArticleInputDto)">
+            <summary>
+            创建文章
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.ArticleController.UpdateAsync(System.Int32,SwiftCode.BBS.Model.ViewModels.Article.UpdateArticleInputDto)">
+            <summary>
+            修改文章
+            </summary>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.ArticleController.DeleteAsync(System.Int32)">
+            <summary>
+            删除文章
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.ArticleController.CreateCollectionAsync(System.Int32)">
+            <summary>
+            收藏文章
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.ArticleController.CreateArticleCommentsAsync(System.Int32,SwiftCode.BBS.Model.ViewModels.Article.CreateArticleCommentsInputDto)">
+            <summary>
+            添加文章评论
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.ArticleController.DeleteArticleCommentsAsync(System.Int32,System.Int32)">
+            <summary>
+            删除文章评论
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SwiftCode.BBS.API.Controllers.AuthController">
+            <summary>
+            授权
+            </summary>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.AuthController.Login(System.String,System.String)">
+            <summary>
+            登录
+            </summary>
+            <param name="loginName"></param>
+            <param name="loginPassWord"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.AuthController.Register(SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto)">
+            <summary>
+            注册
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:SwiftCode.BBS.API.Controllers.CalculatController.Get(System.Int32,System.Int32)">
@@ -19,9 +90,26 @@
             <param name="j">参数j</param>
             <returns></returns>
         </member>
-        <member name="M:SwiftCode.BBS.API.Controllers.HomeController.Index">
+        <member name="T:SwiftCode.BBS.API.Controllers.HomeController">
             <summary>
-            首页精选
+            主页
+            </summary>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.HomeController.GetArticle">
+            <summary>
+            获取文章列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.HomeController.GetQuestion">
+            <summary>
+            获取问答列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.HomeController.GetUserInfo">
+            <summary>
+            获取作者列表
             </summary>
             <returns></returns>
         </member>
@@ -37,6 +125,19 @@
             </summary>
             <param name="name"></param>
             <param name="pass"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.UserInfoController.GetAsync">
+            <summary>
+            用户个人信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.UserInfoController.UpdateAsync(SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoInputDto)">
+            <summary>
+            修改个人信息
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:SwiftCode.BBS.API.Controllers.WeatherForecastController">

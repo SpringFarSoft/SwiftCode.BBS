@@ -82,7 +82,7 @@ namespace SwiftCode.BBS.Common.Helper
 
                 tokenModelJwt = new TokenModelJwt
                 {
-                    Uid = Convert.ToInt64(jwtToken.Id),
+                    Uid = Convert.ToInt32(jwtToken.Id),
                     Role = role == null ? "" : role.ToString()
                 };
             }
@@ -113,7 +113,7 @@ namespace SwiftCode.BBS.Common.Helper
         /// <summary>
         /// Id
         /// </summary>
-        public long Uid { get; set; }
+        public int Uid { get; set; }
         /// <summary>
         /// 角色
         /// </summary>
