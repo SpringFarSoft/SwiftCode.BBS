@@ -18,9 +18,12 @@ namespace SwiftCode.BBS.Extensions.AutoMapper
         {
             CreateMap<CreateArticleInputDto, Article>();
             CreateMap<UpdateArticleInputDto, Article>();
-
+            
             CreateMap<Article, ArticleDto>();
             CreateMap<Article, ArticleDetailsDto>();
+
+            CreateMap<ArticleComment, ArticleCommentDto>();
+
 
             CreateMap<CreateArticleCommentsInputDto, ArticleComment>();
         }

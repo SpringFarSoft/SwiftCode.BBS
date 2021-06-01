@@ -41,7 +41,7 @@ namespace SwiftCode.BBS.API
 
 
             services.AddDbContext<SwiftCodeBbsContext>(o =>
-                o.UseSqlServer(
+                o.UseLazyLoadingProxies().UseSqlServer(
                     @"Server=.; Database=SwiftCodeBbs; Trusted_Connection=True; Connection Timeout=600;MultipleActiveResultSets=true;", oo => oo.MigrationsAssembly("SwiftCode.BBS.EntityFramework")));
 
 

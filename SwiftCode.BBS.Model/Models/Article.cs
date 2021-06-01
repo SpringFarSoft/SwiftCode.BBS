@@ -40,11 +40,11 @@ namespace SwiftCode.BBS.Model.Models
         /// <summary>
         /// 收藏文章的用户
         /// </summary>
-        public virtual List<UserCollectionArticle> CollectionArticles { get; set; }= new List<UserCollectionArticle>();
+        public virtual ICollection<UserCollectionArticle> CollectionArticles { get; set; }= new List<UserCollectionArticle>();
         /// <summary>
         /// 文章评论
         /// </summary>
-        public virtual List<ArticleComment> ArticleComments { get; set; }= new List<ArticleComment>();
+        public virtual ICollection<ArticleComment> ArticleComments { get; set; }= new List<ArticleComment>();
 
     }
 }

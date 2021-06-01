@@ -46,18 +46,18 @@ namespace SwiftCode.BBS.Model.Models
         /// <summary>
         /// 用户收藏的文章
         /// </summary>
-        public virtual List<UserCollectionArticle> CollectionArticles { get; set; }
+        public virtual ICollection<UserCollectionArticle> CollectionArticles { get; set; } = new List<UserCollectionArticle>();
 
         /// <summary>
         /// 发表的文章
         /// </summary>
-        public virtual List<Article> Articles { get; set; }
+        public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
 
         /// <summary>
         /// 发表的问答
         /// </summary>
-        public virtual List<Question> Questions { get; set; }
+        public virtual ICollection<Question> Questions { get; set; } = new List<Question>();
 
 
     }
