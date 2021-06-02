@@ -154,7 +154,7 @@
             创建时间
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Question.UserInfo">
+        <member name="P:SwiftCode.BBS.Model.Models.Question.CreateUserInfo">
             <summary>
             关联用户
             </summary>
@@ -391,7 +391,7 @@
             文章推荐
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.Author">
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.CreateUserInfo">
             <summary>
             作者
             </summary>
@@ -476,6 +476,81 @@
             类别
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.CreateQuestionInputDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.CreateQuestionInputDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.CreateQuestionInputDto.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionCommentDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionCommentDto.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionCommentDto.IsAdoption">
+            <summary>
+            是否采纳
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionCommentDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionCommentDto.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.QuestionCommentCount">
+            <summary>
+            问答数量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.QuestionList">
+            <summary>
+            问答推荐
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.UserInfo">
+            <summary>
+            关联用户
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.QuestionComments">
+            <summary>
+            问答评论
+            </summary>
+        </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDto.Title">
             <summary>
             标题
@@ -489,6 +564,21 @@
         <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDto.QuestionCommentCount">
             <summary>
             问答数量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.UpdateQuestionInputDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.UpdateQuestionInputDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.UpdateQuestionInputDto.Tag">
+            <summary>
+            类别
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.UserName">

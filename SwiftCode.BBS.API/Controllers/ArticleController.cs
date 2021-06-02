@@ -58,12 +58,12 @@ namespace SwiftCode.BBS.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet]
         public async Task<MessageModel<ArticleDetailsDto>> Get(int id)
         {
             var entity = (await _articleServices.Query(d => d.Id == id)).FirstOrDefault();
             var result = _mapper.Map<ArticleDetailsDto>(entity);
-            result.ArticleComments = _mapper.Map<List<ArticleCommentDto>>(entity.ArticleComments.ToList());
+            result.ArticleList = _mapper.Map<List<ArticleDto>>(await _articleServices.QueryPage(x => x.Id != id, x => x.CollectionArticles.Count, 1, 5));
             return new MessageModel<ArticleDetailsDto>()
             {
                 success = true,
@@ -185,7 +185,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpDelete(Name = "DeleteArticleComments")]
         public async Task<MessageModel<string>> DeleteArticleCommentsAsync(int articleId, int id)
         {
-            var entity = (await _articleServices.Query(d => d.Id == id)).FirstOrDefault();
+            var entity = (await _articleServices.Query(d => d.Id == articleId)).FirstOrDefault();
             entity.ArticleComments.Remove(entity.ArticleComments.FirstOrDefault(x => x.Id == id));
             _articleServices.Update(entity);
             return new MessageModel<string>()

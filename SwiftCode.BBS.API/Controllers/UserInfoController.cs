@@ -18,6 +18,9 @@ using SwiftCode.BBS.Model.Models;
 
 namespace SwiftCode.BBS.API.Controllers
 {
+    /// <summary>
+    /// 个人中心
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]

@@ -3,42 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SwiftCode.BBS.Model.ViewModels.UserInfo;
 
-namespace SwiftCode.BBS.Model.Models
+namespace SwiftCode.BBS.Model.ViewModels.Question
 {
-    /// <summary>
-    /// 问答
-    /// </summary>
-    public class Question : RootEntityTkey<int>
+    public class QuestionDetailsDto
     {
         /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }
         /// <summary>
-        /// 内容
-        /// </summary>
-        public string Content { get; set; }
-        /// <summary>
         /// 类别
         /// </summary>
         public string Tag { get; set; }
         /// <summary>
-        /// 访问量
+        /// 问答数量
         /// </summary>
-        public int Traffic { get; set; }
+        public int QuestionCommentCount { get; set; }
+
         /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
+
+
+        /// <summary>
+        /// 问答推荐
+        /// </summary>
+        public List<QuestionDto> QuestionList { get; set; }
+
+
         /// <summary>
         /// 关联用户
         /// </summary>
-        public virtual UserInfo CreateUserInfo { get; set; }
+        public virtual UserInfoDto UserInfo { get; set; }
+
         /// <summary>
         /// 问答评论
         /// </summary>
-        public virtual List<QuestionComment> QuestionComments { get; set; }
-
+        public virtual List<QuestionCommentDto> QuestionComments { get; set; }
     }
 }

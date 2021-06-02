@@ -21,7 +21,6 @@ namespace SwiftCode.BBS.Extensions.AutoMapper
             
             CreateMap<Article, ArticleDto>();
             CreateMap<Article, ArticleDetailsDto>();
-
             CreateMap<ArticleComment, ArticleCommentDto>();
 
 

@@ -44,12 +44,12 @@ namespace SwiftCode.BBS.Model.ViewModels.Article
         /// <summary>
         /// 作者
         /// </summary>
-        public List<UserInfoDto> Author { get; set; }
+        public UserInfoDto CreateUserInfo { get; set; }
 
         /// <summary>
         /// 文章评论
         /// </summary>
-        public  List<ArticleCommentDto> ArticleComments { get; set; }
+        public List<ArticleCommentDto> ArticleComments { get; set; }
 
 
 

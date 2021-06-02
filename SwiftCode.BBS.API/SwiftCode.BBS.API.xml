@@ -127,6 +127,62 @@
             <param name="pass"></param>
             <returns></returns>
         </member>
+        <member name="T:SwiftCode.BBS.API.Controllers.QuestionController">
+            <summary>
+            问答
+            </summary>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.QuestionController.GetList(System.Int32,System.Int32)">
+            <summary>
+            分页获取问答列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.QuestionController.Get(System.Int32)">
+            <summary>
+            根据Id查询问答
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.QuestionController.CreateAsync(SwiftCode.BBS.Model.ViewModels.Question.CreateQuestionInputDto)">
+            <summary>
+            创建问答
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.QuestionController.UpdateAsync(System.Int32,SwiftCode.BBS.Model.ViewModels.Question.UpdateQuestionInputDto)">
+            <summary>
+            问答文章
+            </summary>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.QuestionController.DeleteAsync(System.Int32)">
+            <summary>
+            删除问答
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.QuestionController.CreateQuestionCommentsAsync(System.Int32,SwiftCode.BBS.Model.ViewModels.Question.CreateQuestionCommentsInputDto)">
+            <summary>
+            添加问答评论
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.QuestionController.DeleteQuestionCommentsAsync(System.Int32,System.Int32)">
+            <summary>
+            删除问答评论
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SwiftCode.BBS.API.Controllers.UserInfoController">
+            <summary>
+            个人中心
+            </summary>
+        </member>
         <member name="M:SwiftCode.BBS.API.Controllers.UserInfoController.GetAsync">
             <summary>
             用户个人信息
