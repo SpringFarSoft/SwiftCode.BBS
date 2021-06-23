@@ -13,6 +13,7 @@ using SwiftCode.BBS.Model.ViewModels.UserInfo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model.Models;
 
 
@@ -27,10 +28,10 @@ namespace SwiftCode.BBS.API.Controllers
     public class UserInfoController : ControllerBase
     {
 
-        private readonly IUserInfoService _userInfoService;
+        private readonly IBaseServices<UserInfo> _userInfoService;
         private readonly IMapper _mapper;
 
-        public UserInfoController(IUserInfoService userInfoService, IMapper mapper)
+        public UserInfoController(IBaseServices<UserInfo> userInfoService, IMapper mapper)
         {
             _userInfoService = userInfoService;
             _mapper = mapper;

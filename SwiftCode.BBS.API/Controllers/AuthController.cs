@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SwiftCode.BBS.Common.Helper;
 using SwiftCode.BBS.IRepositories;
+using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model;
 using SwiftCode.BBS.Model.Models;
 using SwiftCode.BBS.Model.ViewModels.UserInfo;
@@ -19,10 +20,10 @@ namespace SwiftCode.BBS.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IUserInfoService _userInfoService;
+        private readonly IBaseServices<UserInfo> _userInfoService;
         private readonly IMapper _mapper;
 
-        public AuthController(IUserInfoService userInfoService, IMapper mapper)
+        public AuthController(IBaseServices<UserInfo> userInfoService, IMapper mapper)
         {
             _userInfoService = userInfoService;
             _mapper = mapper;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using SwiftCode.BBS.IRepositories;
 using SwiftCode.BBS.IServices;
+using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model;
 using SwiftCode.BBS.Model.Models;
 using SwiftCode.BBS.Model.ViewModels.Article;
@@ -22,16 +23,16 @@ namespace SwiftCode.BBS.API.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
-        private readonly IUserInfoService _userInfoService;
-        private readonly IArticleService _articleService;
-        private readonly IQuestionService _questionService;
-        private readonly IAdvertisementService _advertisementService;
+        private readonly IBaseServices<UserInfo> _userInfoService;
+        private readonly IBaseServices<Article> _articleService;
+        private readonly IBaseServices<Question> _questionService;
+        private readonly IBaseServices<Advertisement> _advertisementService;
         private readonly IMapper _mapper;
 
-        public HomeController(IUserInfoService userInfoService, 
-            IArticleService articleService, 
-            IQuestionService questionService, 
-            IAdvertisementService advertisementService,
+        public HomeController(IBaseServices<UserInfo> userInfoService,
+            IBaseServices<Article> articleService,
+            IBaseServices<Question> questionService,
+            IBaseServices<Advertisement> advertisementService,
             IMapper mapper)
         {
             _userInfoService = userInfoService;
@@ -50,7 +51,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<ArticleDto>>> GetArticle()
         {
-           var articleList = await  _articleService.QueryPage(x => x.Content.Length > 50, x => x.CollectionArticles.Count, 0, 10);
+           var articleList = await  _articleService.QueryPage(x => x.Content.Length > 50, x => x.CollectionArticles.Count, 1, 10);
 
            return new MessageModel<List<ArticleDto>>()
            {
@@ -66,7 +67,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<QuestionDto>>> GetQuestion()
         {
-            var questionList = await _questionService.QueryPage(x => x.Content.Length > 20, x => x.QuestionComments.Count, 0, 10);
+            var questionList = await _questionService.QueryPage(x => x.Content.Length > 20, x => x.QuestionComments.Count, 1, 10);
 
             return new MessageModel<List<QuestionDto>>()
             {
@@ -82,7 +83,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<UserInfoDto>>> GetUserInfo()
         {
-            var userInfoList = await _userInfoService.QueryPage(x => true, x => x.Articles.Count, 0, 5);
+            var userInfoList = await _userInfoService.QueryPage(x => true, x => x.Articles.Count, 1, 5);
 
             return new MessageModel<List<UserInfoDto>>()
             {
@@ -98,7 +99,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<string>> GetAdvertisement()
         {
-            var advertisementList = await _advertisementService.QueryPage(x => true, x=> x.CreateTime,0,5);
+            var advertisementList = await _advertisementService.QueryPage(x => true, x=> x.CreateTime,1,5);
             return new MessageModel<string>();
         }
 

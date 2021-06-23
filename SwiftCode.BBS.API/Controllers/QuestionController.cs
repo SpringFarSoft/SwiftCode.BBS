@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using SwiftCode.BBS.Common.Helper;
 using SwiftCode.BBS.IRepositories;
 using SwiftCode.BBS.IServices;
+using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model;
 using SwiftCode.BBS.Model.Models;
 using SwiftCode.BBS.Model.ViewModels.Article;
@@ -23,11 +24,11 @@ namespace SwiftCode.BBS.API.Controllers
     [Authorize]
     public class QuestionController : ControllerBase
     {
-        private readonly IQuestionService _questionService;
-        private readonly IUserInfoService _userInfoService;
+        private readonly IBaseServices<Question> _questionService;
+        private readonly IBaseServices<UserInfo> _userInfoService;
         private readonly IMapper _mapper;
 
-        public QuestionController(IQuestionService questionService, IUserInfoService userInfoService, IMapper mapper)
+        public QuestionController(IBaseServices<Question> questionService, IBaseServices<UserInfo> userInfoService, IMapper mapper)
         {
             _questionService = questionService;
             _userInfoService = userInfoService;

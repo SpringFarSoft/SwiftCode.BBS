@@ -92,7 +92,7 @@ namespace SwiftCode.BBS.Repositories.BASE
         /// <param name="intPageIndex"></param>
         /// <param name="intPageSize"></param>
         /// <returns></returns>
-        public Task<List<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, object>> orderByExpression, int intPageIndex = 0, int intPageSize = 20)
+        public Task<List<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, object>> orderByExpression, int intPageIndex = 1, int intPageSize = 20)
         {
             return context.Set<TEntity>().Where(whereExpression).OrderBy(orderByExpression).Skip(intPageSize * (intPageIndex - 1)).Take(intPageSize).ToListAsync();
         }

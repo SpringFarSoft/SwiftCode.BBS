@@ -10,6 +10,7 @@ using SwiftCode.BBS.Common.Helper;
 using SwiftCode.BBS.IRepositories;
 using SwiftCode.BBS.Model.Models;
 using SwiftCode.BBS.IServices;
+using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model;
 using SwiftCode.BBS.Model.ViewModels;
 using SwiftCode.BBS.Model.ViewModels.Article;
@@ -24,11 +25,11 @@ namespace SwiftCode.BBS.API.Controllers
     [Authorize]
     public class ArticleController : ControllerBase
     {
-        private readonly IArticleService _articleServices;
-        private readonly IUserInfoService _userInfoService;
+        private readonly IBaseServices<Article> _articleServices;
+        private readonly IBaseServices<UserInfo> _userInfoService;
         private readonly IMapper _mapper;
 
-        public ArticleController(IArticleService articleServices, IUserInfoService userInfoService, IMapper mapper)
+        public ArticleController(IBaseServices<Article> articleServices, IBaseServices<UserInfo> userInfoService, IMapper mapper)
         {
             _articleServices = articleServices;
             _userInfoService = userInfoService;
