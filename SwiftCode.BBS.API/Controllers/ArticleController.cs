@@ -12,7 +12,6 @@ using SwiftCode.BBS.Model.Models;
 using SwiftCode.BBS.IServices;
 using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model;
-using SwiftCode.BBS.Model.ViewModels;
 using SwiftCode.BBS.Model.ViewModels.Article;
 
 namespace SwiftCode.BBS.API.Controllers
