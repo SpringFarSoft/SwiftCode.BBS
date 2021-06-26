@@ -50,8 +50,9 @@ namespace SwiftCode.BBS.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<MessageModel<List<ArticleDto>>> GetArticle()
-        {
-           var articleList = await  _articleService.QueryPage(x => x.Content.Length > 50, x => x.CollectionArticles.Count, 1, 10);
+        { 
+           // todo
+           var articleList = await  _articleService.GetPagedListAsync( 1, 10, nameof(Article.CreateTime));
 
            return new MessageModel<List<ArticleDto>>()
            {
@@ -67,7 +68,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<QuestionDto>>> GetQuestion()
         {
-            var questionList = await _questionService.QueryPage(x => x.Content.Length > 20, x => x.QuestionComments.Count, 1, 10);
+            var questionList = await _questionService.GetPagedListAsync(1, 10, nameof(Question.CreateTime));
 
             return new MessageModel<List<QuestionDto>>()
             {
@@ -83,7 +84,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<UserInfoDto>>> GetUserInfo()
         {
-            var userInfoList = await _userInfoService.QueryPage(x => true, x => x.Articles.Count, 1, 5);
+            var userInfoList = await _userInfoService.GetPagedListAsync(1, 5,nameof(UserInfo.CreateTime));
 
             return new MessageModel<List<UserInfoDto>>()
             {
@@ -99,7 +100,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<string>> GetAdvertisement()
         {
-            var advertisementList = await _advertisementService.QueryPage(x => true, x=> x.CreateTime,1,5);
+            var advertisementList = await _advertisementService.GetPagedListAsync(1,5, nameof(Advertisement.CreateTime));
             return new MessageModel<string>();
         }
 

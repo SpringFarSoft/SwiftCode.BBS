@@ -44,7 +44,7 @@ namespace SwiftCode.BBS.API.Controllers
         public async Task<MessageModel<UserInfoDetailsDto>> GetAsync()
         {
             var token = JwtHelper.ParsingJwtToken(HttpContext);
-            var userInfo = await _userInfoService.Get(x => x.Id == token.Uid);
+            var userInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid);
 
             return new MessageModel<UserInfoDetailsDto>()
             {
@@ -63,10 +63,10 @@ namespace SwiftCode.BBS.API.Controllers
         public async Task<MessageModel<string>> UpdateAsync(UserInfoInputDto input)
         {
             var token = JwtHelper.ParsingJwtToken(HttpContext);
-            var userInfo = await _userInfoService.Get(x => x.Id == token.Uid);
+            var userInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid);
 
             userInfo = _mapper.Map<UserInfo>(input);
-            _userInfoService.Update(userInfo);
+            await _userInfoService.UpdateAsync(userInfo, true);
 
             return new MessageModel<string>()
             {

@@ -43,7 +43,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<ArticleDto>>> GetList(int page, int pageSize)
         {
-            var entityList = await _articleServices.QueryPage(x=>true,x=>x.CreateTime, page, pageSize);
+            var entityList = await _articleServices.GetPagedListAsync(page, pageSize,nameof(Article.CreateTime));
 
             return new MessageModel<List<ArticleDto>>()
             {
@@ -61,9 +61,9 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<ArticleDetailsDto>> Get(int id)
         {
-            var entity = (await _articleServices.Query(d => d.Id == id)).FirstOrDefault();
+            var entity = await _articleServices.GetAsync(d => d.Id == id);
             var result = _mapper.Map<ArticleDetailsDto>(entity);
-            result.ArticleList = _mapper.Map<List<ArticleDto>>(await _articleServices.QueryPage(x => x.Id != id, x => x.CollectionArticles.Count, 1, 5));
+            result.ArticleList = _mapper.Map<List<ArticleDto>>(await _articleServices.GetPagedListAsync( 1, 5,nameof(Article.CreateTime)));
             return new MessageModel<ArticleDetailsDto>()
             {
                 success = true,
@@ -83,8 +83,8 @@ namespace SwiftCode.BBS.API.Controllers
 
             var entity = _mapper.Map<Article>(input);
             entity.CreateTime = DateTime.Now;
-            entity.CreateUserInfo = await _userInfoService.Get(x => x.Id == token.Uid);
-            _articleServices.Add(entity);
+            entity.CreateUserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid);
+            await _articleServices.InsertAsync(entity);
 
             return new MessageModel<string>()
             {
@@ -99,11 +99,11 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpPut]
         public async Task<MessageModel<string>> UpdateAsync(int id,UpdateArticleInputDto input)
         {
-            var entity = (await _articleServices.Query(d => d.Id == id)).FirstOrDefault();
+            var entity = await _articleServices.GetAsync(d => d.Id == id);
 
             entity =  _mapper.Map(input, entity);
             
-            _articleServices.Update(entity);
+            await _articleServices.UpdateAsync(entity);
             return new MessageModel<string>()
             {
                 success = true,
@@ -119,8 +119,8 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpDelete]
         public async Task<MessageModel<string>> DeleteAsync(int id)
         {
-            var entity = (await _articleServices.Query(d => d.Id == id)).FirstOrDefault();
-            _articleServices.Delete(entity);
+            var entity = await _articleServices.GetAsync(d => d.Id == id);
+            await _articleServices.DeleteAsync(entity);
             return new MessageModel<string>()
             {
                 success = true,
@@ -137,14 +137,14 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpPost("{id}", Name = "CreateCollection")]
         public async Task<MessageModel<string>> CreateCollectionAsync(int id)
         {
-            var entity = (await _articleServices.Query(d => d.Id == id)).FirstOrDefault();
+            var entity = await _articleServices.GetAsync(d => d.Id == id);
             var token = JwtHelper.ParsingJwtToken(HttpContext);
             entity.CollectionArticles.Add(new UserCollectionArticle()
             {
                 ArticleId = id,
                 UserId = token.Uid
             });
-            _articleServices.Update(entity);
+            await _articleServices.UpdateAsync(entity);
             return new MessageModel<string>()
             {
                 success = true,
@@ -161,15 +161,15 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpPost( Name = "CreateArticleComments")]
         public async Task<MessageModel<string>> CreateArticleCommentsAsync(int id, CreateArticleCommentsInputDto input)
         {
-            var entity = (await _articleServices.Query(d => d.Id == id)).FirstOrDefault();
+            var entity = await _articleServices.GetAsync(d => d.Id == id);
             var token = JwtHelper.ParsingJwtToken(HttpContext);
             entity.ArticleComments.Add(new ArticleComment()
             {
                 Content = input.Content,
                 CreateTime = DateTime.Now,
-                UserInfo = await _userInfoService.Get(x => x.Id == token.Uid)
+                UserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid)
              });
-            _articleServices.Update(entity);
+            await _articleServices.UpdateAsync(entity);
             return new MessageModel<string>()
             {
                 success = true,
@@ -185,9 +185,9 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpDelete(Name = "DeleteArticleComments")]
         public async Task<MessageModel<string>> DeleteArticleCommentsAsync(int articleId, int id)
         {
-            var entity = (await _articleServices.Query(d => d.Id == articleId)).FirstOrDefault();
+            var entity = await _articleServices.GetAsync(d => d.Id == articleId);
             entity.ArticleComments.Remove(entity.ArticleComments.FirstOrDefault(x => x.Id == id));
-            _articleServices.Update(entity);
+            await _articleServices.UpdateAsync(entity);
             return new MessageModel<string>()
             {
                 success = true,

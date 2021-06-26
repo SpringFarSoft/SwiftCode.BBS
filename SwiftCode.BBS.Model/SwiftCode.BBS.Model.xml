@@ -206,21 +206,6 @@
             泛型主键Tkey
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.SystemAdmin.SysUserInfo.UserName">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.Models.SystemAdmin.SysUserInfo.LoginName">
-            <summary>
-            登录账号
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.Models.SystemAdmin.SysUserInfo.LoginPassWord">
-            <summary>
-            登录密码
-            </summary>
-        </member>
         <member name="T:SwiftCode.BBS.Model.Models.UserCollectionArticle">
             <summary>
             用户文章收藏表

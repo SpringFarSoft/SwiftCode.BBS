@@ -51,7 +51,7 @@ namespace SwiftCode.BBS.API.Controllers
             }
 
             var pass = MD5Helper.MD5Encrypt32(loginPassWord);
-            var userInfo = await _userInfoService.Get(x => x.LoginName == loginName && x.LoginPassWord == pass);
+            var userInfo = await _userInfoService.GetAsync(x => x.LoginName == loginName && x.LoginPassWord == pass);
             if (userInfo == null)
             {
                 return new MessageModel<string>()
@@ -79,7 +79,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpPost]
         public async Task<MessageModel<string>> Register(RegisterInputDto input)
         {
-            var userInfo = await _userInfoService.Get(x => x.LoginName == input.LoginName);
+            var userInfo = await _userInfoService.GetAsync(x => x.LoginName == input.LoginName);
             if (userInfo != null)
             {
                 return new MessageModel<string>()
@@ -89,7 +89,7 @@ namespace SwiftCode.BBS.API.Controllers
                 };
             }
 
-            userInfo = await _userInfoService.Get(x => x.Email == input.Email);
+            userInfo = await _userInfoService.GetAsync(x => x.Email == input.Email);
             if (userInfo != null)
             {
                 return new MessageModel<string>()
@@ -99,7 +99,7 @@ namespace SwiftCode.BBS.API.Controllers
                 };
             }
 
-            userInfo = await _userInfoService.Get(x => x.Phone == input.Phone);
+            userInfo = await _userInfoService.GetAsync(x => x.Phone == input.Phone);
             if (userInfo != null)
             {
                 return new MessageModel<string>()
@@ -109,7 +109,7 @@ namespace SwiftCode.BBS.API.Controllers
                 };
             }
 
-            userInfo = await _userInfoService.Get(x => x.UserName == input.UserName);
+            userInfo = await _userInfoService.GetAsync(x => x.UserName == input.UserName);
             if (userInfo != null)
             {
                 return new MessageModel<string>()
@@ -122,7 +122,7 @@ namespace SwiftCode.BBS.API.Controllers
 
             var user = _mapper.Map<UserInfo>(input);
             user.CreateTime = DateTime.Now;
-            _userInfoService.Add(user);
+            await _userInfoService.InsertAsync(user, true);
             var jwtStr = GetUserJwt(user);
 
             return new MessageModel<string>()

@@ -45,7 +45,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<QuestionDto>>> GetList(int page, int pageSize)
         {
-            var entityList = await _questionService.QueryPage(x => true, x => x.CreateTime, page, pageSize);
+            var entityList = await _questionService.GetPagedListAsync(page, pageSize,nameof(Question.CreateTime));
 
             return new MessageModel<List<QuestionDto>>()
             {
@@ -63,12 +63,13 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<QuestionDetailsDto>> Get(int id)
         {
-            var entity = (await _questionService.Query(d => d.Id == id)).FirstOrDefault();
+            var entity = await _questionService.GetAsync(d => d.Id == id);
             var result = _mapper.Map<QuestionDetailsDto>(entity);
-            result.QuestionList = _mapper.Map<List<QuestionDto>>(await _questionService.QueryPage(x => x.Id != id, x => x.QuestionComments.Count, 1, 5));
+            // todo
+            result.QuestionList = _mapper.Map<List<QuestionDto>>(await _questionService.GetPagedListAsync(1, 5, nameof(Question.CreateTime)));
 
             entity.Traffic += 1;
-            _questionService.Update(entity);
+            await _questionService.UpdateAsync(entity, true);
 
             return new MessageModel<QuestionDetailsDto>()
             {
@@ -90,8 +91,8 @@ namespace SwiftCode.BBS.API.Controllers
             var entity = _mapper.Map<Question>(input);
             entity.Traffic = 1;
             entity.CreateTime = DateTime.Now;
-            entity.CreateUserInfo = await _userInfoService.Get(x => x.Id == token.Uid);
-            _questionService.Add(entity);
+            entity.CreateUserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid);
+            await _questionService.InsertAsync(entity, true);
 
             return new MessageModel<string>()
             {
@@ -106,11 +107,11 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpPut]
         public async Task<MessageModel<string>> UpdateAsync(int id, UpdateQuestionInputDto input)
         {
-            var entity = (await _questionService.Query(d => d.Id == id)).FirstOrDefault();
+            var entity = await _questionService.GetAsync(d => d.Id == id);
 
             entity = _mapper.Map(input, entity);
 
-            _questionService.Update(entity);
+            await _questionService.UpdateAsync(entity, true);
             return new MessageModel<string>()
             {
                 success = true,
@@ -126,8 +127,8 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpDelete]
         public async Task<MessageModel<string>> DeleteAsync(int id)
         {
-            var entity = (await _questionService.Query(d => d.Id == id)).FirstOrDefault();
-            _questionService.Delete(entity);
+            var entity = await _questionService.GetAsync(d => d.Id == id);
+            await _questionService.DeleteAsync(entity, true);
             return new MessageModel<string>()
             {
                 success = true,
@@ -144,15 +145,15 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpPost(Name = "CreateQuestionComments")]
         public async Task<MessageModel<string>> CreateQuestionCommentsAsync(int id, CreateQuestionCommentsInputDto input)
         {
-            var entity = (await _questionService.Query(d => d.Id == id)).FirstOrDefault();
+            var entity = await _questionService.GetAsync(d => d.Id == id);
             var token = JwtHelper.ParsingJwtToken(HttpContext);
             entity.QuestionComments.Add(new QuestionComment()
             {
                 Content = input.Content,
                 CreateTime = DateTime.Now,
-                UserInfo = await _userInfoService.Get(x => x.Id == token.Uid)
+                UserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid)
             });
-            _questionService.Update(entity);
+            await _questionService.UpdateAsync(entity, true);
             return new MessageModel<string>()
             {
                 success = true,
@@ -168,9 +169,10 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpDelete(Name = "DeleteQuestionComments")]
         public async Task<MessageModel<string>> DeleteQuestionCommentsAsync(int questionId, int id)
         {
-            var entity = (await _questionService.Query(d => d.Id == questionId)).FirstOrDefault();
+            // todo
+            var entity = await _questionService.GetAsync(d => d.Id == questionId);
             entity.QuestionComments.Remove(entity.QuestionComments.FirstOrDefault(x => x.Id == id));
-            _questionService.Update(entity);
+            await _questionService.UpdateAsync(entity, true);
             return new MessageModel<string>()
             {
                 success = true,
