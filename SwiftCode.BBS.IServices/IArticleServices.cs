@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model.Models;
+using SwiftCode.BBS.Model.ViewModels.Article;
 
 namespace SwiftCode.BBS.IServices
 {

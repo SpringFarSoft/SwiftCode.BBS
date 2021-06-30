@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftCode.BBS.EntityFramework;
 
 namespace SwiftCode.BBS.EntityFramework.Migrations
 {
     [DbContext(typeof(SwiftCodeBbsContext))]
-    partial class SwiftCodeBbsContextModelSnapshot : ModelSnapshot
+    [Migration("20210630143300_Update_Article")]
+    partial class Update_Article
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

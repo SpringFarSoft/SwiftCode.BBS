@@ -32,9 +32,9 @@ namespace SwiftCode.BBS.Model.Models
         /// </summary>
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// 关联用户
+        /// 创建用户
         /// </summary>
-        public virtual UserInfo CreateUserInfo { get; set; }
+        public int CreateUserId { get; set; }
         /// <summary>
         /// 问答评论
         /// </summary>

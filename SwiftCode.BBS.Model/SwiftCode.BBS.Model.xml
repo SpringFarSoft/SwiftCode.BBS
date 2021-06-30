@@ -84,9 +84,9 @@
             创建时间
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Article.CreateUserInfo">
+        <member name="P:SwiftCode.BBS.Model.Models.Article.CreateUserId">
             <summary>
-            创建用户信息
+            创建用户
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.Models.Article.CollectionArticles">
@@ -154,9 +154,9 @@
             创建时间
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.Question.CreateUserInfo">
+        <member name="P:SwiftCode.BBS.Model.Models.Question.CreateUserId">
             <summary>
-            关联用户
+            创建用户
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.Models.Question.QuestionComments">
@@ -371,14 +371,14 @@
             创建时间
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.ArticleList">
-            <summary>
-            文章推荐
-            </summary>
-        </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.CreateUserInfo">
             <summary>
             作者
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.ArticleList">
+            <summary>
+            文章推荐
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.ArticleComments">

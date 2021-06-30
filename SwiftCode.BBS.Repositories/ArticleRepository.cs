@@ -20,7 +20,8 @@ namespace SwiftCode.BBS.Repositories
 
         public Task<Article> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-           return DbContext().Articles.Where(x=>x.Id == id).Include(x=>x.CreateUserInfo).Include(x=>x.CollectionArticles).Include(x=>x.ArticleComments).SingleOrDefaultAsync(cancellationToken);
+           return DbContext().Articles.Where(x=>x.Id == id)
+                .Include(x=>x.ArticleComments).SingleOrDefaultAsync(cancellationToken);
         }
     }
 }

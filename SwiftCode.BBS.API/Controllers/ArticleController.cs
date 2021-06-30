@@ -13,6 +13,7 @@ using SwiftCode.BBS.IServices;
 using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model;
 using SwiftCode.BBS.Model.ViewModels.Article;
+using SwiftCode.BBS.Model.ViewModels.UserInfo;
 
 namespace SwiftCode.BBS.API.Controllers
 {
@@ -44,7 +45,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<ArticleDto>>> GetList(int page, int pageSize)
         {
-            var entityList = await _articleServices.GetPagedListAsync(page, pageSize,nameof(Article.CreateTime));
+            var entityList = await _articleServices.GetPagedListAsync(page, pageSize, nameof(Article.CreateTime));
 
             return new MessageModel<List<ArticleDto>>()
             {
@@ -64,8 +65,9 @@ namespace SwiftCode.BBS.API.Controllers
         {
             var entity = await _articleServices.GetByIdAsync(id);
             var result = _mapper.Map<ArticleDetailsDto>(entity);
-
-            result.ArticleList = _mapper.Map<List<ArticleDto>>(await _articleServices.GetPagedListAsync( 1, 5,nameof(Article.CreateTime)));
+            var userInfo = await _userInfoService.GetAsync(x => x.Id == entity.CreateUserId);
+            result.CreateUserInfo = _mapper.Map<UserInfoDto>(userInfo);
+            result.ArticleList = _mapper.Map<List<ArticleDto>>(await _articleServices.GetPagedListAsync(1, 5, nameof(Article.CreateTime)));
             return new MessageModel<ArticleDetailsDto>()
             {
                 success = true,
@@ -85,7 +87,7 @@ namespace SwiftCode.BBS.API.Controllers
 
             var entity = _mapper.Map<Article>(input);
             entity.CreateTime = DateTime.Now;
-            entity.CreateUserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid);
+            entity.CreateUserId = token.Uid;
             await _articleServices.InsertAsync(entity, true);
 
             return new MessageModel<string>()
@@ -99,12 +101,12 @@ namespace SwiftCode.BBS.API.Controllers
         /// 修改文章
         /// </summary>
         [HttpPut]
-        public async Task<MessageModel<string>> UpdateAsync(int id,UpdateArticleInputDto input)
+        public async Task<MessageModel<string>> UpdateAsync(int id, UpdateArticleInputDto input)
         {
             var entity = await _articleServices.GetAsync(d => d.Id == id);
 
-            entity =  _mapper.Map(input, entity);
-            
+            entity = _mapper.Map(input, entity);
+
             await _articleServices.UpdateAsync(entity, true);
             return new MessageModel<string>()
             {
@@ -160,7 +162,7 @@ namespace SwiftCode.BBS.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost( Name = "CreateArticleComments")]
+        [HttpPost(Name = "CreateArticleComments")]
         public async Task<MessageModel<string>> CreateArticleCommentsAsync(int id, CreateArticleCommentsInputDto input)
         {
             var entity = await _articleServices.GetAsync(d => d.Id == id);
@@ -170,7 +172,7 @@ namespace SwiftCode.BBS.API.Controllers
                 Content = input.Content,
                 CreateTime = DateTime.Now,
                 UserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid)
-             });
+            });
             await _articleServices.UpdateAsync(entity, true);
             return new MessageModel<string>()
             {

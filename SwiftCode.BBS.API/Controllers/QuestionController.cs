@@ -13,6 +13,7 @@ using SwiftCode.BBS.Model;
 using SwiftCode.BBS.Model.Models;
 using SwiftCode.BBS.Model.ViewModels.Article;
 using SwiftCode.BBS.Model.ViewModels.Question;
+using SwiftCode.BBS.Model.ViewModels.UserInfo;
 
 namespace SwiftCode.BBS.API.Controllers
 {
@@ -65,7 +66,8 @@ namespace SwiftCode.BBS.API.Controllers
         {
             var entity = await _questionService.GetAsync(d => d.Id == id);
             var result = _mapper.Map<QuestionDetailsDto>(entity);
-            // todo
+
+            result.UserInfo = _mapper.Map<UserInfoDto>(await _userInfoService.GetAsync(x => x.Id == entity.CreateUserId));
             result.QuestionList = _mapper.Map<List<QuestionDto>>(await _questionService.GetPagedListAsync(1, 5, nameof(Question.CreateTime)));
 
             entity.Traffic += 1;
@@ -91,7 +93,7 @@ namespace SwiftCode.BBS.API.Controllers
             var entity = _mapper.Map<Question>(input);
             entity.Traffic = 1;
             entity.CreateTime = DateTime.Now;
-            entity.CreateUserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid);
+            entity.CreateUserId = token.Uid;
             await _questionService.InsertAsync(entity, true);
 
             return new MessageModel<string>()

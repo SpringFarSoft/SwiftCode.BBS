@@ -8,6 +8,7 @@ using SwiftCode.BBS.IRepositories;
 using SwiftCode.BBS.IRepositories.BASE;
 using SwiftCode.BBS.IServices;
 using SwiftCode.BBS.Model.Models;
+using SwiftCode.BBS.Model.ViewModels.Article;
 using SwiftCode.BBS.Services.BASE;
 
 namespace SwiftCode.BBS.Services

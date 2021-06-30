@@ -36,16 +36,16 @@ namespace SwiftCode.BBS.Model.ViewModels.Article
 
 
         /// <summary>
-        /// 文章推荐
-        /// </summary>
-        public List<ArticleDto> ArticleList { get; set; }
-
-
-        /// <summary>
         /// 作者
         /// </summary>
         public UserInfoDto CreateUserInfo { get; set; }
 
+        /// <summary>
+        /// 文章推荐
+        /// </summary>
+        public List<ArticleDto> ArticleList { get; set; }
+
+ 
         /// <summary>
         /// 文章评论
         /// </summary>
