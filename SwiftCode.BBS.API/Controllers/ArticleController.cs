@@ -24,11 +24,11 @@ namespace SwiftCode.BBS.API.Controllers
     [Authorize]
     public class ArticleController : ControllerBase
     {
-        private readonly IBaseServices<Article> _articleServices;
+        private readonly IArticleServices _articleServices;
         private readonly IBaseServices<UserInfo> _userInfoService;
         private readonly IMapper _mapper;
 
-        public ArticleController(IBaseServices<Article> articleServices, IBaseServices<UserInfo> userInfoService, IMapper mapper)
+        public ArticleController(IArticleServices articleServices, IBaseServices<UserInfo> userInfoService, IMapper mapper)
         {
             _articleServices = articleServices;
             _userInfoService = userInfoService;
@@ -38,7 +38,8 @@ namespace SwiftCode.BBS.API.Controllers
         /// <summary>
         /// 分页获取文章列表
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet]
         public async Task<MessageModel<List<ArticleDto>>> GetList(int page, int pageSize)
@@ -61,8 +62,9 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<ArticleDetailsDto>> Get(int id)
         {
-            var entity = await _articleServices.GetAsync(d => d.Id == id);
+            var entity = await _articleServices.GetByIdAsync(id);
             var result = _mapper.Map<ArticleDetailsDto>(entity);
+
             result.ArticleList = _mapper.Map<List<ArticleDto>>(await _articleServices.GetPagedListAsync( 1, 5,nameof(Article.CreateTime)));
             return new MessageModel<ArticleDetailsDto>()
             {
@@ -84,7 +86,7 @@ namespace SwiftCode.BBS.API.Controllers
             var entity = _mapper.Map<Article>(input);
             entity.CreateTime = DateTime.Now;
             entity.CreateUserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid);
-            await _articleServices.InsertAsync(entity);
+            await _articleServices.InsertAsync(entity, true);
 
             return new MessageModel<string>()
             {
@@ -103,7 +105,7 @@ namespace SwiftCode.BBS.API.Controllers
 
             entity =  _mapper.Map(input, entity);
             
-            await _articleServices.UpdateAsync(entity);
+            await _articleServices.UpdateAsync(entity, true);
             return new MessageModel<string>()
             {
                 success = true,
@@ -120,7 +122,7 @@ namespace SwiftCode.BBS.API.Controllers
         public async Task<MessageModel<string>> DeleteAsync(int id)
         {
             var entity = await _articleServices.GetAsync(d => d.Id == id);
-            await _articleServices.DeleteAsync(entity);
+            await _articleServices.DeleteAsync(entity, true);
             return new MessageModel<string>()
             {
                 success = true,
@@ -144,7 +146,7 @@ namespace SwiftCode.BBS.API.Controllers
                 ArticleId = id,
                 UserId = token.Uid
             });
-            await _articleServices.UpdateAsync(entity);
+            await _articleServices.UpdateAsync(entity, true);
             return new MessageModel<string>()
             {
                 success = true,
@@ -169,7 +171,7 @@ namespace SwiftCode.BBS.API.Controllers
                 CreateTime = DateTime.Now,
                 UserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid)
              });
-            await _articleServices.UpdateAsync(entity);
+            await _articleServices.UpdateAsync(entity, true);
             return new MessageModel<string>()
             {
                 success = true,
@@ -187,7 +189,7 @@ namespace SwiftCode.BBS.API.Controllers
         {
             var entity = await _articleServices.GetAsync(d => d.Id == articleId);
             entity.ArticleComments.Remove(entity.ArticleComments.FirstOrDefault(x => x.Id == id));
-            await _articleServices.UpdateAsync(entity);
+            await _articleServices.UpdateAsync(entity, true);
             return new MessageModel<string>()
             {
                 success = true,

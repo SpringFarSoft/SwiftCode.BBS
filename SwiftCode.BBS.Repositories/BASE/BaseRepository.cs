@@ -20,7 +20,13 @@ namespace SwiftCode.BBS.Repositories.BASE
         {
             _context = context;
         }
-        
+
+        protected SwiftCodeBbsContext DbContext()
+        {
+            return _context;
+        }
+
+
         public async Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
         {
             var savedEntity = (await _context.Set<TEntity>().AddAsync(entity, cancellationToken)).Entity;
