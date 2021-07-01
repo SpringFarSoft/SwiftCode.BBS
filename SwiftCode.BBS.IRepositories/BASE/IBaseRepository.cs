@@ -36,5 +36,6 @@ namespace SwiftCode.BBS.IRepositories.BASE
         Task<List<TEntity>> GetPagedListAsync(int skipCount, int maxResultCount, string sorting, CancellationToken cancellationToken = default);
 
         Task<long> GetCountAsync(CancellationToken cancellationToken = default);
+        Task<long> GetCountAsync<TEntity>(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken) where TEntity : class, new();
     }
 }

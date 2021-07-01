@@ -89,6 +89,11 @@
             创建用户
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Article.CreateUser">
+            <summary>
+            创建用户
+            </summary>
+        </member>
         <member name="P:SwiftCode.BBS.Model.Models.Article.CollectionArticles">
             <summary>
             收藏文章的用户
@@ -114,9 +119,19 @@
             创建时间
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.ArticleComment.UserInfo">
+        <member name="P:SwiftCode.BBS.Model.Models.ArticleComment.CreateUserId">
             <summary>
-            用户信息
+            创建用户
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.ArticleComment.CreateUser">
+            <summary>
+            创建用户
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.ArticleComment.ArticleId">
+            <summary>
+            文章Id
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.Models.ArticleComment.Article">
@@ -159,6 +174,11 @@
             创建用户
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.Models.Question.CreateUser">
+            <summary>
+            创建用户
+            </summary>
+        </member>
         <member name="P:SwiftCode.BBS.Model.Models.Question.QuestionComments">
             <summary>
             问答评论
@@ -184,14 +204,24 @@
             是否采纳
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.UserInfo">
+        <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.CreateUserId">
             <summary>
-            用户信息
+            创建用户
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.CreateUser">
+            <summary>
+            创建用户
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.QuestionId">
+            <summary>
+            问答Id
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.Models.QuestionComment.Question">
             <summary>
-            文章信息
+            问答信息
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.Models.RootTkey.EntityTKeyDto`1.Id">
@@ -256,21 +286,6 @@
             创建时间
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.CollectionArticles">
-            <summary>
-            用户收藏的文章
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.Articles">
-            <summary>
-            发表的文章
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.Models.UserInfo.Questions">
-            <summary>
-            发表的问答
-            </summary>
-        </member>
         <member name="T:SwiftCode.BBS.Model.WeatherForecast">
             <summary>
             天气预报
@@ -331,6 +346,11 @@
             创建时间
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleCommentDto.CreateUserId">
+            <summary>
+            创建用户
+            </summary>
+        </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleCommentDto.UserName">
             <summary>
             用户名
@@ -371,14 +391,9 @@
             创建时间
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.CreateUserInfo">
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.CreateUserId">
             <summary>
-            作者
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.ArticleList">
-            <summary>
-            文章推荐
+            创建用户
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDetailsDto.ArticleComments">
@@ -409,6 +424,11 @@
         <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.CreateTime">
             <summary>
             创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.CreateUserId">
+            <summary>
+            创建用户
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleDto.UserName">
@@ -491,6 +511,11 @@
             是否采纳
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionCommentDto.CreateUserId">
+            <summary>
+            创建用户
+            </summary>
+        </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionCommentDto.UserName">
             <summary>
             用户名
@@ -521,16 +546,6 @@
             创建时间
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.QuestionList">
-            <summary>
-            问答推荐
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.UserInfo">
-            <summary>
-            关联用户
-            </summary>
-        </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDetailsDto.QuestionComments">
             <summary>
             问答评论
@@ -544,6 +559,16 @@
         <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDto.Tag">
             <summary>
             类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDto.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDto.CreateUserId">
+            <summary>
+            创建用户
             </summary>
         </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Question.QuestionDto.QuestionCommentCount">

@@ -24,6 +24,11 @@ namespace SwiftCode.BBS.Model.ViewModels.Question
         public bool IsAdoption { get; set; }
 
         /// <summary>
+        /// 创建用户
+        /// </summary>
+        public int CreateUserId { get; set; }
+
+        /// <summary>
         /// 用户名
         /// </summary>
         public string UserName { get; set; }

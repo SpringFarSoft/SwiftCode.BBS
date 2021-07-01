@@ -43,10 +43,6 @@ namespace SwiftCode.BBS.Model.Models
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
-        /// <summary>
-        /// 用户收藏的文章
-        /// </summary>
-        public virtual ICollection<UserCollectionArticle> CollectionArticles { get; set; } = new List<UserCollectionArticle>();
 
     }
 }

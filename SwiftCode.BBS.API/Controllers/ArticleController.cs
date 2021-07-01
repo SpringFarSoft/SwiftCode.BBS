@@ -45,13 +45,22 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<ArticleDto>>> GetList(int page, int pageSize)
         {
+            // 这里只是展示用法，还可以通过懒加载的形式 或 自定义仓储去Include UserInfo
             var entityList = await _articleServices.GetPagedListAsync(page, pageSize, nameof(Article.CreateTime));
-
+            var articleUserIdList = entityList.Select(x => x.CreateUserId);
+            var userList = await _userInfoService.GetListAsync(x=> articleUserIdList.Contains(x.Id));
+            var response = _mapper.Map<List<ArticleDto>>(entityList);
+            foreach (var item in response)
+            {
+                var user = userList.FirstOrDefault(x => x.Id == item.CreateUserId);
+                item.UserName = user.UserName;
+                item.HeadPortrait = user.HeadPortrait;
+            }
             return new MessageModel<List<ArticleDto>>()
             {
                 success = true,
                 msg = "获取成功",
-                response = _mapper.Map<List<ArticleDto>>(entityList)
+                response = response
             };
         }
 
@@ -63,11 +72,9 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<ArticleDetailsDto>> Get(int id)
         {
-            var entity = await _articleServices.GetByIdAsync(id);
+            // 通过自定义服务层处理内部业务
+            var entity = await _articleServices.GetArticleDetailsAsync(id);
             var result = _mapper.Map<ArticleDetailsDto>(entity);
-            var userInfo = await _userInfoService.GetAsync(x => x.Id == entity.CreateUserId);
-            result.CreateUserInfo = _mapper.Map<UserInfoDto>(userInfo);
-            result.ArticleList = _mapper.Map<List<ArticleDto>>(await _articleServices.GetPagedListAsync(1, 5, nameof(Article.CreateTime)));
             return new MessageModel<ArticleDetailsDto>()
             {
                 success = true,
@@ -75,6 +82,7 @@ namespace SwiftCode.BBS.API.Controllers
                 response = result
             };
         }
+
 
         /// <summary>
         /// 创建文章
@@ -132,7 +140,6 @@ namespace SwiftCode.BBS.API.Controllers
             };
         }
 
-
         /// <summary>
         /// 收藏文章
         /// </summary>
@@ -141,14 +148,8 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpPost("{id}", Name = "CreateCollection")]
         public async Task<MessageModel<string>> CreateCollectionAsync(int id)
         {
-            var entity = await _articleServices.GetAsync(d => d.Id == id);
             var token = JwtHelper.ParsingJwtToken(HttpContext);
-            entity.CollectionArticles.Add(new UserCollectionArticle()
-            {
-                ArticleId = id,
-                UserId = token.Uid
-            });
-            await _articleServices.UpdateAsync(entity, true);
+            await _articleServices.AddArticleCollection(id, token.Uid);
             return new MessageModel<string>()
             {
                 success = true,
@@ -161,19 +162,13 @@ namespace SwiftCode.BBS.API.Controllers
         /// 添加文章评论
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost(Name = "CreateArticleComments")]
         public async Task<MessageModel<string>> CreateArticleCommentsAsync(int id, CreateArticleCommentsInputDto input)
         {
-            var entity = await _articleServices.GetAsync(d => d.Id == id);
             var token = JwtHelper.ParsingJwtToken(HttpContext);
-            entity.ArticleComments.Add(new ArticleComment()
-            {
-                Content = input.Content,
-                CreateTime = DateTime.Now,
-                UserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid)
-            });
-            await _articleServices.UpdateAsync(entity, true);
+            await _articleServices.AddArticleComments(id, token.Uid, input.Content);
             return new MessageModel<string>()
             {
                 success = true,
@@ -181,15 +176,17 @@ namespace SwiftCode.BBS.API.Controllers
             };
         }
 
+
         /// <summary>
         /// 删除文章评论
         /// </summary>
+        /// <param name="articleId"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete(Name = "DeleteArticleComments")]
         public async Task<MessageModel<string>> DeleteArticleCommentsAsync(int articleId, int id)
         {
-            var entity = await _articleServices.GetAsync(d => d.Id == articleId);
+            var entity = await _articleServices.GetByIdAsync(articleId);
             entity.ArticleComments.Remove(entity.ArticleComments.FirstOrDefault(x => x.Id == id));
             await _articleServices.UpdateAsync(entity, true);
             return new MessageModel<string>()

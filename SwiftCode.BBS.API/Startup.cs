@@ -92,9 +92,7 @@ namespace SwiftCode.BBS.API
 
             #endregion
 
-           
-
-
+  
             // хож╓
             services.AddAuthentication(x =>
             {

@@ -9,11 +9,9 @@ using SwiftCode.BBS.Model.Models;
 
 namespace SwiftCode.BBS.IRepositories
 {
-    public interface IArticleRepository: IBaseRepository<Article>
+    public interface IQuestionRepository : IBaseRepository<Question>
     {
+        Task<Question> GetByIdAsync(int id, CancellationToken cancellationToken = default);
 
-        Task<Article> GetByIdAsync(int id, CancellationToken cancellationToken = default);
-
-        Task<Article> GetCollectionArticlesByIdAsync(int id, CancellationToken cancellationToken = default);
     }
 }

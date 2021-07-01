@@ -13,6 +13,7 @@ using SwiftCode.BBS.Model.ViewModels.UserInfo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using SwiftCode.BBS.IServices;
 using SwiftCode.BBS.IServices.BASE;
 using SwiftCode.BBS.Model.Models;
 
@@ -22,19 +23,23 @@ namespace SwiftCode.BBS.API.Controllers
     /// <summary>
     /// 个人中心
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
     public class UserInfoController : ControllerBase
     {
 
         private readonly IBaseServices<UserInfo> _userInfoService;
+        private readonly IArticleServices _articleServices;
+        private readonly IBaseServices<Question> _questionService;
         private readonly IMapper _mapper;
 
-        public UserInfoController(IBaseServices<UserInfo> userInfoService, IMapper mapper)
+        public UserInfoController(IBaseServices<UserInfo> userInfoService, IMapper mapper, IArticleServices articleServices, IBaseServices<Question> questionService)
         {
             _userInfoService = userInfoService;
             _mapper = mapper;
+            _articleServices = articleServices;
+            _questionService = questionService;
         }
         /// <summary>
         /// 用户个人信息
@@ -75,5 +80,26 @@ namespace SwiftCode.BBS.API.Controllers
             };
         }
 
+
+        /// <summary>
+        /// 获取文章作者
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<MessageModel<UserInfoDto>> GetAuthor(int id)
+        {
+            var entity = await _articleServices.GetAsync(x => x.Id == id);
+            var user = await _userInfoService.GetAsync(x => x.Id == entity.CreateUserId);
+            var response = _mapper.Map<UserInfoDto>(user);
+            response.ArticlesCount = await _articleServices.GetCountAsync(x => x.CreateUserId == user.Id);
+            response.QuestionsCount = await _questionService.GetCountAsync(x => x.CreateUserId == user.Id);
+            return new MessageModel<UserInfoDto>()
+            {
+                success = true,
+                msg = "获取成功",
+                response = response
+            };
+
+        }
     }
 }

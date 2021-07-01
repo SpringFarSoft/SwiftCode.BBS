@@ -149,5 +149,10 @@ namespace SwiftCode.BBS.Repositories.BASE
         {
             return _context.Set<TEntity>().LongCountAsync(cancellationToken);
         }
+
+        public Task<long> GetCountAsync<TEntity1>(Expression<Func<TEntity1, bool>> predicate, CancellationToken cancellationToken) where TEntity1 : class, new()
+        {
+            return _context.Set<TEntity>().Where(predicate).LongCountAsync(cancellationToken);
+        }
     }
 }

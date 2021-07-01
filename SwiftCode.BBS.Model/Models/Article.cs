@@ -37,7 +37,10 @@ namespace SwiftCode.BBS.Model.Models
         /// 创建用户
         /// </summary>
         public int CreateUserId { get; set; }
-
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        public virtual UserInfo CreateUser { get; set; }
         /// <summary>
         /// 收藏文章的用户
         /// </summary>

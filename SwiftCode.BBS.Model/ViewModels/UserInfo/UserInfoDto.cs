@@ -21,11 +21,11 @@ namespace SwiftCode.BBS.Model.ViewModels.UserInfo
         /// <summary>
         /// 文章数量
         /// </summary>
-        public int ArticlesCount { get; set; }
+        public long ArticlesCount { get; set; }
         /// <summary>
         /// 问答数量
         /// </summary>
-        public int QuestionsCount { get; set; }
+        public long QuestionsCount { get; set; }
 
 
     }

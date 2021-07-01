@@ -19,6 +19,15 @@ namespace SwiftCode.BBS.Model.ViewModels.Question
         /// </summary>
         public string Tag { get; set; }
         /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        public int CreateUserId { get; set; }
+
+        /// <summary>
         /// 问答数量
         /// </summary>
         public int QuestionCommentCount { get; set; }

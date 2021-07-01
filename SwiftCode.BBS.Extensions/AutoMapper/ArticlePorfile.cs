@@ -21,7 +21,11 @@ namespace SwiftCode.BBS.Extensions.AutoMapper
             
             CreateMap<Article, ArticleDto>();
             CreateMap<Article, ArticleDetailsDto>();
-            CreateMap<ArticleComment, ArticleCommentDto>();
+
+
+            CreateMap<ArticleComment, ArticleCommentDto>()
+                .ForMember(a => a.UserName, o => o.MapFrom(x => x.CreateUser.UserName))
+                .ForMember(a => a.HeadPortrait, o => o.MapFrom(x => x.CreateUser.HeadPortrait));
 
 
             CreateMap<CreateArticleCommentsInputDto, ArticleComment>();

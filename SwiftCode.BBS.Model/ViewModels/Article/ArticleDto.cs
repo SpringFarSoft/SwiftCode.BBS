@@ -29,6 +29,11 @@ namespace SwiftCode.BBS.Model.ViewModels.Article
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        public int CreateUserId { get; set; }
+
 
         /// <summary>
         /// 用户名

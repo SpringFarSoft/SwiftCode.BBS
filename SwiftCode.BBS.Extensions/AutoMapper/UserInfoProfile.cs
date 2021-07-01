@@ -17,9 +17,9 @@ namespace SwiftCode.BBS.Extensions.AutoMapper
         public UserInfoProfile()
         {
             CreateMap<RegisterInputDto, UserInfo>();
-            CreateMap<UserInfo, UserInfoDto>()
-                .ForMember(a => a.QuestionsCount, o => o.MapFrom(x => x.Questions.Count))
-                .ForMember(a => a.ArticlesCount, o => o.MapFrom(x => x.Articles.Count));
+            CreateMap<UserInfo, UserInfoDto>();
+
+            CreateMap<UserInfo, UserInfoDetailsDto>();
 
         }
     }

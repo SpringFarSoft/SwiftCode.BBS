@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SwiftCode.BBS.Model.ViewModels.Article;
 
 namespace SwiftCode.BBS.Model.Models
 {
@@ -20,10 +21,19 @@ namespace SwiftCode.BBS.Model.Models
         /// </summary>
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// 用户信息
+        /// 创建用户
         /// </summary>
-        public virtual UserInfo UserInfo { get; set; }
+        public int CreateUserId { get; set; }
+        /// <summary>
+        /// 创建用户
+        /// </summary>
+        public virtual UserInfo CreateUser { get; set; }
 
+
+        /// <summary>
+        /// 文章Id
+        /// </summary>
+        public int ArticleId { get; set; }
 
         /// <summary>
         /// 文章信息

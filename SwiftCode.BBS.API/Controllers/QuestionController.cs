@@ -25,11 +25,11 @@ namespace SwiftCode.BBS.API.Controllers
     [Authorize]
     public class QuestionController : ControllerBase
     {
-        private readonly IBaseServices<Question> _questionService;
+        private readonly IQuestionServices _questionService;
         private readonly IBaseServices<UserInfo> _userInfoService;
         private readonly IMapper _mapper;
 
-        public QuestionController(IBaseServices<Question> questionService, IBaseServices<UserInfo> userInfoService, IMapper mapper)
+        public QuestionController(IQuestionServices questionService, IBaseServices<UserInfo> userInfoService, IMapper mapper)
         {
             _questionService = questionService;
             _userInfoService = userInfoService;
@@ -37,11 +37,11 @@ namespace SwiftCode.BBS.API.Controllers
         }
 
 
-
         /// <summary>
         /// 分页获取问答列表
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet]
         public async Task<MessageModel<List<QuestionDto>>> GetList(int page, int pageSize)
@@ -64,15 +64,9 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<QuestionDetailsDto>> Get(int id)
         {
-            var entity = await _questionService.GetAsync(d => d.Id == id);
+            // 通过自定义服务层处理内部业务
+            var entity = await _questionService.GetQuestionDetailsAsync(id);
             var result = _mapper.Map<QuestionDetailsDto>(entity);
-
-            result.UserInfo = _mapper.Map<UserInfoDto>(await _userInfoService.GetAsync(x => x.Id == entity.CreateUserId));
-            result.QuestionList = _mapper.Map<List<QuestionDto>>(await _questionService.GetPagedListAsync(1, 5, nameof(Question.CreateTime)));
-
-            entity.Traffic += 1;
-            await _questionService.UpdateAsync(entity, true);
-
             return new MessageModel<QuestionDetailsDto>()
             {
                 success = true,
@@ -104,7 +98,7 @@ namespace SwiftCode.BBS.API.Controllers
         }
 
         /// <summary>
-        /// 问答文章
+        /// 修改问答
         /// </summary>
         [HttpPut]
         public async Task<MessageModel<string>> UpdateAsync(int id, UpdateQuestionInputDto input)
@@ -147,15 +141,8 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpPost(Name = "CreateQuestionComments")]
         public async Task<MessageModel<string>> CreateQuestionCommentsAsync(int id, CreateQuestionCommentsInputDto input)
         {
-            var entity = await _questionService.GetAsync(d => d.Id == id);
             var token = JwtHelper.ParsingJwtToken(HttpContext);
-            entity.QuestionComments.Add(new QuestionComment()
-            {
-                Content = input.Content,
-                CreateTime = DateTime.Now,
-                UserInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid)
-            });
-            await _questionService.UpdateAsync(entity, true);
+            await _questionService.AddQuestionComments(id, token.Uid, input.Content);
             return new MessageModel<string>()
             {
                 success = true,
@@ -166,13 +153,13 @@ namespace SwiftCode.BBS.API.Controllers
         /// <summary>
         /// 删除问答评论
         /// </summary>
+        /// <param name="questionId"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete(Name = "DeleteQuestionComments")]
         public async Task<MessageModel<string>> DeleteQuestionCommentsAsync(int questionId, int id)
         {
-            // todo
-            var entity = await _questionService.GetAsync(d => d.Id == questionId);
+            var entity = await _questionService.GetByIdAsync(questionId);
             entity.QuestionComments.Remove(entity.QuestionComments.FirstOrDefault(x => x.Id == id));
             await _questionService.UpdateAsync(entity, true);
             return new MessageModel<string>()

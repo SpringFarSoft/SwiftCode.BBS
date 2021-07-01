@@ -13,5 +13,11 @@ namespace SwiftCode.BBS.IServices
     public interface IArticleServices: IBaseServices<Article>
     {
         Task<Article> GetByIdAsync(int id, CancellationToken cancellationToken = default);
+
+        Task<Article> GetArticleDetailsAsync(int id, CancellationToken cancellationToken = default);
+
+        Task AddArticleCollection(int id, int userId, CancellationToken cancellationToken = default);
+
+        Task AddArticleComments(int id, int userId, string content, CancellationToken cancellationToken = default);
     }
 }

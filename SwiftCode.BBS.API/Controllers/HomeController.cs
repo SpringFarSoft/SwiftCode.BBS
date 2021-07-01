@@ -50,16 +50,23 @@ namespace SwiftCode.BBS.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<MessageModel<List<ArticleDto>>> GetArticle()
-        { 
-           // todo
-           var articleList = await  _articleService.GetPagedListAsync( 1, 10, nameof(Article.CreateTime));
-
-           return new MessageModel<List<ArticleDto>>()
-           {
-               success = true,
-               msg = "获取成功",
-               response = _mapper.Map<List<ArticleDto>>(articleList)
-           };
+        {
+            var entityList = await _articleService.GetPagedListAsync(0, 10, nameof(Article.CreateTime));
+            var articleUserIdList = entityList.Select(x => x.CreateUserId);
+            var userList = await _userInfoService.GetListAsync(x => articleUserIdList.Contains(x.Id));
+            var response = _mapper.Map<List<ArticleDto>>(entityList);
+            foreach (var item in response)
+            {
+                var user = userList.FirstOrDefault(x => x.Id == item.CreateUserId);
+                item.UserName = user.UserName;
+                item.HeadPortrait = user.HeadPortrait;
+            }
+            return new MessageModel<List<ArticleDto>>()
+            {
+                success = true,
+                msg = "获取成功",
+                response = response
+            };
         }
         /// <summary>
         /// 获取问答列表
@@ -68,7 +75,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<QuestionDto>>> GetQuestion()
         {
-            var questionList = await _questionService.GetPagedListAsync(1, 10, nameof(Question.CreateTime));
+            var questionList = await _questionService.GetPagedListAsync(0, 10, nameof(Question.CreateTime));
 
             return new MessageModel<List<QuestionDto>>()
             {
@@ -84,13 +91,21 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<List<UserInfoDto>>> GetUserInfo()
         {
-            var userInfoList = await _userInfoService.GetPagedListAsync(1, 5,nameof(UserInfo.CreateTime));
+            var userInfoList = await _userInfoService.GetPagedListAsync(0, 5, nameof(UserInfo.CreateTime));
 
+            var response = _mapper.Map<List<UserInfoDto>>(userInfoList);
+
+            // 此处会多次调用数据库操作，实际项目中我们会返回字典来处理
+            foreach (var item in response)
+            {
+                item.QuestionsCount = await _questionService.GetCountAsync(x => x.CreateUserId == item.Id);
+                item.ArticlesCount = await _articleService.GetCountAsync(x => x.CreateUserId == item.Id);
+            }
             return new MessageModel<List<UserInfoDto>>()
             {
                 success = true,
                 msg = "获取成功",
-                response = _mapper.Map<List<UserInfoDto>>(userInfoList)
+                response = response
             };
         }
         /// <summary>
@@ -100,7 +115,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet]
         public async Task<MessageModel<string>> GetAdvertisement()
         {
-            var advertisementList = await _advertisementService.GetPagedListAsync(1,5, nameof(Advertisement.CreateTime));
+            var advertisementList = await _advertisementService.GetPagedListAsync(0, 5, nameof(Advertisement.CreateTime));
             return new MessageModel<string>();
         }
 

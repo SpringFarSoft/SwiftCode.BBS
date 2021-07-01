@@ -17,9 +17,15 @@ namespace SwiftCode.BBS.Extensions.AutoMapper
             CreateMap<CreateQuestionInputDto, Question>();
             CreateMap<UpdateQuestionInputDto, Question>();
 
-            CreateMap<Question, QuestionDto>();
+            CreateMap<Question, QuestionDto>()
+                .ForMember(a => a.QuestionCommentCount, o => o.MapFrom(x => x.QuestionComments.Count));
+          
             CreateMap<Question, QuestionDetailsDto>();
-            CreateMap<QuestionComment, QuestionCommentDto>();
+
+
+            CreateMap<QuestionComment, QuestionCommentDto>()
+                .ForMember(a => a.UserName, o => o.MapFrom(x => x.CreateUser.UserName))
+                .ForMember(a => a.HeadPortrait, o => o.MapFrom(x => x.CreateUser.HeadPortrait));
 
 
             CreateMap<CreateQuestionCommentsInputDto, QuestionComment>();

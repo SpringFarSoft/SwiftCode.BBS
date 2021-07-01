@@ -78,7 +78,10 @@ namespace SwiftCode.BBS.Services.BASE
         {
             return await _baseRepository.GetPagedListAsync(skipCount, maxResultCount, sorting, cancellationToken);
         }
-
+        public async Task<long> GetCountAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            return await _baseRepository.GetCountAsync(predicate, cancellationToken);
+        }
         public async Task<long> GetCountAsync(CancellationToken cancellationToken = default)
         {
             return await _baseRepository.GetCountAsync(cancellationToken);

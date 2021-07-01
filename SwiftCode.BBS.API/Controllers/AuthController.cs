@@ -79,7 +79,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpPost]
         public async Task<MessageModel<string>> Register(RegisterInputDto input)
         {
-            var userInfo = await _userInfoService.GetAsync(x => x.LoginName == input.LoginName);
+            var userInfo = await _userInfoService.FindAsync(x => x.LoginName == input.LoginName);
             if (userInfo != null)
             {
                 return new MessageModel<string>()
@@ -89,7 +89,7 @@ namespace SwiftCode.BBS.API.Controllers
                 };
             }
 
-            userInfo = await _userInfoService.GetAsync(x => x.Email == input.Email);
+            userInfo = await _userInfoService.FindAsync(x => x.Email == input.Email);
             if (userInfo != null)
             {
                 return new MessageModel<string>()
@@ -99,7 +99,7 @@ namespace SwiftCode.BBS.API.Controllers
                 };
             }
 
-            userInfo = await _userInfoService.GetAsync(x => x.Phone == input.Phone);
+            userInfo = await _userInfoService.FindAsync(x => x.Phone == input.Phone);
             if (userInfo != null)
             {
                 return new MessageModel<string>()
@@ -109,7 +109,7 @@ namespace SwiftCode.BBS.API.Controllers
                 };
             }
 
-            userInfo = await _userInfoService.GetAsync(x => x.UserName == input.UserName);
+            userInfo = await _userInfoService.FindAsync(x => x.UserName == input.UserName);
             if (userInfo != null)
             {
                 return new MessageModel<string>()

@@ -27,18 +27,6 @@ namespace SwiftCode.BBS.Model.ViewModels.Question
         /// </summary>
         public DateTime CreateTime { get; set; }
 
-
-        /// <summary>
-        /// 问答推荐
-        /// </summary>
-        public List<QuestionDto> QuestionList { get; set; }
-
-
-        /// <summary>
-        /// 关联用户
-        /// </summary>
-        public virtual UserInfoDto UserInfo { get; set; }
-
         /// <summary>
         /// 问答评论
         /// </summary>

@@ -73,12 +73,9 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                     b.Property<int>("Traffic")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserInfoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserInfoId");
+                    b.HasIndex("CreateUserId");
 
                     b.ToTable("Articles");
                 });
@@ -90,7 +87,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ArticleId")
+                    b.Property<int>("ArticleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -100,14 +97,14 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserInfoId")
+                    b.Property<int>("CreateUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ArticleId");
 
-                    b.HasIndex("UserInfoId");
+                    b.HasIndex("CreateUserId");
 
                     b.ToTable("ArticleComment");
                 });
@@ -126,7 +123,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreateUserInfoId")
+                    b.Property<int>("CreateUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("Tag")
@@ -142,9 +139,9 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreateUserInfoId");
+                    b.HasIndex("CreateUserId");
 
-                    b.ToTable("Question");
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.QuestionComment", b =>
@@ -161,20 +158,20 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsAdoption")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserInfoId")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionId");
+                    b.HasIndex("CreateUserId");
 
-                    b.HasIndex("UserInfoId");
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("QuestionComment");
                 });
@@ -192,14 +189,9 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserInfoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ArticleId");
-
-                    b.HasIndex("UserInfoId");
 
                     b.ToTable("UserCollectionArticle");
                 });
@@ -248,48 +240,62 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.Article", b =>
                 {
-                    b.HasOne("SwiftCode.BBS.Model.Models.UserInfo", null)
-                        .WithMany("Articles")
-                        .HasForeignKey("UserInfoId");
+                    b.HasOne("SwiftCode.BBS.Model.Models.UserInfo", "CreateUser")
+                        .WithMany()
+                        .HasForeignKey("CreateUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CreateUser");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.ArticleComment", b =>
                 {
                     b.HasOne("SwiftCode.BBS.Model.Models.Article", "Article")
                         .WithMany("ArticleComments")
-                        .HasForeignKey("ArticleId");
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("SwiftCode.BBS.Model.Models.UserInfo", "UserInfo")
+                    b.HasOne("SwiftCode.BBS.Model.Models.UserInfo", "CreateUser")
                         .WithMany()
-                        .HasForeignKey("UserInfoId");
+                        .HasForeignKey("CreateUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Article");
 
-                    b.Navigation("UserInfo");
+                    b.Navigation("CreateUser");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.Question", b =>
                 {
-                    b.HasOne("SwiftCode.BBS.Model.Models.UserInfo", "CreateUserInfo")
-                        .WithMany("Questions")
-                        .HasForeignKey("CreateUserInfoId");
+                    b.HasOne("SwiftCode.BBS.Model.Models.UserInfo", "CreateUser")
+                        .WithMany()
+                        .HasForeignKey("CreateUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("CreateUserInfo");
+                    b.Navigation("CreateUser");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.QuestionComment", b =>
                 {
+                    b.HasOne("SwiftCode.BBS.Model.Models.UserInfo", "CreateUser")
+                        .WithMany()
+                        .HasForeignKey("CreateUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("SwiftCode.BBS.Model.Models.Question", "Question")
                         .WithMany("QuestionComments")
-                        .HasForeignKey("QuestionId");
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("SwiftCode.BBS.Model.Models.UserInfo", "UserInfo")
-                        .WithMany()
-                        .HasForeignKey("UserInfoId");
+                    b.Navigation("CreateUser");
 
                     b.Navigation("Question");
-
-                    b.Navigation("UserInfo");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.UserCollectionArticle", b =>
@@ -299,10 +305,6 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SwiftCode.BBS.Model.Models.UserInfo", null)
-                        .WithMany("CollectionArticles")
-                        .HasForeignKey("UserInfoId");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.Article", b =>
@@ -315,15 +317,6 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.Question", b =>
                 {
                     b.Navigation("QuestionComments");
-                });
-
-            modelBuilder.Entity("SwiftCode.BBS.Model.Models.UserInfo", b =>
-                {
-                    b.Navigation("Articles");
-
-                    b.Navigation("CollectionArticles");
-
-                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

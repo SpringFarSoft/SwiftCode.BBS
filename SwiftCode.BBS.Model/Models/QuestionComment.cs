@@ -24,11 +24,21 @@ namespace SwiftCode.BBS.Model.Models
         /// </summary>
         public bool IsAdoption { get; set; }
         /// <summary>
-        /// 用户信息
+        /// 创建用户
         /// </summary>
-        public virtual UserInfo UserInfo { get; set; }
+        public int CreateUserId { get; set; }
         /// <summary>
-        /// 文章信息
+        /// 创建用户
+        /// </summary>
+        public virtual UserInfo CreateUser { get; set; }
+
+
+        /// <summary>
+        /// 问答Id
+        /// </summary>
+        public int QuestionId { get; set; }
+        /// <summary>
+        /// 问答信息
         /// </summary>
         public virtual Question Question { get; set; }
     }
