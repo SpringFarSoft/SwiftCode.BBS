@@ -10,7 +10,7 @@ using SwiftCode.BBS.EntityFramework;
 namespace SwiftCode.BBS.EntityFramework.Migrations
 {
     [DbContext(typeof(SwiftCodeBbsContext))]
-    [Migration("20210701055501_InitDb")]
+    [Migration("20210702084310_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Advertisement");
+                    b.ToTable("Advertisements");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.Article", b =>
@@ -108,7 +108,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
 
                     b.HasIndex("CreateUserId");
 
-                    b.ToTable("ArticleComment");
+                    b.ToTable("ArticleComments");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.Question", b =>
@@ -175,7 +175,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("QuestionComment");
+                    b.ToTable("QuestionComments");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.UserCollectionArticle", b =>
@@ -237,7 +237,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserInfo");
+                    b.ToTable("UserInfos");
                 });
 
             modelBuilder.Entity("SwiftCode.BBS.Model.Models.Article", b =>

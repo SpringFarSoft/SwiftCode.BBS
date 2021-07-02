@@ -18,6 +18,7 @@ using SwiftCode.BBS.Common.Helper;
 using Swashbuckle.AspNetCore.Filters;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
+using SwiftCode.BBS.Common.MemoryCache;
 using SwiftCode.BBS.EntityFramework;
 using SwiftCode.BBS.Extensions.ServiceExtensions;
 using SwiftCode.BBS.IServices;
@@ -46,6 +47,7 @@ namespace SwiftCode.BBS.API
 
 
             services.AddSingleton(new Appsettings(Configuration));
+            services.AddMemoryCacheSetup();
             services.AddAutoMapperSetup();
 
             #region Swagger

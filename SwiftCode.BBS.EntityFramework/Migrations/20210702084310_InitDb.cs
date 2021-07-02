@@ -8,7 +8,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Advertisement",
+                name: "Advertisements",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -19,11 +19,11 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Advertisement", x => x.Id);
+                    table.PrimaryKey("PK_Advertisements", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserInfo",
+                name: "UserInfos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -39,7 +39,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserInfo", x => x.Id);
+                    table.PrimaryKey("PK_UserInfos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,9 +60,9 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                 {
                     table.PrimaryKey("PK_Articles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Articles_UserInfo_CreateUserId",
+                        name: "FK_Articles_UserInfos_CreateUserId",
                         column: x => x.CreateUserId,
-                        principalTable: "UserInfo",
+                        principalTable: "UserInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -84,15 +84,15 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                 {
                     table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Questions_UserInfo_CreateUserId",
+                        name: "FK_Questions_UserInfos_CreateUserId",
                         column: x => x.CreateUserId,
-                        principalTable: "UserInfo",
+                        principalTable: "UserInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ArticleComment",
+                name: "ArticleComments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -104,17 +104,17 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArticleComment", x => x.Id);
+                    table.PrimaryKey("PK_ArticleComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ArticleComment_Articles_ArticleId",
+                        name: "FK_ArticleComments_Articles_ArticleId",
                         column: x => x.ArticleId,
                         principalTable: "Articles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ArticleComment_UserInfo_CreateUserId",
+                        name: "FK_ArticleComments_UserInfos_CreateUserId",
                         column: x => x.CreateUserId,
-                        principalTable: "UserInfo",
+                        principalTable: "UserInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -140,7 +140,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuestionComment",
+                name: "QuestionComments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -153,29 +153,29 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuestionComment", x => x.Id);
+                    table.PrimaryKey("PK_QuestionComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_QuestionComment_Questions_QuestionId",
+                        name: "FK_QuestionComments_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QuestionComment_UserInfo_CreateUserId",
+                        name: "FK_QuestionComments_UserInfos_CreateUserId",
                         column: x => x.CreateUserId,
-                        principalTable: "UserInfo",
+                        principalTable: "UserInfos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArticleComment_ArticleId",
-                table: "ArticleComment",
+                name: "IX_ArticleComments_ArticleId",
+                table: "ArticleComments",
                 column: "ArticleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArticleComment_CreateUserId",
-                table: "ArticleComment",
+                name: "IX_ArticleComments_CreateUserId",
+                table: "ArticleComments",
                 column: "CreateUserId");
 
             migrationBuilder.CreateIndex(
@@ -184,13 +184,13 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                 column: "CreateUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestionComment_CreateUserId",
-                table: "QuestionComment",
+                name: "IX_QuestionComments_CreateUserId",
+                table: "QuestionComments",
                 column: "CreateUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestionComment_QuestionId",
-                table: "QuestionComment",
+                name: "IX_QuestionComments_QuestionId",
+                table: "QuestionComments",
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
@@ -207,13 +207,13 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Advertisement");
+                name: "Advertisements");
 
             migrationBuilder.DropTable(
-                name: "ArticleComment");
+                name: "ArticleComments");
 
             migrationBuilder.DropTable(
-                name: "QuestionComment");
+                name: "QuestionComments");
 
             migrationBuilder.DropTable(
                 name: "UserCollectionArticle");
@@ -225,7 +225,7 @@ namespace SwiftCode.BBS.EntityFramework.Migrations
                 name: "Articles");
 
             migrationBuilder.DropTable(
-                name: "UserInfo");
+                name: "UserInfos");
         }
     }
 }
