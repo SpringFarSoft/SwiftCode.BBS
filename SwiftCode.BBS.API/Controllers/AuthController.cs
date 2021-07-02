@@ -77,7 +77,7 @@ namespace SwiftCode.BBS.API.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<MessageModel<string>> Register(RegisterInputDto input)
+        public async Task<MessageModel<string>> Register(CreateUserInfoInputDto input)
         {
             var userInfo = await _userInfoService.FindAsync(x => x.LoginName == input.LoginName);
             if (userInfo != null)

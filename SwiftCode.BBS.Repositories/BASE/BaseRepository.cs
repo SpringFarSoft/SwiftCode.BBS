@@ -116,7 +116,12 @@ namespace SwiftCode.BBS.Repositories.BASE
         {
             return _context.Set<TEntity>().Where(predicate).SingleOrDefaultAsync(cancellationToken);
         }
-
+        /// <summary>
+        /// 数据不存在会抛出异常
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate,  CancellationToken cancellationToken = default)
         {
             var entity = await FindAsync(predicate, cancellationToken);
@@ -150,7 +155,7 @@ namespace SwiftCode.BBS.Repositories.BASE
             return _context.Set<TEntity>().LongCountAsync(cancellationToken);
         }
 
-        public Task<long> GetCountAsync<TEntity1>(Expression<Func<TEntity1, bool>> predicate, CancellationToken cancellationToken) where TEntity1 : class, new()
+        public Task<long> GetCountAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
         {
             return _context.Set<TEntity>().Where(predicate).LongCountAsync(cancellationToken);
         }

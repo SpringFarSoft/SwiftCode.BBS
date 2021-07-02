@@ -65,7 +65,7 @@ namespace SwiftCode.BBS.API.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<MessageModel<string>> UpdateAsync(UserInfoInputDto input)
+        public async Task<MessageModel<string>> UpdateAsync(UpdateUserInfoInputDto input)
         {
             var token = JwtHelper.ParsingJwtToken(HttpContext);
             var userInfo = await _userInfoService.GetAsync(x => x.Id == token.Uid);

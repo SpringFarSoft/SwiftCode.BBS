@@ -16,7 +16,7 @@ namespace SwiftCode.BBS.Extensions.AutoMapper
         /// </summary>
         public UserInfoProfile()
         {
-            CreateMap<RegisterInputDto, UserInfo>();
+            CreateMap<CreateUserInfoInputDto, UserInfo>();
             CreateMap<UserInfo, UserInfoDto>();
 
             CreateMap<UserInfo, UserInfoDetailsDto>();

@@ -591,37 +591,52 @@
             类别
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.UserName">
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.CreateUserInfoInputDto.UserName">
             <summary>
             用户名
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.LoginName">
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.CreateUserInfoInputDto.LoginName">
             <summary>
             登录账号
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.LoginPassWord">
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.CreateUserInfoInputDto.LoginPassWord">
             <summary>
             登录密码
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.Phone">
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.CreateUserInfoInputDto.Phone">
             <summary>
             手机号
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.Introduction">
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.CreateUserInfoInputDto.Introduction">
             <summary>
             个人介绍
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.Email">
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.CreateUserInfoInputDto.Email">
             <summary>
             邮箱
             </summary>
         </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto.HeadPortrait">
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.CreateUserInfoInputDto.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UpdateUserInfoInputDto.Introduction">
+            <summary>
+            个人介绍
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UpdateUserInfoInputDto.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UpdateUserInfoInputDto.HeadPortrait">
             <summary>
             头像
             </summary>
@@ -669,21 +684,6 @@
         <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDto.QuestionsCount">
             <summary>
             问答数量
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoInputDto.Introduction">
-            <summary>
-            个人介绍
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoInputDto.Email">
-            <summary>
-            邮箱
-            </summary>
-        </member>
-        <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoInputDto.HeadPortrait">
-            <summary>
-            头像
             </summary>
         </member>
     </members>

@@ -78,7 +78,7 @@
             <param name="loginPassWord"></param>
             <returns></returns>
         </member>
-        <member name="M:SwiftCode.BBS.API.Controllers.AuthController.Register(SwiftCode.BBS.Model.ViewModels.UserInfo.RegisterInputDto)">
+        <member name="M:SwiftCode.BBS.API.Controllers.AuthController.Register(SwiftCode.BBS.Model.ViewModels.UserInfo.CreateUserInfoInputDto)">
             <summary>
             注册
             </summary>
@@ -194,7 +194,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SwiftCode.BBS.API.Controllers.UserInfoController.UpdateAsync(SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoInputDto)">
+        <member name="M:SwiftCode.BBS.API.Controllers.UserInfoController.UpdateAsync(SwiftCode.BBS.Model.ViewModels.UserInfo.UpdateUserInfoInputDto)">
             <summary>
             修改个人信息
             </summary>

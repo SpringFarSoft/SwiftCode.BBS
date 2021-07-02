@@ -20,7 +20,6 @@ namespace SwiftCode.BBS.Extensions.ServiceExtensions
         protected override void Load(ContainerBuilder builder)
         {
 
-            var basePath = AppContext.BaseDirectory;
             builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();
             builder.RegisterGeneric(typeof(BaseServices<>)).As(typeof(IBaseServices<>)).InstancePerDependency();
 
