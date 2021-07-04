@@ -3,15 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftCode.BBS.API", "SwiftCode.BBS.API\SwiftCode.BBS.API.csproj", "{DF71EB99-B915-4391-AFC4-FA8F09EBDAFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftCode.BBS.API", "SwiftCode.BBS.API\SwiftCode.BBS.API.csproj", "{DF71EB99-B915-4391-AFC4-FA8F09EBDAFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftCode.BBS.IRepositories", "SwiftCode.BBS.IRepositories\SwiftCode.BBS.IRepositories.csproj", "{40499087-663D-4271-B391-895470212C6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftCode.BBS.IRepositories", "SwiftCode.BBS.IRepositories\SwiftCode.BBS.IRepositories.csproj", "{40499087-663D-4271-B391-895470212C6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftCode.BBS.Repositories", "SwiftCode.BBS.Repositories\SwiftCode.BBS.Repositories.csproj", "{0690A834-FF01-405B-B39A-B8EE178B9423}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftCode.BBS.Repositories", "SwiftCode.BBS.Repositories\SwiftCode.BBS.Repositories.csproj", "{0690A834-FF01-405B-B39A-B8EE178B9423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftCode.BBS.IServices", "SwiftCode.BBS.IServices\SwiftCode.BBS.IServices.csproj", "{4AE85D1D-3B97-466E-A5EF-3604FB18E6B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftCode.BBS.IServices", "SwiftCode.BBS.IServices\SwiftCode.BBS.IServices.csproj", "{4AE85D1D-3B97-466E-A5EF-3604FB18E6B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftCode.BBS.Services", "SwiftCode.BBS.Services\SwiftCode.BBS.Services.csproj", "{A7F00026-11DC-48CD-B4C1-7A8B11AEDCA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftCode.BBS.Services", "SwiftCode.BBS.Services\SwiftCode.BBS.Services.csproj", "{A7F00026-11DC-48CD-B4C1-7A8B11AEDCA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftCode.BBS.Model", "SwiftCode.BBS.Model\SwiftCode.BBS.Model.csproj", "{44D39EB6-695D-4B4D-9D77-1671C77D3785}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwiftCode.BBS.Common", "SwiftCode.BBS.Common\SwiftCode.BBS.Common.csproj", "{5E8AC80B-D28D-4102-A425-9F09AF9E0579}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftCode.BBS.Extensions", "SwiftCode.BBS.Extensions\SwiftCode.BBS.Extensions.csproj", "{6DD9A8DE-B09E-4904-BC98-34977F82F126}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftCode.BBS.EntityFramework", "SwiftCode.BBS.EntityFramework\SwiftCode.BBS.EntityFramework.csproj", "{30DFC544-B73C-4303-822A-D70252F1EC0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +47,22 @@ Global
 		{A7F00026-11DC-48CD-B4C1-7A8B11AEDCA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7F00026-11DC-48CD-B4C1-7A8B11AEDCA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7F00026-11DC-48CD-B4C1-7A8B11AEDCA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44D39EB6-695D-4B4D-9D77-1671C77D3785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44D39EB6-695D-4B4D-9D77-1671C77D3785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44D39EB6-695D-4B4D-9D77-1671C77D3785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44D39EB6-695D-4B4D-9D77-1671C77D3785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E8AC80B-D28D-4102-A425-9F09AF9E0579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E8AC80B-D28D-4102-A425-9F09AF9E0579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E8AC80B-D28D-4102-A425-9F09AF9E0579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E8AC80B-D28D-4102-A425-9F09AF9E0579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DD9A8DE-B09E-4904-BC98-34977F82F126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD9A8DE-B09E-4904-BC98-34977F82F126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD9A8DE-B09E-4904-BC98-34977F82F126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD9A8DE-B09E-4904-BC98-34977F82F126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30DFC544-B73C-4303-822A-D70252F1EC0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30DFC544-B73C-4303-822A-D70252F1EC0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30DFC544-B73C-4303-822A-D70252F1EC0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30DFC544-B73C-4303-822A-D70252F1EC0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

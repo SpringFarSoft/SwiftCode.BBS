@@ -4,9 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SwiftCode.BBS.API.Controllers
 {
+    /// <summary>
+    /// 天气预报
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -22,8 +26,12 @@ namespace SwiftCode.BBS.API.Controllers
         {
             _logger = logger;
         }
-
+        /// <summary>
+        /// 获取天气
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [Authorize(Policy = "SystemOrAdmin")]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
