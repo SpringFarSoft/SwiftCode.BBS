@@ -13,14 +13,7 @@ namespace SwiftCode.BBS.Extensions.AOP
 {
     public class BbsLogAOP : IInterceptor
     {
-        private readonly IHttpContextAccessor _accessor;
-
-        public BbsLogAOP(IHttpContextAccessor accessor)
-        {
-            _accessor = accessor;
-        }
-
-
+   
         /// <summary>
         /// 实例化IInterceptor唯一方法 
         /// </summary>
