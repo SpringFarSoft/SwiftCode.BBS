@@ -10,7 +10,7 @@ using SwiftCode.BBS.Model.ViewModels.Article;
 
 namespace SwiftCode.BBS.IServices
 {
-    public interface IArticleServices: IBaseServices<Article>
+    public interface IArticleServices : IBaseServices<Article>
     {
         Task<Article> GetByIdAsync(int id, CancellationToken cancellationToken = default);
 
@@ -19,5 +19,6 @@ namespace SwiftCode.BBS.IServices
         Task AddArticleCollection(int id, int userId, CancellationToken cancellationToken = default);
 
         Task AddArticleComments(int id, int userId, string content, CancellationToken cancellationToken = default);
+        Task AdditionalItemAsync(Article entity, bool v, int n = 0);
     }
 }

@@ -32,7 +32,7 @@ namespace SwiftCode.BBS.Services
             var entity = await _articleRepository.GetByIdAsync(id, cancellationToken);
             entity.Traffic += 1;
 
-            await _articleRepository.UpdateAsync(entity,true, cancellationToken: cancellationToken);
+            await _articleRepository.UpdateAsync(entity, true, cancellationToken: cancellationToken);
 
             return entity;
         }
@@ -60,5 +60,10 @@ namespace SwiftCode.BBS.Services
             await _articleRepository.UpdateAsync(entity, true, cancellationToken);
         }
 
+        public async Task AdditionalItemAsync(Article entity, bool v, int n = 0)
+        {
+            entity.CreateTime = DateTime.Now.AddDays(-n);
+            await _articleRepository.InsertAsync(entity, true);
+        }
     }
 }
