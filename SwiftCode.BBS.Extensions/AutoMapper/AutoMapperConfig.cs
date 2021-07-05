@@ -14,6 +14,7 @@ namespace SwiftCode.BBS.Extensions.AutoMapper
                 cfg.AddProfile(new UserInfoProfile());
                 cfg.AddProfile(new ArticlePorfile());
                 cfg.AddProfile(new QuestionProfile());
+                cfg.AddProfile(new UserManagerProfile());
             });
         }
     }
