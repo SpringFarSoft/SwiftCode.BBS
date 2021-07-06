@@ -25,7 +25,7 @@ namespace SwiftCode.BBS.API.Controllers
         {
             IArticleService ArticleServices = new ArticleService();
 
-            return await ArticleServices.Query(d => d.Id == id);
+            return await ArticleServices.GetListAsync(d => d.Id == id);
         }
     }
 }

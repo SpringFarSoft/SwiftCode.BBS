@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using SwiftCode.BBS.IRepositories.BASE;
 using SwiftCode.BBS.IServices.BASE;
@@ -11,82 +12,75 @@ namespace SwiftCode.BBS.Services.BASE
 {
     public class BaseServices<TEntity> : IBaseServices<TEntity> where TEntity : class, new()
     {
-        public IBaseRepository<TEntity> baseDal = new BaseRepository<TEntity>();
+        public IBaseRepository<TEntity> _baseRepository = new BaseRepository<TEntity>();
 
-        /// <summary>
-        /// 写入实体数据
-        /// </summary>
-        /// <param name="model"></param>
-        public void Add(TEntity model)
+        public async Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            baseDal.Add(model);
+            return await _baseRepository.InsertAsync(entity, autoSave, cancellationToken);
         }
-        /// <summary>
-        /// 删除指定对象的数据
-        /// </summary>
-        /// <param name="model"></param>
-        public void Delete(TEntity model)
+
+        public async Task InsertManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            baseDal.Delete(model);
+            await _baseRepository.InsertManyAsync(entities, autoSave, cancellationToken);
         }
-        /// <summary>
-        /// 更新实体数据
-        /// </summary>
-        /// <param name="model"></param>
-        public void Update(TEntity model)
+
+        public async Task<TEntity> UpdateAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            baseDal.Update(model);
+            return await _baseRepository.UpdateAsync(entity, autoSave, cancellationToken);
         }
-        /// <summary>
-        /// 功能描述:查询所有数据
-        /// </summary>
-        /// <returns></returns>
-        public Task<List<TEntity>> Query()
+
+        public async Task UpdateManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-           return baseDal.Query();
+            await _baseRepository.UpdateManyAsync(entities, autoSave, cancellationToken);
         }
-        /// <summary>
-        /// 功能描述:查询数据列表
-        /// </summary>
-        /// <param name="whereExpression"></param>
-        /// <returns></returns>
-        public Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression)
+
+        public async Task DeleteAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            return baseDal.Query(whereExpression);
+            await _baseRepository.DeleteAsync(entity, autoSave, cancellationToken);
         }
-        /// <summary>
-        /// 功能描述:查询一个列表
-        /// </summary>
-        /// <param name="whereExpression"></param>
-        /// <param name="orderByExpression"></param>
-        /// <param name="isAsc"></param>
-        /// <returns></returns>
-        public Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, object>> orderByExpression, bool isAsc = true)
+
+        public async Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            return baseDal.Query(whereExpression, orderByExpression, isAsc);
+            await _baseRepository.DeleteAsync(predicate, autoSave, cancellationToken);
         }
-        /// <summary>
-        /// 功能描述:分页查询
-        /// </summary>
-        /// <param name="whereExpression"></param>
-        /// <param name="orderByExpression"></param>
-        /// <param name="intPageIndex"></param>
-        /// <param name="intPageSize"></param>
-        /// <returns></returns>
-        public Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression, int intTop, Expression<Func<TEntity, object>> orderByExpression)
+
+        public async Task DeleteManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            return baseDal.Query(whereExpression, intTop, orderByExpression);
+            await _baseRepository.DeleteManyAsync(entities, autoSave, cancellationToken);
         }
-        /// <summary>
-        /// 功能描述:查询前N条数据
-        /// </summary>
-        /// <param name="whereExpression"></param>
-        /// <param name="intTop"></param>
-        /// <param name="orderByExpression"></param>
-        /// <returns></returns>
-        public Task<List<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, object>> orderByExpression, int intPageIndex = 0, int intPageSize = 20)
+
+        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            return baseDal.QueryPage(whereExpression, orderByExpression, intPageIndex, intPageSize);
+            return await _baseRepository.FindAsync(predicate, cancellationToken);
+        }
+
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            return await _baseRepository.GetAsync(predicate, cancellationToken);
+        }
+
+        public async Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default)
+        {
+            return await _baseRepository.GetListAsync(cancellationToken);
+        }
+
+        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            return await _baseRepository.GetListAsync(predicate, cancellationToken);
+        }
+
+        public async Task<List<TEntity>> GetPagedListAsync(int skipCount, int maxResultCount, string sorting,
+            CancellationToken cancellationToken = default)
+        {
+            return await _baseRepository.GetPagedListAsync(skipCount, maxResultCount, sorting, cancellationToken);
+        }
+        public async Task<long> GetCountAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            return await _baseRepository.GetCountAsync(predicate, cancellationToken);
+        }
+        public async Task<long> GetCountAsync(CancellationToken cancellationToken = default)
+        {
+            return await _baseRepository.GetCountAsync(cancellationToken);
         }
     }
 }

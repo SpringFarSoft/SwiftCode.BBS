@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Linq.Dynamic.Core;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SwiftCode.BBS.IRepositories.BASE;
@@ -12,94 +14,148 @@ namespace SwiftCode.BBS.Repositories.BASE
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, new()
     {
-        private SwiftCodeBbsContext context;
+        private SwiftCodeBbsContext _context;
         public BaseRepository()
         {
-            context = new SwiftCodeBbsContext();
+            _context = new SwiftCodeBbsContext();
         }
-        /// <summary>
-        /// 写入实体数据
-        /// </summary>
-        /// <param name="model"></param>
-        public void Add(TEntity model)
+        protected SwiftCodeBbsContext DbContext()
         {
-            context.Set<TEntity>().Add(model);
-            context.SaveChanges();
+            return _context;
         }
-        /// <summary>
-        /// 删除指定对象的数据
-        /// </summary>
-        /// <param name="model"></param>
-        public void Delete(TEntity model)
-        {
-            context.Set<TEntity>().Remove(model);
-            context.SaveChanges();
-        }
-        /// <summary>
-        /// 更新实体数据
-        /// </summary>
-        /// <param name="model"></param>
-        public void Update(TEntity model)
-        {
-            context.Set<TEntity>().Update(model);
-            context.SaveChanges();
-        }
-        /// <summary>
-        /// 功能描述:查询所有数据
-        /// </summary>
-        /// <returns></returns>
-        public Task<List<TEntity>> Query()
-        {
-            return context.Set<TEntity>().ToListAsync();
-        }
-        /// <summary>
-        /// 功能描述:查询数据列表
-        /// </summary>
-        /// <param name="whereExpression"></param>
-        /// <returns></returns>
 
-        public Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression)
+        public async Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            return context.Set<TEntity>().Where(whereExpression).ToListAsync();
-        }
-        /// <summary>
-        /// 功能描述:查询一个列表
-        /// </summary>
-        /// <param name="whereExpression"></param>
-        /// <param name="orderByExpression"></param>
-        /// <param name="isAsc"></param>
-        /// <returns></returns>
-        public Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, object>> orderByExpression, bool isAsc = true)
-        {
-            if (isAsc)
+            var savedEntity = (await _context.Set<TEntity>().AddAsync(entity, cancellationToken)).Entity;
+
+            if (autoSave)
             {
-                return context.Set<TEntity>().Where(whereExpression).OrderBy(orderByExpression).ToListAsync();
+                await _context.SaveChangesAsync(cancellationToken);
             }
-            return context.Set<TEntity>().Where(whereExpression).OrderByDescending(orderByExpression).ToListAsync();
+
+            return savedEntity;
         }
 
-        /// <summary>
-        /// 功能描述:分页查询
-        /// </summary>
-        /// <param name="whereExpression"></param>
-        /// <param name="orderByExpression"></param>
-        /// <param name="intPageIndex"></param>
-        /// <param name="intPageSize"></param>
-        /// <returns></returns>
-        public Task<List<TEntity>> QueryPage(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, object>> orderByExpression, int intPageIndex = 0, int intPageSize = 20)
+        public async Task InsertManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            return context.Set<TEntity>().Where(whereExpression).OrderBy(orderByExpression).Skip(intPageSize * (intPageIndex - 1)).Take(intPageSize).ToListAsync();
+            var entityArray = entities.ToArray();
+
+            await _context.Set<TEntity>().AddRangeAsync(entityArray, cancellationToken);
+
+            if (autoSave)
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task<TEntity> UpdateAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
+        {
+
+            _context.Attach(entity);
+
+            var updatedEntity = _context.Update(entity).Entity;
+
+            if (autoSave)
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+
+            return updatedEntity;
+        }
+
+        public async Task UpdateManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
+        {
+            _context.Set<TEntity>().UpdateRange(entities);
+
+            if (autoSave)
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task DeleteAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
+        {
+            _context.Set<TEntity>().Remove(entity);
+
+            if (autoSave)
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, bool autoSave = false, CancellationToken cancellationToken = default)
+        {
+            var dbSet = _context.Set<TEntity>();
+
+            var entities = await dbSet
+                .Where(predicate)
+                .ToListAsync(cancellationToken);
+
+            await DeleteManyAsync(entities, autoSave, cancellationToken);
+
+            if (autoSave)
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public async Task DeleteManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
+        {
+            _context.RemoveRange(entities);
+
+            if (autoSave)
+            {
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+        }
+
+        public Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            return _context.Set<TEntity>().Where(predicate).SingleOrDefaultAsync(cancellationToken);
         }
         /// <summary>
-        /// 功能描述:查询前N条数据
+        /// 数据不存在会抛出异常
         /// </summary>
-        /// <param name="whereExpression"></param>
-        /// <param name="intTop"></param>
-        /// <param name="orderByExpression"></param>
+        /// <param name="predicate"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> whereExpression, int intTop, Expression<Func<TEntity, object>> orderByExpression)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            return context.Set<TEntity>().Where(whereExpression).OrderBy(orderByExpression).Take(intTop).ToListAsync();
+            var entity = await FindAsync(predicate, cancellationToken);
+
+            if (entity == null)
+            {
+                throw new Exception(nameof(TEntity) + ": 数据不存在");
+            }
+
+            return entity;
+        }
+
+        public Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default)
+        {
+            return _context.Set<TEntity>().ToListAsync(cancellationToken);
+        }
+
+        public Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            return _context.Set<TEntity>().Where(predicate).ToListAsync(cancellationToken);
+        }
+
+        public Task<List<TEntity>> GetPagedListAsync(int skipCount, int maxResultCount, string sorting,
+            CancellationToken cancellationToken = default)
+        {
+            // nuget System.Linq.Dynamic.Core
+            return _context.Set<TEntity>().OrderBy(sorting).Skip(skipCount).Take(maxResultCount).ToListAsync(cancellationToken);
+        }
+
+        public Task<long> GetCountAsync(CancellationToken cancellationToken = default)
+        {
+            return _context.Set<TEntity>().LongCountAsync(cancellationToken);
+        }
+
+        public Task<long> GetCountAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return _context.Set<TEntity>().Where(predicate).LongCountAsync(cancellationToken);
         }
     }
 }
