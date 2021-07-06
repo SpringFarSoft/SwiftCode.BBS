@@ -19,5 +19,6 @@ namespace SwiftCode.BBS.IServices
         Task AddArticleCollection(int id, int userId, CancellationToken cancellationToken = default);
 
         Task AddArticleComments(int id, int userId, string content, CancellationToken cancellationToken = default);
+        Task<List<string>> GetArticleCommentsAsync(int id, CancellationToken cancellationToken = default);
     }
 }

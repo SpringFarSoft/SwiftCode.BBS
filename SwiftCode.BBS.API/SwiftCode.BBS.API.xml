@@ -4,6 +4,70 @@
         <name>SwiftCode.BBS.API</name>
     </assembly>
     <members>
+        <member name="M:SwiftCode.BBS.API.Controllers.Admin.ArticleManagerController.GetList(System.Int32,System.Int32)">
+            <summary>
+            文章管理分页获取文章列表
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.Admin.ArticleManagerController.Get(System.Int32)">
+            <summary>
+            根据Id查询文章
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.Admin.ArticleManagerController.DeleteAsync(System.Int32)">
+            <summary>
+            删除文章
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.Admin.ArticleManagerController.GetArticleCommentsAsync(System.Int32)">
+            <summary>
+            获取文章评论
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SwiftCode.BBS.API.Controllers.Admin.UserCollectionController">
+            <summary>
+            用户收藏管理
+            </summary>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.Admin.UserCollectionController.GetUserCollectionArticlePageAsync(System.Int32,System.Int32)">
+            <summary>
+            获取用户收藏文章列表
+            </summary>
+            <param name="intPageIndex"></param>
+            <param name="intPageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SwiftCode.BBS.API.Controllers.UserManagerController">
+            <summary>
+            用户后台管理
+            </summary>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.UserManagerController.GetAsync(System.Int32,System.Int32)">
+            <summary>
+            后台管理分页获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.UserManagerController.UpdateAsync(System.Int32,SwiftCode.BBS.Model.ViewModels.UserManager.UserManagerDto)">
+            <summary>
+            后台管理修改用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SwiftCode.BBS.API.Controllers.UserManagerController.DeleteAsync(System.Int32)">
+            <summary>
+            后台管理删除用户信息
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SwiftCode.BBS.API.Controllers.ArticleController">
             <summary>
             文章

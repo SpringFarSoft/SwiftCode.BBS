@@ -336,6 +336,41 @@
             返回数据集
             </summary>
         </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Admin.UserCollectionArticleDto.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Admin.UserCollectionArticleDto.Tag">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Admin.UserCollectionArticleDto.Cover">
+            <summary>
+            封面
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Admin.UserCollectionArticleDto.Traffic">
+            <summary>
+            访问量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Admin.UserCollectionArticleDto.CollectionUser">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Admin.UserCollectionArticleDto.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.Admin.UserCollectionArticleDto.CreateUser">
+            <summary>
+            创建时间
+            </summary>
+        </member>
         <member name="P:SwiftCode.BBS.Model.ViewModels.Article.ArticleCommentDto.Content">
             <summary>
             内容
@@ -684,6 +719,41 @@
         <member name="P:SwiftCode.BBS.Model.ViewModels.UserInfo.UserInfoDto.QuestionsCount">
             <summary>
             问答数量
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserManager.UserManagerDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserManager.UserManagerDto.LoginName">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserManager.UserManagerDto.LoginPassWord">
+            <summary>
+            登录密码
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserManager.UserManagerDto.Phone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserManager.UserManagerDto.Introduction">
+            <summary>
+            个人介绍
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserManager.UserManagerDto.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:SwiftCode.BBS.Model.ViewModels.UserManager.UserManagerDto.HeadPortrait">
+            <summary>
+            头像
             </summary>
         </member>
     </members>

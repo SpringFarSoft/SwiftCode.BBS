@@ -11,6 +11,7 @@ namespace SwiftCode.BBS.IRepositories.BASE
     public  interface IBaseRepository<TEntity> where TEntity : class
     {
 
+        IQueryable<TEntity> NoTrackEntities { get; }
         Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
 
         Task InsertManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default);

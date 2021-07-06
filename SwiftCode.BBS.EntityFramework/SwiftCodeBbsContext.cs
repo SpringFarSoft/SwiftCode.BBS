@@ -24,6 +24,7 @@ namespace SwiftCode.BBS.EntityFramework
         public DbSet<QuestionComment> QuestionComments { get; set; }
 
         public DbSet<Advertisement> Advertisements { get; set; }
+        public DbSet<UserCollectionArticle> UserCollectionArticles { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

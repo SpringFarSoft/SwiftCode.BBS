@@ -16,6 +16,8 @@ namespace SwiftCode.BBS.Repositories.BASE
     {
         private readonly SwiftCodeBbsContext _context;
 
+        public IQueryable<TEntity> NoTrackEntities => _context.Set<TEntity>();
+
         public BaseRepository(SwiftCodeBbsContext context)
         {
             _context = context;

@@ -60,5 +60,11 @@ namespace SwiftCode.BBS.Services
             await _articleRepository.UpdateAsync(entity, true, cancellationToken);
         }
 
+        public async Task<List<string>> GetArticleCommentsAsync(int id, CancellationToken cancellationToken = default)
+        {
+            var entity = await _articleRepository.GetByIdAsync(id, cancellationToken);
+            var list = entity.ArticleComments.Select(x => x.Content);
+            return list.ToList();
+        }
     }
 }
