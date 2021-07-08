@@ -8,6 +8,10 @@
     <OutputPath>..\SwiftCode.BBS.API\bin\Debug\</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.10" />
+  </ItemGroup>
+
 
 
   <ItemGroup>

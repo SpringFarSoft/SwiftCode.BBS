@@ -28,7 +28,7 @@ namespace SwiftCode.BBS.API.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<List<Article>> Get(int id)
         {
-            return await _articleServices.Query(d => d.Id == id);
+            return await _articleServices.GetListAsync(d => d.Id == id);
         }
     }
 }

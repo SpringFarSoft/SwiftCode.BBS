@@ -12,10 +12,9 @@ namespace SwiftCode.BBS.Services
 {
     public class ArticleService: BaseServices<Article>,IArticleService
     {
-        IArticleRepository dal;
         public ArticleService(IArticleRepository dal):base(dal)
         {
-            this.dal = dal;
+
         }
         //public IArticleRepository dal = new ArticleRepository();
         //public void Add(Article model)
