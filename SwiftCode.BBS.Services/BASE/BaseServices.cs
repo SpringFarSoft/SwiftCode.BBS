@@ -13,7 +13,7 @@ namespace SwiftCode.BBS.Services.BASE
     {
         public IBaseRepository<TEntity> _baseRepository;
 
-        public BaseServices(IBaseRepository<TEntity> baseRepository)
+        public BaseServices(IBaseRepository<TEntity> baseDal)
         {
             _baseRepository = baseDal;
         }
