@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SwiftCode.BBS.IRepositories.BASE
 {
-    public  interface IBaseRepository<TEntity> where TEntity : class
+    public interface IBaseRepository<TEntity> where TEntity : class
     {
 
         Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
