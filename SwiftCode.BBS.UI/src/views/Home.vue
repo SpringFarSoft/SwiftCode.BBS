@@ -1,119 +1,320 @@
-<template
->
-  <div class="home">
-    <div class="l_body">
-      <div class="container clearfix">
-        <div class="l_main">
-          <section class="post-list">
-            <div v-for="i in list" :key="i.bID" class="post-wrapper">
-              <article class="post">
-                <section class="meta">
-                  <h2 class="title">
-                    <router-link :to="'/content/' + i.bID">
-                      {{ i.btitle }}
-                    </router-link>
-                  </h2>
-                  <time>
-                    {{ i.bCreateTime }}
-                  </time>
-                  <div class="cats">
-                    <a href="javascript:void(0)">{{ i.bsubmitter }}</a>
-                  </div>
-                </section>
-                <section class="article typo">
-                  <article v-html="i.bcontent"></article>
-                  <div class="readmore">
-                    <a href="/dotnet/asp.net core???????????/">查看更多</a>
-                  </div>
-                  <div class="full-width auto-padding tags">
-                    <a href="javascript:void(0);">{{ i.bcategory }}</a>
-                  </div>
-                </section>
-              </article>
-            </div>
-          </section>
+<template>
+  <div id="home">
+    <header>
+      <div class="header-wrapper header-wrapper-default">
+        <div class="header-container">
+          <h1 class="header-community-logo">
+            <span style="color: #18ad91">社区Logo</span>
+          </h1>
 
-          <nav id="page-nav">
-            <router-link
-              :to="'/?page=' + (page > 1 ? page - 1 : 1)"
-              class="prev"
-              rel="prev"
-            >
-              {{ page <= 1 ? "" : "Previous" }}
-            </router-link>
-            <router-link
-              :to="'/?page=' + (page >= TotalCount ? TotalCount : page + 1)"
-              class="next"
-              rel="next"
-            >
-              {{ page >= TotalCount ? "" : "Next" }}
-            </router-link>
+          <nav class="header-menu">
+            <a class="x-link-a">问答</a>
+            <a class="x-link-a">文章</a>
           </nav>
-        </div>
-        <aside class="l_side">
-          <section class="m_widget categories">
-            <div class="header">标签</div>
-            <div class="content">
-              <ul class="entry">
-                <li>
-                  <a class="flat-box" href="javascript:void(0);">
-                    <div class="name">博客</div>
-                    <div class="badget">11</div>
-                  </a>
-                </li>
 
-                <li>
-                  <a class="flat-box" href="javascript:void(0);">
-                    <div class="name">随笔</div>
-                    <div class="badget">10</div>
-                  </a>
-                </li>
-              </ul>
+          <div class="header-user">
+            <div class="header-user-login">
+              <span class="user-login-btn">登录</span>
+              <i class="user-login-btn-line"></i>
+              <span class="user-login-btn">注册</span>
             </div>
-          </section>
-        </aside>
+          </div>
+
+          <div class="header-entry">
+            <el-button size="small">写文章</el-button>
+            <el-button size="small">提问</el-button>
+          </div>
+
+          <div class="header-search">
+            <el-input placeholder="请输入内容" class="input-with-select">
+              <template #append>
+                <el-button icon="el-icon-search"></el-button>
+              </template>
+            </el-input>
+          </div>
+        </div>
       </div>
+    </header>
+
+    <div class="app-content">
+      <main class="home-container">
+        <el-row :gutter="20" style="margin-top: 24px">
+          <el-col :offset="2" :span="12">
+            <div class="home-swiper-wrapper swiper-slide">
+              <img
+                src="../assets/6fd7f53b8f9b4f6caff05dfb981707a7.jpg"
+                style="height: 340px; width: 100%"
+              />
+            </div>
+          </el-col>
+          <el-col :span="6">
+            <el-card class="box-card" style="padding: 24px; text-align: center">
+              <img src="../assets/052bf99.svg" alt="缺省图" />
+
+              <div style="font-size: 20px; text-align: center">
+                <span>加入</span>
+                <span
+                  style="color: #18ad91; font-size: xx-large; font-weight: 500"
+                  >社区</span
+                >
+              </div>
+
+              <div style="margin-top: 10px">
+                与百万开发者一起探讨技术、实践创新
+              </div>
+
+              <el-row style="margin: 24px auto 0">
+                <el-button
+                  style="
+                    background-color: rgb(24, 173, 145);
+                    border-color: rgb(24, 173, 145);
+                    color: aliceblue;
+                  "
+                  >登录</el-button
+                >
+                <el-button>注册</el-button>
+              </el-row>
+            </el-card>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="20" style="margin-top: 24px">
+          <el-col :offset="2" :span="12">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>技术问答</span>
+                <el-button style="float: right; padding: 3px 0" type="text"
+                  >问答首页 ></el-button
+                >
+              </div>
+
+              <question-item
+                v-for="item in questionList" :key="item.id"
+                :comments="item.comments"
+                :tag="item.tag"
+                :title="item.title"
+              ></question-item>
+            </el-card>
+          </el-col>
+          <el-col :span="6">
+            <el-card class="box-card" style="text-align: center">
+              <el-row :gutter="20">
+                <el-col :span="12"
+                  ><div class="grid-content bg-purple">
+                    <img
+                      src="../assets/2ff4e61.svg"
+                      alt="发表文章icon"
+                      data-v-52a9c7f2=""
+                    />
+                    <div class="action-text" data-v-52a9c7f2="">发表文章</div>
+                  </div></el-col
+                >
+                <el-col :span="12"
+                  ><div class="grid-content bg-purple">
+                    <img
+                      src="../assets/2f55400.svg"
+                      alt="提出问题icon"
+                      data-v-52a9c7f2=""
+                    />
+                    <div class="action-text" data-v-52a9c7f2="">提出问题</div>
+                  </div></el-col
+                >
+              </el-row>
+            </el-card>
+
+            <el-card class="box-card" style="margin-top: 24px">
+              <div slot="header" class="clearfix">
+                <span>热门标签</span>
+                <el-button style="float: right; padding: 3px 0" type="text"
+                  >更多 ></el-button
+                >
+              </div>
+
+              <el-tag class="tags-item">标签一</el-tag>
+              <el-tag class="tags-item" type="success">标签二</el-tag>
+            </el-card>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="20" style="margin-top: 24px">
+          <el-col :offset="2" :span="12">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>优选文章</span>
+                <el-button style="float: right; padding: 3px 0" type="text"
+                  >文章首页 ></el-button
+                >
+              </div>
+
+              <article-item
+                v-for="item in articleList" :key="item.id"
+                :content="item.content"
+                :createTime="item.createTime"
+                :userName="item.userName"
+                :cover="item.cover"
+                :title="item.title"
+              ></article-item>
+            </el-card>
+          </el-col>
+          <el-col :span="6">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>推荐作者</span>
+              </div>
+
+              <author-item
+                v-for="item in userInfoList" :key="item.id"
+                :userName="item.userName"
+                :articlesCount="item.articlesCount"
+                :questionsCount="item.questionsCount"
+                :headPortrait="item.headPortrait"
+              ></author-item>
+
+              
+            </el-card>
+          </el-col>
+        </el-row>
+      </main>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
+import QuestionItem from "../components/QuestionItem.vue";
+import AuthorItem from "../components/AuthorItem.vue";
+import ArticleItem from "../components/ArticleItem.vue";
 import request from "@/api/http";
 @Component({
   components: {
-    
+    QuestionItem,
+    ArticleItem,
+    AuthorItem,
   },
 })
 export default class Home extends Vue {
-  private page = 1;
-  private TotalCount = 1;
-  private isShow = true;
-  private list = [];
+ private articleList = [];
+  private questionList = [];
+  private userInfoList = [];
 
   created() {
-    this.getData();
+    this.getArticle();
+    this.getQuestion();
+    this.getUserInfo();
   }
-  getData() {
+  getArticle() {
     request({
       url: "/Home/GetArticle",
-    })
-      .then((res: any) => {
-        this.list = res;
-        this.page = 1;
-        this.TotalCount = 1;
-        this.isShow = false;
-      })
-      .catch((err: any) => {
-        console.log("Error", err);
-      });
+    }).then((res: any) => {
+      this.articleList = res.data.response;
+    });
   }
-  @Watch("$route")
-  routeChange(to: any, from: any) {
-    this.list = [];
-    this.isShow = true;
-    this.page = to.query.page;
-    this.getData();
+  getQuestion() {
+    request({
+      url: "/Home/GetQuestion",
+    }).then((res: any) => {
+      this.questionList = res.data.response;
+    });
+  }
+  getUserInfo() {
+    request({
+      url: "/Home/GetUserInfo",
+    }).then((res: any) => {
+      this.userInfoList = res.data.response;
+    });
   }
 }
 </script>
+
+<style lang="css">
+header {
+  position: relative;
+}
+
+header {
+  display: block;
+}
+.header-wrapper {
+  height: 64px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 12%);
+}
+.header-container {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+}
+.header-community-logo {
+  float: left;
+  margin: 0;
+  padding-top: 10px;
+  line-height: 1.4;
+}
+.header-community-logo img {
+  height: 23px;
+}
+.x-link-a {
+  color: inherit;
+}
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+.header-menu {
+  float: left;
+  line-height: 64px;
+  margin-left: 40px;
+}
+.header-menu > a {
+  font-size: 16px;
+  color: #00223b;
+  margin: 0 30px;
+}
+
+.header-user {
+  float: right;
+  line-height: 64px;
+  font-size: 14px;
+}
+.header-user-info,
+.header-user-login {
+  width: 130px;
+  text-align: right;
+}
+.user-login-btn-line {
+  display: inline-block;
+  width: 1px;
+  height: 11px;
+  background-color: #d8d8d8;
+  margin: 0 11px;
+}
+.user-login-btn {
+  cursor: pointer;
+}
+.header-entry {
+  margin-left: 26px;
+}
+.header-entry {
+  float: right;
+  padding-top: 16px;
+}
+.header-search {
+  float: right;
+  padding-top: 11px;
+}
+
+.app-content {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+}
+
+.tags-item {
+  margin: 11.5px 7px;
+}
+</style>

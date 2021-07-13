@@ -33,7 +33,7 @@ namespace SwiftCode.BBS.API
         }
 
         public IConfiguration Configuration { get; }
-
+        private const string DefaultCorsPolicyName = "Default";
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -49,7 +49,22 @@ namespace SwiftCode.BBS.API
             services.AddSingleton(new Appsettings(Configuration));
             services.AddMemoryCacheSetup();
             services.AddAutoMapperSetup();
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy(DefaultCorsPolicyName, builder =>
+                {
+                    builder
+                        .WithOrigins(
+                            Configuration["App:CorsOrigins"]
+                                .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                                .ToArray()
+                        )
+                        .SetIsOriginAllowedToAllowWildcardSubdomains()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
             #region Swagger
             services.AddSwaggerGen(c =>
             {
@@ -162,7 +177,7 @@ namespace SwiftCode.BBS.API
             #endregion
 
             app.UseRouting();
-
+            app.UseCors(DefaultCorsPolicyName);
             // 先开启认证
             app.UseAuthentication();
             // 然后是授权中间件

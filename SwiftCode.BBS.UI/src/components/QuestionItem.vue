@@ -17,9 +17,9 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
   name: "question-item",
 })
 export default class QuestionIten extends Vue {
-  @Prop() private comments: String | undefined;
-  @Prop() private title: String | undefined;
-  @Prop() private tag!: String;
+  @Prop({ type: Number, default: 0 }) readonly  comments!: Number;
+  @Prop({ type: String, default: '' }) readonly  title!: String;
+  @Prop({ type: String, default: '' }) readonly  tag!: String;
 
   private tagList = this.tag.split(",");
 }

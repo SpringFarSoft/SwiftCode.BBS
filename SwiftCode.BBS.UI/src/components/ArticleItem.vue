@@ -42,11 +42,11 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
   name: "article-item",
 })
 export default class ArticleItem extends Vue {
-  @Prop() private content: String | undefined;
-  @Prop() private title: String | undefined;
-  @Prop() private cover: String | undefined;
-  @Prop() private userName!: String;
-  @Prop() private createTime!: Date;
+  @Prop({ type: String, default: '' }) private content!: String;
+  @Prop({ type: String, default: '' }) private title!: String;
+  @Prop({ type: String, default: '' }) private cover!: String;
+  @Prop({ type: String, default: '' }) private userName!: String;
+  @Prop({ type: String, default: '' }) private createTime!: Date;
 
 }
 </script>

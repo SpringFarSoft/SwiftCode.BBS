@@ -20,10 +20,10 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
   name: "author-item",
 })
 export default class AuthorItem extends Vue {
-  @Prop() private userName: String | undefined;
-  @Prop() private articlesCount: String | undefined;
-  @Prop() private questionsCount: String | undefined;
-  @Prop() private headPortrait: String | undefined;
+  @Prop({ type: String, default: '' }) private userName!: String;
+  @Prop({ type: Number, default: 0 }) private articlesCount!: Number;
+  @Prop({ type: Number, default: 0 }) private questionsCount!: Number;
+  @Prop({ type: String, default: '' }) private headPortrait!: String;
 }
 </script>
 
