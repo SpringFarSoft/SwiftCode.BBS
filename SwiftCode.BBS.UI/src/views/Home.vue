@@ -14,7 +14,7 @@
 
           <div class="header-user">
             <div class="header-user-login">
-              <span class="user-login-btn">登录</span>
+              <span class="user-login-btn">  <router-link to="/Login">登录</router-link> | </span>
               <i class="user-login-btn-line"></i>
               <span class="user-login-btn">注册</span>
             </div>
@@ -64,14 +64,14 @@
               </div>
 
               <el-row style="margin: 24px auto 0">
-                <el-button
+                <router-link to="/Login"><el-button
                   style="
                     background-color: rgb(24, 173, 145);
                     border-color: rgb(24, 173, 145);
                     color: aliceblue;
                   "
-                  >登录</el-button
-                >
+                  >  登录 </el-button
+                > </router-link>
                 <el-button>注册</el-button>
               </el-row>
             </el-card>

@@ -1,6 +1,12 @@
 <template>
   <div class="login">
-    <el-card class="box-card">
+    <div style="margin: auto; margin-top: 12%">
+      <h1 style="text-align: center">
+        <span style="color: rgb(24, 173, 145)"> 社区Logo</span>
+      </h1>
+    </div>
+
+    <el-card class="box-card" style="width: 431px; margin: auto">
       <div slot="header" class="clearfix">
         <span>登录</span>
         <el-button style="float: right; padding: 3px 0" type="text"
@@ -41,6 +47,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import request from "@/api/http";
+import { Method } from "axios";
 @Component({
   components: {},
 })
@@ -55,31 +62,58 @@ export default class Login extends Vue {
     pass: [{ validator: this.validatePass, trigger: "blur" }],
   };
 
-  checkName(_: any, value: string, callback: (arg0: Error) => any) {
+  checkName(_: any, value: string, callback: any) {
     if (!value) {
       return callback(new Error("账号不能为空"));
+    } else {
+      return callback();
     }
   }
 
-  validatePass(_: any, value: string, callback: (arg0: Error) => void) {
+  validatePass(_: any, value: string, callback: any) {
     if (value === "") {
       callback(new Error("请输入密码"));
+    } else {
+      return callback();
     }
   }
 
-  submitForm(formName: string | number) {
-    this.$data[formName].validate((valid: any) => {
+  submitForm(formName: any) {
+    let that = this;
+    (this.$refs[formName] as any).validate((valid: any) => {
       if (valid) {
-        alert("submit!");
+        request({
+          url: "/Auth/Login",
+          params: {
+            loginName: that.ruleForm.name,
+            loginPassWord: that.ruleForm.pass,
+          },
+        }).then((res: any) => {
+          if (!res.data.success) {
+            that.$alert(res.data.msg, "登录提示", {
+              confirmButtonText: "确定",
+              callback: (action) => {
+                return false;
+              },
+            });
+          } else {
+            that.$message({
+              type: "info",
+              message: `欢迎登录`,
+            });
+            that.$store.commit("saveToken", res.data.response); //保存 token
+            that.$router.replace("/");
+          }
+        });
       } else {
-        console.log("error submit!!");
         return false;
       }
     });
   }
 
-  resetForm(formName: string | number) {
-    this.$data[formName].resetFields();
+  resetForm(formName: any) {
+    debugger;
+    (this.$refs[formName] as any).resetFields();
   }
 }
 </script>

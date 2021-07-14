@@ -51,7 +51,7 @@ namespace SwiftCode.BBS.API.Controllers
             }
 
             var pass = MD5Helper.MD5Encrypt32(loginPassWord);
-            var userInfo = await _userInfoService.GetAsync(x => x.LoginName == loginName && x.LoginPassWord == pass);
+            var userInfo = await _userInfoService.FindAsync(x => x.LoginName == loginName && x.LoginPassWord == pass);
             if (userInfo == null)
             {
                 return new MessageModel<string>()
