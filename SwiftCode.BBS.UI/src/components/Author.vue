@@ -7,27 +7,45 @@
       <h3 class="auth-info-name">{{ userName }}</h3>
       <div class="auth-info-statics">
         <span>{{ articlesCount }}篇文章</span>
-        <el-divider direction="vertical"></el-divider>
+        <a-divider type="vertical" />
         <span>{{ questionsCount }}个问答</span>
       </div>
     </div>
   </div>
 </template>
 
+
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-@Component({
-  name: "author-item",
-})
-export default class AuthorItem extends Vue {
-  @Prop({ type: String, default: '' }) private userName!: String;
-  @Prop({ type: Number, default: 0 }) private articlesCount!: Number;
-  @Prop({ type: Number, default: 0 }) private questionsCount!: Number;
-  @Prop({ type: String, default: '' }) private headPortrait!: String;
-}
+import { defineComponent, toRefs } from "vue";
+
+export default defineComponent({
+  name: "Author",
+  props: {
+    userName: {
+      type: String,
+      default: "",
+    },
+    articlesCount: {
+      type: Number,
+      default: 0,
+    },
+    questionsCount: {
+      type: Number,
+      default: 0,
+    },
+    headPortrait: {
+      type: String,
+      default: "",
+    },
+  },
+  setup(props: any) {
+    toRefs(props);
+  },
+});
 </script>
 
-<style scoped lang="stylus">
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
 .auth-item {
   display: -webkit-box;
   display: flex;

@@ -2,15 +2,11 @@
   <div class="columns-item columns-item-img">
     <div class="columns-config">
       <h3 class="columns-config-title">
-        <a style="display: block; word-break: break-all"
-          >{{ title }}</a
-        >
+        <a style="display: block; word-break: break-all">{{ title }}</a>
       </h3>
 
       <p class="columns-config-desc">
-        <a style="display: block; word-break: break-all"
-          >{{ content }}</a
-        >
+        <a style="display: block; word-break: break-all">{{ content }}</a>
       </p>
 
       <div class="columns-config-footer">
@@ -22,7 +18,7 @@
     </div>
 
     <a class="columns-img" style="position: relative; overflow: hidden">
-   <img
+      <img
         src="../assets/201fdsfs9.jpg"
         style="
           position: absolute;
@@ -31,28 +27,46 @@
           width: 100%;
           transform: translateY(-50%);
         "
-    />
+      />
     </a>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-@Component({
-  name: "article-item",
-})
-export default class ArticleItem extends Vue {
-  @Prop({ type: String, default: '' }) private content!: String;
-  @Prop({ type: String, default: '' }) private title!: String;
-  @Prop({ type: String, default: '' }) private cover!: String;
-  @Prop({ type: String, default: '' }) private userName!: String;
-  @Prop({ type: String, default: '' }) private createTime!: Date;
+import { defineComponent, toRefs } from "vue";
 
-}
+export default defineComponent({
+  name: "Article",
+  props: {
+    content: {
+      type: String,
+      default: "",
+    },
+    title: {
+      type: String,
+      default: "",
+    },
+    cover: {
+      type: String,
+      default: "",
+    },
+    userName: {
+      type: String,
+      default: "",
+    },
+    createTime: {
+      type: String,
+      default: '',
+    },
+  },
+  setup(props: any) {
+    toRefs(props);
+  },
+});
 </script>
 
-<style scoped lang="stylus">
-
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
 .columns-item {
   display: flex;
   padding: 24px 0;

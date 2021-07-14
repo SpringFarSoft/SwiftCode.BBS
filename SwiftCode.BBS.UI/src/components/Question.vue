@@ -6,26 +6,42 @@
     </div>
     <div class="question-config">
       <h3 class="question-config-title">{{ title }}</h3>
-      <el-tag size="mini" v-for="tagName in tagList" :key="tagName">{{ tagName }}</el-tag>
+      <a-tag color="pink" v-for="tagName in tagList" :key="tagName">{{
+        tagName
+      }}</a-tag>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-@Component({
-  name: "question-item",
-})
-export default class QuestionIten extends Vue {
-  @Prop({ type: Number, default: 0 }) readonly  comments!: Number;
-  @Prop({ type: String, default: '' }) readonly  title!: String;
-  @Prop({ type: String, default: '' }) readonly  tag!: String;
+import { defineComponent, toRefs } from "vue";
 
-  private tagList = this.tag.split(",");
-}
+export default defineComponent({
+  name: "Question",
+  props: {
+    comments: {
+      type: Number,
+      default: 0,
+    },
+    title: {
+      type: String,
+      default: "",
+    },
+    tag: {
+      type: String,
+      default: "",
+    },
+  },
+  setup(props: any) {
+    let { tag } = toRefs(props);
+    let tagList = tag.value.split(",");
+    return { tagList };
+  },
+});
 </script>
 
-<style scoped lang="stylus">
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
 .question-item {
   box-sizing: border-box;
   padding: 20px 8px;
@@ -64,7 +80,8 @@ export default class QuestionIten extends Vue {
   display: block;
   margin: 0;
   padding: 0;
-  font-family: PingFangSC-Medium, PingFangSC, helvetica neue, hiragino sans gb, arial, microsoft yahei ui, microsoft yahei, simsun, sans-serif;
+  font-family: PingFangSC-Medium, PingFangSC, helvetica neue, hiragino sans gb,
+    arial, microsoft yahei ui, microsoft yahei, simsun, sans-serif;
   font-size: 16px;
   color: #00223b;
   width: 100%;
