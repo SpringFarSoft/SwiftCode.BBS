@@ -59,7 +59,11 @@
         <a-row :gutter="20" style="margin-top: 24px">
           <a-col :offset="2" :span="12">
             <a-card title="技术问答">
-              <template #extra><router-link to="/ArticleList">问答首页 ></router-link></template>
+              <template #extra
+                ><router-link to="/ArticleList"
+                  >问答首页 ></router-link
+                ></template
+              >
 
               <b-question
                 v-for="item in questionList"
@@ -75,22 +79,14 @@
               <a-row :gutter="20">
                 <a-col :span="12"
                   ><div class="grid-content bg-purple">
-                    <img
-                      src="../assets/2ff4e61.svg"
-                      alt="发表文章icon"
-                      
-                    />
-                    <div class="action-text" >发表文章</div>
+                    <img src="../assets/2ff4e61.svg" alt="发表文章icon" />
+                    <div class="action-text">发表文章</div>
                   </div></a-col
                 >
                 <a-col :span="12"
                   ><div class="grid-content bg-purple">
-                    <img
-                      src="../assets/2f55400.svg"
-                      alt="提出问题icon"
-                      
-                    />
-                    <div class="action-text" >提出问题</div>
+                    <img src="../assets/2f55400.svg" alt="提出问题icon" />
+                    <div class="action-text">提出问题</div>
                   </div></a-col
                 >
               </a-row>
@@ -108,7 +104,11 @@
         <a-row :gutter="20" style="margin-top: 24px">
           <a-col :offset="2" :span="12">
             <a-card title="优选文章">
-              <template #extra><a href="#">文章首页 ></a></template>
+              <template #extra
+                ><router-link to="/ArticleList"
+                  >文章首页 ></router-link
+                ></template
+              >
 
               <b-article
                 v-for="item in articleList"
@@ -118,6 +118,7 @@
                 :userName="item.userName"
                 :cover="item.cover"
                 :title="item.title"
+                @click="gotoArticleDetails(item.id)"
               ></b-article>
             </a-card>
           </a-col>
@@ -145,6 +146,7 @@ import Article from "@/components/Article.vue"; // @ is an alias to /src
 import Author from "@/components/Author.vue"; // @ is an alias to /src
 import Question from "@/components/Question.vue"; // @ is an alias to /src
 import request from "@/api/http";
+import router from "@/router";
 export default defineComponent({
   name: "Home",
   components: {
@@ -185,10 +187,15 @@ export default defineComponent({
     getQuestion();
     getUserInfo();
 
+    function gotoArticleDetails(id: number) {
+      router.push("/ArticleDetails/" + id);
+    }
+
     return {
       articleList,
       questionList,
       userInfoList,
+      gotoArticleDetails,
     };
   },
 });

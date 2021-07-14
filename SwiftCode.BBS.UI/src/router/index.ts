@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import ArticleList from '../views/ArticleList.vue'
+import ArticleDetails from '../views/ArticleDetails.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -23,6 +24,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/ArticleList',
     name: 'ArticleList',
     component: ArticleList
+  },
+  {
+    path: '/ArticleDetails/:id',
+    name: 'ArticleDetails',
+    props: true,
+    component: ArticleDetails
   },
   {
     path: '/about',

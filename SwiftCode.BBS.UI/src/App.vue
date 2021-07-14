@@ -3,11 +3,13 @@
     <div class="header-wrapper header-wrapper-default">
       <div class="header-container">
         <h1 class="header-community-logo">
-          <span style="color: #18ad91">社区Logo</span>
+          <router-link to="/">
+            <span style="color: #18ad91">社区Logo</span>
+          </router-link>
         </h1>
 
         <nav class="header-menu">
-          <a class="x-link-a">问答</a>
+           <router-link to="/ArticleList"><a class="x-link-a">问答</a> </router-link>
           <a class="x-link-a">文章</a>
         </nav>
 

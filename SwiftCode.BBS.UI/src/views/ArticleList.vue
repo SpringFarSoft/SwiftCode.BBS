@@ -32,6 +32,7 @@
                   :userName="item.userName"
                   :cover="item.cover"
                   :title="item.title"
+                  @click="gotoDetails(item.id)"
                 ></b-article>
               </a-list-item>
             </template>
@@ -78,6 +79,7 @@ import Article from "@/components/Article.vue"; // @ is an alias to /src
 import Author from "@/components/Author.vue";
 import request from "@/api/http";
 import { message } from "ant-design-vue";
+import router from "@/router";
 export default defineComponent({
   name: "ArticleList",
   components: {
@@ -85,6 +87,7 @@ export default defineComponent({
     "b-author": Author,
   },
   setup(props: any) {
+    let articleData: any = [];
     let articleList = ref([]);
     let userInfoList = ref([]);
 
@@ -100,17 +103,19 @@ export default defineComponent({
       request({
         url: "/Article/GetList",
         params: {
-          page: page,
+          page: page * pageSize,
           pageSize: pageSize,
         },
       }).then((res: any) => {
-        
-        articleList.value = res.data.response;
         loading.value = false;
         loadingMore.value = false;
         if (res.data.response.length <= 0) {
           message.success("没有更多了");
+          return false;
         }
+
+        articleData = [...articleData, ...res.data.response];
+        articleList.value = articleData;
       });
     }
     function getUserInfo() {
@@ -129,12 +134,17 @@ export default defineComponent({
       getArticle();
     };
 
+    function gotoDetails(id: number) {
+      router.push("/ArticleDetails/" + id);
+    }
+
     return {
       articleList,
       userInfoList,
       loading,
       loadingMore,
       loadMore,
+      gotoDetails
     };
   },
 });
