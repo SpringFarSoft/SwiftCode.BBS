@@ -1,6 +1,6 @@
 <template>
   <div class="Login">
-    <div style="margin: auto; margin-top: 12%">
+    <div style="margin: auto; margin-top: 8%">
       <h1 style="text-align: center">
         <span style="color: rgb(24, 173, 145)"> 社区Logo</span>
       </h1>
@@ -58,8 +58,11 @@
 </template>
 
 <script lang="ts">
+import { Modal, message } from "ant-design-vue";
 import { defineComponent, reactive, ref } from "vue";
 import request from "@/api/http";
+import router from "@/router";
+import store from "@/store";
 export default defineComponent({
   name: "Login",
   components: {},
@@ -133,7 +136,7 @@ export default defineComponent({
       request({
         url: "/Auth/Register",
         method: "POST",
-        params: {
+        data: {
           userName: values.userName,
           loginName: values.loginName,
           loginPassWord: values.loginPassWord,
@@ -144,8 +147,14 @@ export default defineComponent({
         },
       }).then((res: any) => {
         if (!res.data.success) {
+          Modal.error({
+            title: "提示",
+            content: res.data.msg,
+          });
         } else {
-          return false;
+          message.success("登录成功");
+          store.commit("saveToken", res.data.response); //保存 token
+          router.replace("/");
         }
       });
     };

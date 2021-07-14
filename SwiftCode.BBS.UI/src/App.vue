@@ -1,44 +1,44 @@
 <template>
-    <header>
-      <div class="header-wrapper header-wrapper-default">
-        <div class="header-container">
-          <h1 class="header-community-logo">
-            <span style="color: #18ad91">社区Logo</span>
-          </h1>
+  <header>
+    <div class="header-wrapper header-wrapper-default">
+      <div class="header-container">
+        <h1 class="header-community-logo">
+          <span style="color: #18ad91">社区Logo</span>
+        </h1>
 
-          <nav class="header-menu">
-            <a class="x-link-a">问答</a>
-            <a class="x-link-a">文章</a>
-          </nav>
+        <nav class="header-menu">
+          <a class="x-link-a">问答</a>
+          <a class="x-link-a">文章</a>
+        </nav>
 
-          <div class="header-user">
-            <div class="header-user-login">
-              <span class="user-login-btn">
-                <router-link to="/Login">登录</router-link> |
-              </span>
-              <i class="user-login-btn-line"></i>
-              <span class="user-login-btn">注册</span>
-            </div>
-          </div>
-
-          <div class="header-entry">
-            <a-radio-button value="small" style="margin-right: 20px"
-              >写文章</a-radio-button
+        <div class="header-user">
+          <div class="header-user-login">
+            <router-link to="/Login">
+              <span class="user-login-btn"> 登录 </span></router-link
             >
-            <a-radio-button value="small">提问</a-radio-button>
-          </div>
 
-          <div class="header-search">
-            <a-input-search
-              placeholder="请输入内容"
-              style="width: 200px"
-            />
+            <i class="user-login-btn-line"></i>
+            <router-link to="/Register">
+              <span class="user-login-btn">注册</span></router-link
+            >
           </div>
         </div>
-      </div>
-    </header>
 
-  <router-view/>
+        <div class="header-entry">
+          <a-radio-button value="small" style="margin-right: 20px"
+            >写文章</a-radio-button
+          >
+          <a-radio-button value="small">提问</a-radio-button>
+        </div>
+
+        <div class="header-search">
+          <a-input-search placeholder="请输入内容" style="width: 200px" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <router-view />
 </template>
 
 <style lang="scss">

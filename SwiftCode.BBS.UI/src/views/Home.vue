@@ -47,7 +47,7 @@
                   </router-link>
                 </a-col>
                 <a-col :span="12">
-                  <router-link to="/Login" style="float: left">
+                  <router-link to="/Register" style="float: left">
                     <a-radio-button>注册</a-radio-button>
                   </router-link>
                 </a-col>
@@ -59,7 +59,7 @@
         <a-row :gutter="20" style="margin-top: 24px">
           <a-col :offset="2" :span="12">
             <a-card title="技术问答">
-              <template #extra><a href="#">问答首页 ></a></template>
+              <template #extra><router-link to="/ArticleList">问答首页 ></router-link></template>
 
               <b-question
                 v-for="item in questionList"
@@ -78,9 +78,9 @@
                     <img
                       src="../assets/2ff4e61.svg"
                       alt="发表文章icon"
-                      data-v-52a9c7f2=""
+                      
                     />
-                    <div class="action-text" data-v-52a9c7f2="">发表文章</div>
+                    <div class="action-text" >发表文章</div>
                   </div></a-col
                 >
                 <a-col :span="12"
@@ -88,9 +88,9 @@
                     <img
                       src="../assets/2f55400.svg"
                       alt="提出问题icon"
-                      data-v-52a9c7f2=""
+                      
                     />
-                    <div class="action-text" data-v-52a9c7f2="">提出问题</div>
+                    <div class="action-text" >提出问题</div>
                   </div></a-col
                 >
               </a-row>
@@ -195,8 +195,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-
-
 .app-content {
   -webkit-box-flex: 1;
   flex-grow: 1;
