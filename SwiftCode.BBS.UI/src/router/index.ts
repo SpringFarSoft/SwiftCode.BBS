@@ -68,6 +68,7 @@ var storeTemp = store;
 router.beforeEach((to, from, next) => {
   if (!storeTemp.state.token) {
     storeTemp.commit("saveToken", window.localStorage.Token);
+    storeTemp.commit("saveUserInfo", window.localStorage.UserInfo);
   }
   if (to.meta.requireAuth) {
     // 判断该路由是否需要登录权限

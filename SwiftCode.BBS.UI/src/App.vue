@@ -16,7 +16,7 @@
         </nav>
 
         <div class="header-user">
-          <div class="header-user-login">
+          <div class="header-user-login" v-if="userInfo == null">
             <router-link to="/Login">
               <span class="user-login-btn"> 登录 </span></router-link
             >
@@ -25,6 +25,20 @@
             <router-link to="/Register">
               <span class="user-login-btn">注册</span></router-link
             >
+          </div>
+          <div class="header-user-login" v-else>
+            <a-row style="padding-left: 32px">
+              <a-col :span="6">
+                <a-avatar>
+                  <template #icon>
+                    <img src="./assets/608144857.jpg"
+                  /></template>
+                </a-avatar>
+              </a-col>
+              <a-col :span="18" style="line-height: 64px"
+                ><h2>{{ userInfo.userName }}</h2></a-col
+              >
+            </a-row>
           </div>
         </div>
 
@@ -47,6 +61,28 @@
   <router-view />
 </template>
 
+<script lang="ts">
+import { defineComponent, onMounted, ref, reactive } from "vue";
+import store from "@/store";
+export default defineComponent({
+  name: "App",
+  setup() {
+    let userInfo = ref(null);
+
+    onMounted(() => {
+
+      let tempStore = store;
+      if (tempStore.state.token) {
+        userInfo.value = JSON.parse(tempStore.state.userInfo!);
+      }
+    });
+
+    return {
+      userInfo,
+    };
+  },
+});
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

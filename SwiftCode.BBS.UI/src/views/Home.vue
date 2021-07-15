@@ -12,7 +12,10 @@
             </div>
           </a-col>
           <a-col :span="6">
-            <a-card style="padding: 24px; text-align: center">
+            <a-card
+              v-if="userInfo == null"
+              style="padding: 24px; text-align: center"
+            >
               <img src="../assets/052bf99.svg" alt="缺省图" />
 
               <div style="font-size: 20px; text-align: center">
@@ -52,6 +55,24 @@
                   </router-link>
                 </a-col>
               </a-row>
+            </a-card>
+            <a-card title="用户信息" v-else>
+              <a-row>
+                <a-col :span="6">
+                  <a-avatar :size="64">
+                    <template #icon>
+                      <img src="../assets/608144857.jpg"
+                    /></template>
+                  </a-avatar>
+                </a-col>
+                <a-col :span="18" style="line-height: 64px"
+                  ><h2>{{ userInfo.userName }}</h2></a-col
+                >
+              </a-row>
+
+              <h3 style="margin-top: 22px">
+                个人介绍： {{ userInfo.introduction }}
+              </h3>
             </a-card>
           </a-col>
         </a-row>
@@ -149,6 +170,7 @@ import Author from "@/components/Author.vue"; // @ is an alias to /src
 import Question from "@/components/Question.vue"; // @ is an alias to /src
 import request from "@/api/http";
 import router from "@/router";
+import store from "@/store";
 export default defineComponent({
   name: "Home",
   components: {
@@ -193,11 +215,19 @@ export default defineComponent({
       router.push("/ArticleDetails/" + id);
     }
 
+    let tempStore = store;
+    let userInfo: any = null;
+
+    if (tempStore.state.token) {
+      userInfo = JSON.parse(tempStore.state.userInfo!);
+    }
+
     return {
       articleList,
       questionList,
       userInfoList,
       gotoArticleDetails,
+      userInfo,
     };
   },
 });
