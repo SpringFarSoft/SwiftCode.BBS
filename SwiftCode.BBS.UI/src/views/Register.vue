@@ -152,12 +152,22 @@ export default defineComponent({
             content: res.data.msg,
           });
         } else {
-          message.success("登录成功");
           store.commit("saveToken", res.data.response); //保存 token
-          router.replace("/");
+          getMyUserInfo();
         }
       });
     };
+
+
+     function getMyUserInfo() {
+      request({
+        url: "/UserInfo/Get",
+      }).then((res: any) => {
+        store.commit("saveUserInfo", JSON.stringify(res.data.response)); //保存 token
+        message.success("登录成功");
+        router.replace("/");
+      });
+    }
 
     return {
       formState,

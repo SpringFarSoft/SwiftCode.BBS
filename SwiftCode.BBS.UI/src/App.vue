@@ -70,7 +70,6 @@ export default defineComponent({
     let userInfo = ref(null);
 
     onMounted(() => {
-
       let tempStore = store;
       if (tempStore.state.token) {
         userInfo.value = JSON.parse(tempStore.state.userInfo!);

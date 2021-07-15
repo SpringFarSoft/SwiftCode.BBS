@@ -9,7 +9,7 @@ const service = axios.create({
 //定义请求拦截器
 service.interceptors.request.use(
   (config) => {
-    if (true) {
+    if (window.localStorage.Token&&window.localStorage.Token.length>=128) {
       config.headers["Authorization"] = "Bearer " + store.state.token;
     }
     return config;

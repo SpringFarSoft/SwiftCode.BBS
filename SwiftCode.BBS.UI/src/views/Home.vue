@@ -12,6 +12,8 @@
             </div>
           </a-col>
           <a-col :span="6">
+
+            
             <a-card
               v-if="userInfo == null"
               style="padding: 24px; text-align: center"
@@ -56,6 +58,8 @@
                 </a-col>
               </a-row>
             </a-card>
+
+
             <a-card title="用户信息" v-else>
               <a-row>
                 <a-col :span="6">
@@ -74,6 +78,7 @@
                 个人介绍： {{ userInfo.introduction }}
               </h3>
             </a-card>
+          
           </a-col>
         </a-row>
 
