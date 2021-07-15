@@ -80,7 +80,9 @@
                 <a-col :span="12"
                   ><div class="grid-content bg-purple">
                     <img src="../assets/2ff4e61.svg" alt="发表文章icon" />
-                    <div class="action-text">发表文章</div>
+                    <router-link to="/ArticleCreate">
+                      <div class="action-text">发表文章</div>
+                    </router-link>
                   </div></a-col
                 >
                 <a-col :span="12"

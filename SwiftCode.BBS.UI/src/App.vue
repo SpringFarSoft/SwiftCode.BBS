@@ -9,7 +9,9 @@
         </h1>
 
         <nav class="header-menu">
-           <router-link to="/ArticleList"><a class="x-link-a">问答</a> </router-link>
+          <router-link to="/ArticleList"
+            ><a class="x-link-a">问答</a>
+          </router-link>
           <a class="x-link-a">文章</a>
         </nav>
 
@@ -27,8 +29,10 @@
         </div>
 
         <div class="header-entry">
-          <a-radio-button value="small" style="margin-right: 20px"
-            >写文章</a-radio-button
+          <router-link to="/ArticleCreate">
+            <a-radio-button value="small" style="margin-right: 20px"
+              >写文章</a-radio-button
+            ></router-link
           >
           <a-radio-button value="small">提问</a-radio-button>
         </div>
