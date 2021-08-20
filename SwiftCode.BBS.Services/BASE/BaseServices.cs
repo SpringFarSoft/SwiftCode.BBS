@@ -10,15 +10,33 @@ using SwiftCode.BBS.Repositories.BASE;
 
 namespace SwiftCode.BBS.Services.BASE
 {
+    /// <summary>
+    /// 服务层基类实现
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public class BaseServices<TEntity> : IBaseServices<TEntity> where TEntity : class, new()
     {
         public IBaseRepository<TEntity> _baseRepository = new BaseRepository<TEntity>();
 
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="autoSave"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
         {
             return await _baseRepository.InsertAsync(entity, autoSave, cancellationToken);
         }
 
+        /// <summary>
+        /// 添加（多个）
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <param name="autoSave"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task InsertManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
             await _baseRepository.InsertManyAsync(entities, autoSave, cancellationToken);
