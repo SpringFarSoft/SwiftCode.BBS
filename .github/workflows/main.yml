@@ -25,6 +25,10 @@ jobs:
         run: ls
       - name: Copy DockerFile
         run: cp ./Dockerfile ./app
+      - name: Copy APIxml
+        run: cp ./SwiftCode.BBS.API/SwiftCode.BBS.API.xml ./app
+      - name: Copy Modelxml
+        run: cp ./SwiftCode.BBS.Model/SwiftCode.BBS.Model.xml ./app
       - name: Login to registry
         uses: docker/login-action@v1
         with:
