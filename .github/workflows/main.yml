@@ -1,0 +1,57 @@
+name: Docker Image Core CI/CD
+
+on:
+  push:
+    branches: [main]
+env:
+  IMAGE_NAME: ${{ secrets.DOCKER_REPOSITORY }}
+  IMAGE_NAME_TAG: ${{ secrets.DOCKER_REPOSITORY }}:v${{ github.run_id }}.${{ github.run_number }}
+
+
+jobs:
+  build-net-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build .Net Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: dotnet restore
+        run: dotnet restore ./SwiftCode.BBS.API/SwiftCode.BBS.API.csproj
+      - name: dotnet publish
+        run: dotnet publish ./SwiftCode.BBS.API/SwiftCode.BBS.API.csproj --configuration -c Release --no-restore -o ./app
+      - name: Docker Image
+        run: ls
+      - name: Copy DockerFile
+        run: cp ./Dockerfile ./app
+      - name: Login to registry
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: registry.us-west-1.aliyuncs.com
+      - name: Build Image
+        run: docker build -t ${{ env.IMAGE_NAME_TAG }} ./app
+      - name: Push Image
+        run: docker push ${{ env.IMAGE_NAME_TAG }}
+
+  pull-docker:
+    needs: [build-net-core]
+    name: Pull Docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.HOST_USERNAME }}
+          password: ${{ secrets.HOST_PASSWORD }}
+          port: ${{ secrets.HOST_PORT }}
+          script: |
+            docker stop $(docker ps -a | grep ${{ env.IMAGE_NAME }} |  awk '{print $1}')
+            docker rm -f $(docker ps -a | grep ${{ env.IMAGE_NAME }} |  awk '{print $1}')
+            docker rmi -f $(docker images | grep ${{ env.IMAGE_NAME }} | awk '{print $3}')
+            docker login --username=${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
+            docker pull ${{ env.IMAGE_NAME_TAG }}
+            docker run -d -p 8080:80  ${{ env.IMAGE_NAME_TAG }}
