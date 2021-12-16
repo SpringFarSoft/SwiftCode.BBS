@@ -43,7 +43,7 @@ namespace SwiftCode.BBS.API
 
             services.AddDbContext<SwiftCodeBbsContext>(o =>
                 o.UseLazyLoadingProxies().UseSqlServer(
-                    @"Server=.; Database=SwiftCodeBbs; Trusted_Connection=True; Connection Timeout=600;MultipleActiveResultSets=true;", oo => oo.MigrationsAssembly("SwiftCode.BBS.EntityFramework")));
+                    @"Server=110.40.128.93; Database=SwiftCodeBbs; User Id=sa; Password=dockersql2019.;Max Pool Size=500;Connection Timeout=15;MultipleActiveResultSets=true;", oo => oo.MigrationsAssembly("SwiftCode.BBS.EntityFramework")));
 
 
             services.AddSingleton(new Appsettings(Configuration));
@@ -72,7 +72,7 @@ namespace SwiftCode.BBS.API
                 {
                     Version = "v0.1.0",
                     Title = "SwiftCode.BBS.API",
-                    Description = "¿ò¼ÜËµÃ÷ÎÄµµ",
+                    Description = "æ¡†æ¶è¯´æ˜æ–‡æ¡£",
                     Contact = new OpenApiContact
                     {
                         Name = "SwiftCode",
@@ -81,26 +81,26 @@ namespace SwiftCode.BBS.API
                 });
 
                 var basePath = AppContext.BaseDirectory;
-                var xmlPath = Path.Combine(basePath, "SwiftCode.BBS.API.xml");//Õâ¸ö¾ÍÊÇ¸Õ¸ÕÅäÖÃµÄxmlÎÄ¼şÃû
+                var xmlPath = Path.Combine(basePath, "SwiftCode.BBS.API.xml");//è¿™ä¸ªå°±æ˜¯åˆšåˆšé…ç½®çš„xmlæ–‡ä»¶å
                 c.IncludeXmlComments(xmlPath, true);
 
 
-                var xmlModelPath = Path.Combine(basePath, "SwiftCode.BBS.Model.xml");//Õâ¸ö¾ÍÊÇModel²ãµÄxmlÎÄ¼şÃû
+                var xmlModelPath = Path.Combine(basePath, "SwiftCode.BBS.Model.xml");//è¿™ä¸ªå°±æ˜¯Modelå±‚çš„xmlæ–‡ä»¶å
                 c.IncludeXmlComments(xmlModelPath);
 
-                // ¿ªÆôĞ¡Ëø
+                // å¼€å¯å°é”
                 c.OperationFilter<AddResponseHeadersFilter>();
                 c.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
 
-                // ÔÚheaderÖĞÌí¼Ótoken£¬´«µİµ½ºóÌ¨
+                // åœ¨headerä¸­æ·»åŠ tokenï¼Œä¼ é€’åˆ°åå°
                 c.OperationFilter<SecurityRequirementsOperationFilter>();
 
                 c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
 
-                    Description = "JWTÊÚÈ¨(Êı¾İ½«ÔÚÇëÇóÍ·ÖĞ½øĞĞ´«Êä) Ö±½ÓÔÚÏÂ¿òÖĞÊäÈëBearer {token}£¨×¢ÒâÁ½ÕßÖ®¼äÊÇÒ»¸ö¿Õ¸ñ£©\"",
-                    Name = "Authorization",//jwtÄ¬ÈÏµÄ²ÎÊıÃû³Æ
-                    In = ParameterLocation.Header,//jwtÄ¬ÈÏ´æ·ÅAuthorizationĞÅÏ¢µÄÎ»ÖÃ(ÇëÇóÍ·ÖĞ)
+                    Description = "JWTæˆæƒ(æ•°æ®å°†åœ¨è¯·æ±‚å¤´ä¸­è¿›è¡Œä¼ è¾“) ç›´æ¥åœ¨ä¸‹æ¡†ä¸­è¾“å…¥Bearer {token}ï¼ˆæ³¨æ„ä¸¤è€…ä¹‹é—´æ˜¯ä¸€ä¸ªç©ºæ ¼ï¼‰\"",
+                    Name = "Authorization",//jwté»˜è®¤çš„å‚æ•°åç§°
+                    In = ParameterLocation.Header,//jwté»˜è®¤å­˜æ”¾Authorizationä¿¡æ¯çš„ä½ç½®(è¯·æ±‚å¤´ä¸­)
                     Type = SecuritySchemeType.ApiKey
                 });
 
@@ -110,16 +110,16 @@ namespace SwiftCode.BBS.API
             #endregion
 
   
-            // ÈÏÖ¤
+            // è®¤è¯
             services.AddAuthentication(x =>
             {
-                // ×ĞÏ¸¿´Õâ¸öµ¥´Ê ÉÏÍ¼ÖĞ´íÎóµÄÌáÊ¾ÀïµÄÄÇ¸ö
+                // ä»”ç»†çœ‹è¿™ä¸ªå•è¯ ä¸Šå›¾ä¸­é”™è¯¯çš„æç¤ºé‡Œçš„é‚£ä¸ª
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
             }).AddJwtBearer(o => {
 
-                //¶ÁÈ¡ÅäÖÃÎÄ¼ş
+                //è¯»å–é…ç½®æ–‡ä»¶
                 var audienceConfig = Configuration.GetSection("Audience");
                 var symmetricKeyAsBase64 = audienceConfig["Secret"];
                 var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
@@ -130,29 +130,29 @@ namespace SwiftCode.BBS.API
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = signingKey,
                     ValidateIssuer = true,
-                    ValidIssuer = audienceConfig["Issuer"],//·¢ĞĞÈË
+                    ValidIssuer = audienceConfig["Issuer"],//å‘è¡Œäºº
                     ValidateAudience = true,
-                    ValidAudience = audienceConfig["Audience"],//¶©ÔÄÈË
+                    ValidAudience = audienceConfig["Audience"],//è®¢é˜…äºº
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero,//Õâ¸öÊÇ»º³å¹ıÆÚÊ±¼ä£¬Ò²¾ÍÊÇËµ£¬¼´Ê¹ÎÒÃÇÅäÖÃÁË¹ıÆÚÊ±¼ä£¬ÕâÀïÒ²Òª¿¼ÂÇ½øÈ¥£¬¹ıÆÚÊ±¼ä+»º³å£¬Ä¬ÈÏºÃÏñÊÇ7·ÖÖÓ£¬Äã¿ÉÒÔÖ±½ÓÉèÖÃÎª0
+                    ClockSkew = TimeSpan.Zero,//è¿™ä¸ªæ˜¯ç¼“å†²è¿‡æœŸæ—¶é—´ï¼Œä¹Ÿå°±æ˜¯è¯´ï¼Œå³ä½¿æˆ‘ä»¬é…ç½®äº†è¿‡æœŸæ—¶é—´ï¼Œè¿™é‡Œä¹Ÿè¦è€ƒè™‘è¿›å»ï¼Œè¿‡æœŸæ—¶é—´+ç¼“å†²ï¼Œé»˜è®¤å¥½åƒæ˜¯7åˆ†é’Ÿï¼Œä½ å¯ä»¥ç›´æ¥è®¾ç½®ä¸º0
                     RequireExpirationTime = true,
                 };
             });
 
 
-            // 1¡¾ÊÚÈ¨¡¿¡¢Õâ¸öºÍÉÏ±ßµÄÒìÇúÍ¬¹¤£¬ºÃ´¦¾ÍÊÇ²»ÓÃÔÚcontrollerÖĞ£¬Ğ´¶à¸ö roles ¡£
-            // È»ºóÕâÃ´Ğ´ [Authorize(Policy = "Admin")]
+            // 1ã€æˆæƒã€‘ã€è¿™ä¸ªå’Œä¸Šè¾¹çš„å¼‚æ›²åŒå·¥ï¼Œå¥½å¤„å°±æ˜¯ä¸ç”¨åœ¨controllerä¸­ï¼Œå†™å¤šä¸ª roles ã€‚
+            // ç„¶åè¿™ä¹ˆå†™ [Authorize(Policy = "Admin")]
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Client", policy => policy.RequireRole("Client").Build());//µ¥¶À½ÇÉ«
+                options.AddPolicy("Client", policy => policy.RequireRole("Client").Build());//å•ç‹¬è§’è‰²
                 options.AddPolicy("Admin", policy => policy.RequireRole("Admin").Build());
-                options.AddPolicy("SystemOrAdmin", policy => policy.RequireRole("Admin", "System"));//»òµÄ¹ØÏµ
-                options.AddPolicy("SystemAndAdmin", policy => policy.RequireRole("Admin").RequireRole("System"));//ÇÒµÄ¹ØÏµ
+                options.AddPolicy("SystemOrAdmin", policy => policy.RequireRole("Admin", "System"));//æˆ–çš„å…³ç³»
+                options.AddPolicy("SystemAndAdmin", policy => policy.RequireRole("Admin").RequireRole("System"));//ä¸”çš„å…³ç³»
             });
 
         }
 
-        // ×¢ÒâÔÚProgram.CreateHostBuilder£¬Ìí¼ÓAutofac·şÎñ¹¤³§
+        // æ³¨æ„åœ¨Program.CreateHostBuilderï¼Œæ·»åŠ AutofacæœåŠ¡å·¥å‚
         public void ConfigureContainer(ContainerBuilder builder)
         {
             
@@ -172,15 +172,15 @@ namespace SwiftCode.BBS.API
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiHelp  v1");
-                c.RoutePrefix = ""; //Â·¾¶ÅäÖÃ£¬ÉèÖÃÎª¿Õ£¬±íÊ¾Ö±½ÓÔÚ¸ùÓòÃû£¨localhost:8001£©·ÃÎÊ¸ÃÎÄ¼ş,×¢Òâlocalhost:8001/swaggerÊÇ·ÃÎÊ²»µ½µÄ£¬È¥launchSettings.json°ÑlaunchUrlÈ¥µô
+                c.RoutePrefix = ""; //è·¯å¾„é…ç½®ï¼Œè®¾ç½®ä¸ºç©ºï¼Œè¡¨ç¤ºç›´æ¥åœ¨æ ¹åŸŸåï¼ˆlocalhost:8001ï¼‰è®¿é—®è¯¥æ–‡ä»¶,æ³¨æ„localhost:8001/swaggeræ˜¯è®¿é—®ä¸åˆ°çš„ï¼Œå»launchSettings.jsonæŠŠlaunchUrlå»æ‰
             });
             #endregion
 
             app.UseRouting();
             app.UseCors(DefaultCorsPolicyName);
-            // ÏÈ¿ªÆôÈÏÖ¤
+            // å…ˆå¼€å¯è®¤è¯
             app.UseAuthentication();
-            // È»ºóÊÇÊÚÈ¨ÖĞ¼ä¼ş
+            // ç„¶åæ˜¯æˆæƒä¸­é—´ä»¶
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
