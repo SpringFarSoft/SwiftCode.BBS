@@ -58,4 +58,4 @@ jobs:
             docker rmi -f $(docker images | grep ${{ env.IMAGE_NAME }} | awk '{print $3}')
             docker login --username=${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
             docker pull ${{ env.IMAGE_NAME_TAG }}
-            docker run -d -p 8080:80  ${{ env.IMAGE_NAME_TAG }}
+            docker run -d -p 8108:80  ${{ env.IMAGE_NAME_TAG }}
