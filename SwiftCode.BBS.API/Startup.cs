@@ -41,9 +41,10 @@ namespace SwiftCode.BBS.API
             services.AddControllers();
 
 
+            var connectionStrings = Configuration.GetConnectionString("db");
             services.AddDbContext<SwiftCodeBbsContext>(o =>
-                o.UseLazyLoadingProxies().UseSqlServer(
-                    @"Server=110.40.128.93; Database=SwiftCodeBbs; User Id=sa; Password=dockersql2019.;Max Pool Size=500;Connection Timeout=15;MultipleActiveResultSets=true;", oo => oo.MigrationsAssembly("SwiftCode.BBS.EntityFramework")));
+                o.UseLazyLoadingProxies().UseSqlServer(connectionStrings, 
+                    oo => oo.MigrationsAssembly("SwiftCode.BBS.EntityFramework")));
 
 
             services.AddSingleton(new Appsettings(Configuration));
