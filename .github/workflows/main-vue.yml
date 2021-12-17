@@ -17,15 +17,15 @@ jobs:
           node-version: "12.x"
           registry-url: "https://registry.npmjs.org"
       - name: Vue Restore
-        run: yarn --cwd .
+        run: yarn --cwd ./SwiftCode.BBS.UI
       - name: Vue Build
-        run: yarn --cwd . run build --prod
+        run: yarn --cwd ./SwiftCode.BBS.UI run build --prod
       - name: Docker Vue Image
         run: ls
       - name: Copy DockerFile
-        run: cp ./Dockerfile ./dist
+        run: cp ./SwiftCode.BBS.UI/Dockerfile ./SwiftCode.BBS.UI/dist
       - name: Copy Nginx
-        run: cp -rf ./_nginx ./dist
+        run: cp -rf ./SwiftCode.BBS.UI/_nginx ./SwiftCode.BBS.UI/dist
       - name: Login to registry
         uses: docker/login-action@v1
         with:
@@ -33,7 +33,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: registry.cn-shanghai.aliyuncs.com
       - name: Build Image
-        run: docker build -t ${{ env.IMAGE_NAME_ANGULAR_TAG }} ./dist
+        run: docker build -t ${{ env.IMAGE_NAME_ANGULAR_TAG }} ./SwiftCode.BBS.UI/dist
       - name: Push Image
         run: docker push ${{ env.IMAGE_NAME_ANGULAR_TAG }}
 
