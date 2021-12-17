@@ -2,8 +2,8 @@ import axios from "axios";
 import store from "@/store";
 import router from "@/router";
 const service = axios.create({
-  baseURL: "http://110.40.128.93:8108/api",
-  timeout: 5000,
+  baseURL: "http://localhost:5000/api",
+  timeout: 15000,
 });
 
 //定义请求拦截器
