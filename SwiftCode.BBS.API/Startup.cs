@@ -41,7 +41,7 @@ namespace SwiftCode.BBS.API
             services.AddControllers();
 
 
-            var connectionStrings = Configuration.GetConnectionString("db");
+            var connectionStrings = Configuration.GetConnectionString("mssql-db");
             services.AddDbContext<SwiftCodeBbsContext>(o =>
                 o.UseLazyLoadingProxies().UseSqlServer(connectionStrings, 
                     oo => oo.MigrationsAssembly("SwiftCode.BBS.EntityFramework")));
