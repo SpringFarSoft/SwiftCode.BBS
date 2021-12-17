@@ -3,8 +3,8 @@ on:
   push:
     branches: [main]
 env:
-  IMAGE_NAME_ANGULAR: ${{ secrets.DOCKER_REPOSITORY_VUE }}
-  IMAGE_NAME_ANGULAR_TAG: ${{ secrets.DOCKER_REPOSITORY_VUE }}:v${{ github.run_id }}.${{ github.run_number }}
+  IMAGE_NAME_VUE: ${{ secrets.DOCKER_REPOSITORY_VUE }}
+  IMAGE_NAME_VUE_TAG: ${{ secrets.DOCKER_REPOSITORY_VUE }}:v${{ github.run_id }}.${{ github.run_number }}
  
 jobs:
   build-vue:
@@ -33,9 +33,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: registry.cn-shanghai.aliyuncs.com
       - name: Build Image
-        run: docker build -t ${{ env.IMAGE_NAME_ANGULAR_TAG }} ./SwiftCode.BBS.UI/dist
+        run: docker build -t ${{ env.IMAGE_NAME_VUE_TAG }} ./SwiftCode.BBS.UI/dist
       - name: Push Image
-        run: docker push ${{ env.IMAGE_NAME_ANGULAR_TAG }}
+        run: docker push ${{ env.IMAGE_NAME_VUE_TAG }}
 
   pull-docker:
     needs: [build-vue]
@@ -50,6 +50,9 @@ jobs:
           password: ${{ secrets.HOST_PASSWORD }}
           port: ${{ secrets.HOST_PORT }}
           script: |
+            docker stop $(docker ps -a | grep ${{ env.IMAGE_NAME_VUE }} |  awk '{print $1}')
+            docker rm -f $(docker ps -a | grep ${{ env.IMAGE_NAME_VUE }} |  awk '{print $1}')
+            docker rmi -f $(docker images | grep ${{ env.IMAGE_NAME_VUE }} | awk '{print $3}')
             docker login --username=${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-            docker pull ${{ env.IMAGE_NAME_ANGULAR_TAG }}
-            docker run -d -p 8001:80  ${{ env.IMAGE_NAME_ANGULAR_TAG }}
+            docker pull ${{ env.IMAGE_NAME_VUE_TAG }}
+            docker run -d -p 8001:80  ${{ env.IMAGE_NAME_VUE_TAG }}
