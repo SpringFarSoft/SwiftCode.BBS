@@ -25,4 +25,10 @@
     <ProjectReference Include="..\SwiftCode.BBS.Extensions\SwiftCode.BBS.Extensions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="SwiftCode.BBS.API.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
