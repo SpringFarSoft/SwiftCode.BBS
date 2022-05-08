@@ -53,17 +53,19 @@ namespace SwiftCode.BBS.Common.Helper
         }
 
         /// <summary>
-        /// 64位MD5加密
+        /// MD5加密，base64编码
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static string MD5Encrypt64(string password)
+        //public static string MD5Encrypt64(string password)
+        public static string MD5Encrypt64Base64(string password)
         {
             // 实例化一个md5对像
             // 加密后是一个字节类型的数组，这里要注意编码UTF8/Unicode等的选择　
             MD5 md5 = MD5.Create();
-            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
-            return Convert.ToBase64String(s);
+            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(password)); //16字节数组
+            return Convert.ToBase64String(s);   //生成的base64字符串长度是24
+                                                //所以建议将函数名改为MD5EncryptBase64
         }
 
     }
